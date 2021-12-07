@@ -8,6 +8,7 @@ export const seo: DefaultSeoProps = {
 		title: 'StreamTicker | Home',
 		description: 'Realtime statistics for Discord.',
 	},
+	defaultTitle: 'StreamTicker | Home',
 	additionalMetaTags: [
 		{
 			name: 'theme-color',
