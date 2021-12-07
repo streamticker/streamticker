@@ -1,10 +1,8 @@
-import createAPI from 'nextkit';
+import create from 'nextkit';
 
-export const api = createAPI({
-	async onError() {
-		return {
-			status: 500,
-			message: 'Internal server error',
-		};
-	},
+export const api = create({
+	onError: async (req, res, err) => ({
+		status: 500,
+		message: err.message,
+	}),
 });
