@@ -1,25 +1,33 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {AppProps} from 'next/app';
 import {SWRConfig} from 'swr';
-import {APIResponse, HttpException} from 'nextkit';
+import {fetcher} from '../client/fetcher';
+
+import 'tailwindcss/tailwind.css';
+import '../client/styles/main.css';
+import {loadCursor} from '../client/cursor';
 
 export default function App({Component, pageProps}: AppProps) {
+	const ballCanvas = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		if (typeof window === 'undefined' || !ballCanvas.current) {
+			return;
+		}
+
+		return loadCursor(ballCanvas.current);
+	}, []);
+
 	return (
-		<SWRConfig
-			value={{
-				async fetcher<T>(url: string) {
-					const request = await fetch(url);
-					const body = (await request.json()) as APIResponse<T>;
+		<SWRConfig value={{fetcher}}>
+			<div className="py-24 mx-auto max-w-4xl px-5">
+				<Component {...pageProps} />
+			</div>
 
-					if (!body.success) {
-						throw new HttpException(request.status, body.message);
-					}
-
-					return body.data;
-				},
-			}}
-		>
-			<Component {...pageProps} />
+			<div
+				ref={ballCanvas}
+				className="opacity-0 fixed ball-transitions duration-200 pointer-events-none z-30 h-6 w-6 bg-transparent border border-shark-900 dark:border-shark-50 rounded-full shadow-md"
+			/>
 		</SWRConfig>
 	);
 }
