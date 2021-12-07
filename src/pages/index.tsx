@@ -27,13 +27,13 @@ export default function Home() {
 				</div>
 
 				<div className="relative flex flex-col md:flex-row md:space-x-16 items-center">
-					<div className="relative z-10 space-y-6">
+					<div className="relative z-10 space-y-6 w-full">
 						<h1 className="lg:leading-[78px] tracking-tighter text-center md:text-left md:max-w-nonetext-4xl text-4xl lg:text-6xl font-extrabold">
 							<span>Realtime statistics for Discord</span>
 							<span className="opacity-50">.</span>
 						</h1>
 
-						<p className="text-lg opacity-75 text-center md:text-left max-w-md">
+						<p className="text-lg opacity-75 text-center md:text-left mx-auto md:mx-0 max-w-md">
 							Get realtime statistics about anything online. From Twitter followers to an OpenSea
 							Collection Floor price. Free forever.
 						</p>
