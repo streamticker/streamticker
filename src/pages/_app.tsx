@@ -6,6 +6,8 @@ import {fetcher} from '../client/fetcher';
 import 'tailwindcss/tailwind.css';
 import '../client/styles/main.css';
 import {loadCursor} from '../client/cursor';
+import {NextSeo} from 'next-seo';
+import {seo} from '../server/seo.config';
 
 export default function App({Component, pageProps}: AppProps) {
 	const ballCanvas = useRef<HTMLDivElement | null>(null);
@@ -20,6 +22,8 @@ export default function App({Component, pageProps}: AppProps) {
 
 	return (
 		<SWRConfig value={{fetcher}}>
+			<NextSeo {...seo} />
+
 			<div className="py-24 mx-auto max-w-4xl px-5">
 				<Component {...pageProps} />
 			</div>
