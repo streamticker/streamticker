@@ -5,14 +5,20 @@ import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
 
 const cta = (
-	<div className="space-x-4 text-center md:text-left">
-		<a
-			href="/invite"
-			className="bg-blurple transition-all transform-gpu hover:bg-opacity-50 active:scale-95 duration-500 shadow-lg text-white dark:hover:text-opacity-50 rounded-full px-4 py-1 text-lg inline-flex items-center space-x-2"
-		>
-			<span>Invite</span>
-			<FiArrowUpRight />
-		</a>
+	<div className="space-y-2 md:space-y-0 md:space-x-4 flex flex-col md:flex-row text-center md:items-center md:text-left">
+		<div>
+			<a
+				href="/invite"
+				className="bg-blurple transition-all transform-gpu hover:bg-opacity-50 active:scale-95 duration-500 shadow-lg text-white dark:hover:text-opacity-50 rounded-full px-4 py-1 text-lg inline-flex items-center space-x-2"
+			>
+				<span>Add StreamTicker</span>
+				<FiArrowUpRight />
+			</a>
+		</div>
+
+		<span className="text-shark-900 text-opacity-50 dark:text-white dark:text-opacity-50">
+			Free forever
+		</span>
 	</div>
 );
 
@@ -35,7 +41,7 @@ export default function Home() {
 
 						<p className="text-lg opacity-75 text-center md:text-left mx-auto md:mx-0 w-2/3">
 							Get realtime statistics about anything online. From Twitter followers to an OpenSea
-							Collection Floor price. Free forever.
+							Collection Floor price.
 						</p>
 
 						{cta}
