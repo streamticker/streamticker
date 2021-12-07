@@ -7,3 +7,7 @@ img {
 	-webkit-user-drag: none;
 	-webkit-user-select: none;
 }
+
+#__next {
+	@apply max-w-[100vw] overflow-x-hidden;
+}
