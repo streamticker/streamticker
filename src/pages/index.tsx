@@ -26,8 +26,8 @@ export default function Home() {
 	return (
 		<main>
 			<div className="py-24 space-y-8">
-				<div className="relative z-10 flex justify-center">
-					<div className="max-w-md md:max-w-none w-full">
+				<div className="relative z-10 flex justify-center md:justify-start">
+					<div className="max-w-md md:max-w-sm w-full">
 						<SlashCommandStack command="ticker" description="Creates a new ticker" />
 					</div>
 				</div>
@@ -47,7 +47,7 @@ export default function Home() {
 						{cta}
 					</div>
 
-					<div className="absolute -top-18 dark:opacity-75">
+					<div className="absolute -top-36 md:-top-18 dark:opacity-75">
 						<Image src={heroAsset} alt="hero" />
 					</div>
 				</div>
