@@ -8,7 +8,7 @@ const cta = (
 	<div className="space-x-4 text-center md:text-left">
 		<a
 			href="/invite"
-			className="bg-blurple transition-all transform-gpu hover:bg-opacity-50 active:scale-95 duration-500 shadow-lg text-white dark:text-black dark:text-opacity-75 rounded-full px-4 py-1 text-lg inline-flex items-center space-x-2"
+			className="bg-blurple transition-all transform-gpu hover:bg-opacity-50 active:scale-95 duration-500 shadow-lg text-white dark:hover:text-opacity-50 rounded-full px-4 py-1 text-lg inline-flex items-center space-x-2"
 		>
 			<span>Invite</span>
 			<FiArrowUpRight />
@@ -18,7 +18,7 @@ const cta = (
 
 export default function Home() {
 	return (
-		<div>
+		<main>
 			<div className="py-24 space-y-8">
 				<div className="relative z-10 flex justify-center">
 					<div className="max-w-md md:max-w-none w-full">
@@ -33,7 +33,7 @@ export default function Home() {
 							<span className="opacity-50">.</span>
 						</h1>
 
-						<p className="text-lg opacity-75 text-center md:text-left mx-auto md:mx-0 max-w-md">
+						<p className="text-lg opacity-75 text-center md:text-left mx-auto md:mx-0 w-2/3">
 							Get realtime statistics about anything online. From Twitter followers to an OpenSea
 							Collection Floor price. Free forever.
 						</p>
@@ -46,6 +46,6 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 }
