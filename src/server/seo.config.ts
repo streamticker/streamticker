@@ -8,6 +8,12 @@ export const seo: DefaultSeoProps = {
 		title: 'StreamTicker | Home',
 		description: 'Realtime statistics for Discord.',
 	},
+	additionalMetaTags: [
+		{
+			name: 'theme-color',
+			content: '#000000',
+		},
+	],
 	twitter: {
 		handle: '@alistaiiiir',
 		site: '@alistaiiiir',
