@@ -73,6 +73,15 @@ export default function Home() {
 					<p className="opacity-75 leading-relaxed">lorum ipsum doler sit amet</p>
 				</div>
 
+				<div className="relative z-10 space-y-4">
+					<h1 className="text-4xl font-bold tracking-tight">Do I have to pay?</h1>
+					<p className="opacity-75 leading-relaxed">
+						Nope! StreamTicker&apos;s core functionality will stay free forever, as promised. We
+						hide some features behind voting on top.gg and have extensive plans to build paid-for
+						features in the future.
+					</p>
+				</div>
+
 				<div className="space-y-4">
 					<h1 className="text-6xl font-bold tracking-tight">What are you waiting for?</h1>
 					<p className="opacity-75 leading-relaxed">Invite now and never miss a beat</p>
