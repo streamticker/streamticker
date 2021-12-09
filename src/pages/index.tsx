@@ -18,7 +18,7 @@ const cta = (
 			</a>
 		</div>
 
-		<span className="text-shark-900 text-opacity-50 dark:text-white dark:text-opacity-50">
+		<span className="text-shark-900 animate-pulse text-opacity-50 dark:text-white dark:text-opacity-50">
 			Free forever
 		</span>
 	</div>
@@ -31,14 +31,14 @@ export default function Home() {
 				<main className="space-y-16">
 					<div className="py-24 space-y-8">
 						<div className="relative z-10 flex justify-center md:justify-start">
-							<div className="max-w-md md:max-w-sm w-full">
+							<div className="max-w-md md:max-w-md w-full">
 								<SlashCommandStack command="ticker" description="Creates a new ticker" />
 							</div>
 						</div>
 
 						<div className="relative flex flex-col md:flex-row md:space-x-16 items-center">
 							<div className="relative z-10 space-y-6 w-full">
-								<h1 className="lg:leading-[78px] tracking-tighter text-center md:text-left md:max-w-nonetext-4xl text-4xl lg:text-6xl font-extrabold">
+								<h1 className="lg:leading-[78px] tracking-tighter text-center md:text-left md:max-w-none text-3xl md:text-4xl lg:text-6xl font-extrabold">
 									<span>Realtime statistics for Discord</span>
 									<span className="opacity-50">.</span>
 								</h1>
@@ -98,9 +98,10 @@ export default function Home() {
 						</p>
 					</div>
 
-					<div className="space-y-4 z-10 relative">
-						<h1 className="text-6xl font-bold tracking-tight">What are you waiting for?</h1>
-						<p className="opacity-75 leading-relaxed">Invite now and never miss a beat</p>
+					<div className="space-y-8 z-10 relative">
+						<h1 className="text-6xl font-bold tracking-tight text-center md:text-left">
+							What are you waiting for?
+						</h1>
 						{cta}
 					</div>
 				</main>
