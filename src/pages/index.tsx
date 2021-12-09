@@ -77,7 +77,11 @@ export default function Home() {
 							<Image src={heroAsset} alt="hero" />
 						</div>
 
-						<Image src={discord} alt="Discord Screenshot demonstrating StreamTicker" />
+						<Image
+							src={discord}
+							placeholder="blur"
+							alt="Discord Screenshot demonstrating StreamTicker"
+						/>
 					</div>
 
 					<div className="relative z-10 space-y-4">
@@ -103,7 +107,7 @@ export default function Home() {
 			</div>
 
 			<footer className="relative">
-				<div className="absolute right-0 bottom-0">
+				<div className="absolute bottom-0 right-0">
 					<Image src={footerAsset} alt="hero" />
 				</div>
 			</footer>
