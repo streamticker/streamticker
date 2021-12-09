@@ -22,16 +22,15 @@ export default function App({Component, pageProps, router}: AppProps) {
 
 	return (
 		<>
+			{router.asPath === '/' && (
+				<div
+					ref={ballCanvas}
+					className="opacity-0 fixed ball-transitions duration-200 pointer-events-none z-30 h-6 w-6 bg-transparent border border-shark-900 dark:border-shark-50 rounded-full shadow-md"
+				/>
+			)}
 			<DefaultSeo {...seo} />
 			<SWRConfig value={{fetcher}}>
 				<Component {...pageProps} />
-
-				{router.asPath === '/' && (
-					<div
-						ref={ballCanvas}
-						className="opacity-0 fixed ball-transitions duration-200 pointer-events-none z-30 h-6 w-6 bg-transparent border border-shark-900 dark:border-shark-50 rounded-full shadow-md"
-					/>
-				)}
 			</SWRConfig>
 		</>
 	);

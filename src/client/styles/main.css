@@ -1,5 +1,7 @@
 body {
 	@apply font-sans bg-shark-100 text-shark-700 dark:bg-shark-500 dark:text-shark-100 overflow-x-hidden;
+
+	overscroll-behavior: none;
 }
 
 a:not(.draggable),
