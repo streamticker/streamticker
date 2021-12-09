@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import heroAsset from '../client/images/hero-asset.png';
+import discord from '../client/images/discord.png';
 import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
 
@@ -66,6 +67,10 @@ export default function Home() {
 						any channel to quickly edit the vibe and aesthetic of your Discord setup server.
 						It&apos;s the perfect way to add some functionality and style to your community
 					</p>
+				</div>
+
+				<div className="relative z-10">
+					<Image src={discord} alt="Discord Screenshot demonstrating StreamTicker" />
 				</div>
 
 				<div className="relative z-10 space-y-4">

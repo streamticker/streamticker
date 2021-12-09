@@ -11,3 +11,8 @@ img {
 #__next {
 	@apply max-w-[100vw] overflow-x-hidden;
 }
+
+button,
+a {
+	@apply outline-none focus:outline-none focus:ring focus:ring-offset-2 dark:focus:ring-offset-shark-900 focus:ring-offset-shark-100;
+}
