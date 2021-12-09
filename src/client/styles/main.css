@@ -18,3 +18,7 @@ button,
 a {
 	@apply outline-none focus:outline-none focus:ring focus:ring-offset-2 dark:focus:ring-offset-shark-900 focus:ring-offset-shark-100;
 }
+
+.block-img > :first-child {
+	display: block !important;
+}

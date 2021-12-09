@@ -26,8 +26,8 @@ const cta = (
 
 export default function Home() {
 	return (
-		<>
-			<div className="py-24 mx-auto max-w-4xl px-5">
+		<div className="relative z-10">
+			<div className="py-24 mx-auto max-w-4xl px-5 relative z-10">
 				<main className="space-y-16">
 					<div className="py-24 space-y-8">
 						<div className="relative z-10 flex justify-center md:justify-start">
@@ -98,7 +98,7 @@ export default function Home() {
 						</p>
 					</div>
 
-					<div className="space-y-4">
+					<div className="space-y-4 z-10 relative">
 						<h1 className="text-6xl font-bold tracking-tight">What are you waiting for?</h1>
 						<p className="opacity-75 leading-relaxed">Invite now and never miss a beat</p>
 						{cta}
@@ -106,11 +106,11 @@ export default function Home() {
 				</main>
 			</div>
 
-			<footer className="relative">
-				<div className="absolute bottom-0 right-0">
+			<div className="relative">
+				<div className="block bottom-0 right-0 absolute block-img">
 					<Image src={footerAsset} alt="hero" />
 				</div>
-			</footer>
-		</>
+			</div>
+		</div>
 	);
 }
