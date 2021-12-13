@@ -15,12 +15,12 @@
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-icons": "^4.3.1",
-		"swr": "^1.1.0"
+		"swr": "^1.1.1"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.37",
-		"@typescript-eslint/eslint-plugin": "^5.6.0",
-		"@typescript-eslint/parser": "^5.6.0",
+		"@typescript-eslint/eslint-plugin": "^5.7.0",
+		"@typescript-eslint/parser": "^5.7.0",
 		"autoprefixer": "^10.4.0",
 		"eslint": "^8.4.1",
 		"eslint-config-next": "12.0.7",
@@ -29,9 +29,9 @@
 		"eslint-config-xo-typescript": "^0.47.1",
 		"eslint-plugin-react": "^7.27.1",
 		"eslint-plugin-react-hooks": "^4.3.0",
-		"postcss": "^8.4.4",
+		"postcss": "^8.4.5",
 		"prettier": "^2.5.1",
-		"tailwindcss": "^2.2.19",
-		"typescript": "^4.5.2"
+		"tailwindcss": "^3.0.2",
+		"typescript": "^4.5.3"
 	}
 }
