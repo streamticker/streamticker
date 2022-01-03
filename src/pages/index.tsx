@@ -5,6 +5,11 @@ import discord from '../client/images/discord.png';
 import footerAsset from '../client/images/footer-asset.png';
 import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
+import {GetStaticProps} from 'next';
+
+interface Props {
+	commands: Array<[name: string, description: string]>;
+}
 
 const cta = (
 	<div className="space-y-2 md:space-y-0 md:space-x-4 flex flex-col md:flex-row text-center md:items-center md:text-left">
@@ -24,7 +29,7 @@ const cta = (
 	</div>
 );
 
-export default function Home() {
+export default function Home(props: Props) {
 	return (
 		<div className="relative z-10">
 			<div className="py-24 mx-auto max-w-4xl px-5 relative z-10">
@@ -86,7 +91,6 @@ export default function Home() {
 
 					<div className="relative z-10 space-y-4">
 						<h1 className="text-4xl font-bold tracking-tight">Commands</h1>
-						<p className="opacity-75 leading-relaxed">lorum ipsum doler sit amet</p>
 					</div>
 
 					<div className="relative z-10 space-y-4">
@@ -115,3 +119,14 @@ export default function Home() {
 		</div>
 	);
 }
+
+export const getStaticProps: GetStaticProps<Props> = async ctx => {
+	const commands = (await fetch('http://178.62.5.127:8080/commands').then(res =>
+		res.json()
+	)) as Props['commands'];
+
+	return {
+		props: {commands},
+		revalidate: 60 * 60 * 24, // 1 day
+	};
+};
