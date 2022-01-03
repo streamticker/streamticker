@@ -4,7 +4,7 @@ module.exports = {
 			{
 				source: '/invite',
 				destination:
-					'https://discord.com/oauth2/authorize?scope=bot&client_id=822117936251928586&permissions=8',
+					'https://discord.com/api/oauth2/authorize?client_id=822117936251928586&permissions=8&scope=bot%20applications.commands',
 				permanent: true,
 			},
 			{
