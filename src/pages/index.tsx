@@ -91,6 +91,18 @@ export default function Home(props: Props) {
 
 					<div className="relative z-10 space-y-4">
 						<h1 className="text-4xl font-bold tracking-tight">Commands</h1>
+
+						<dl className="grid md:grid-cols-2 gap-x-3 gap-y-5 p-5 rounded-md bg-neutral-400 bg-opacity-10 backdrop-blur-lg">
+							{props.commands.map(([name, description]) => (
+								<div key={name} className="space-y-1">
+									<dd className="text-2xl font-bold tracking-tight">
+										<span className="text-neutral-500">/</span>
+										{name}
+									</dd>
+									<dt className="opacity-75 leading-relaxed">{description}</dt>
+								</div>
+							))}
+						</dl>
 					</div>
 
 					<div className="relative z-10 space-y-4">
@@ -120,8 +132,8 @@ export default function Home(props: Props) {
 	);
 }
 
-export const getStaticProps: GetStaticProps<Props> = async ctx => {
-	const commands = (await fetch('http://178.62.5.127:8080/commands').then(res =>
+export const getStaticProps: GetStaticProps<Props> = async () => {
+	const commands = (await fetch('http://178.62.5.127:8080/commands').then(async res =>
 		res.json()
 	)) as Props['commands'];
 
