@@ -6,9 +6,11 @@ import footerAsset from '../client/images/footer-asset.png';
 import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
 import {GetStaticProps} from 'next';
+import {Responses, StreamTickerAPI} from '../server/streamticker-api';
 
 interface Props {
-	commands: Array<[name: string, description: string]>;
+	commands: Responses.Command[];
+	stats: Responses.Stats;
 }
 
 const cta = (
@@ -37,7 +39,13 @@ export default function Home(props: Props) {
 					<div className="py-24 space-y-8">
 						<div className="relative z-10 flex justify-center md:justify-start">
 							<div className="max-w-md md:max-w-md w-full">
-								<SlashCommandStack command="ticker" description="Creates a new ticker" />
+								<SlashCommandStack
+									command="ticker"
+									description={`Over ${
+										// prettier-ignore
+										Math.round((props.stats.totalTickers / 10) - 1) * 10
+									} tickers created so far...`}
+								/>
 							</div>
 						</div>
 
@@ -133,12 +141,13 @@ export default function Home(props: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	const commands = (await fetch('http://178.62.5.127:8080/commands').then(async res =>
-		res.json()
-	)) as Props['commands'];
+	const api = new StreamTickerAPI('http://178.62.5.127:8080');
+
+	const {data: commands} = await api.getCommands();
+	const {data: stats} = await api.getStats();
 
 	return {
-		props: {commands},
+		props: {commands, stats},
 		revalidate: 60 * 60 * 24, // 1 day
 	};
 };
