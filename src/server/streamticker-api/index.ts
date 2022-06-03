@@ -13,10 +13,12 @@ export class StreamTickerAPI {
 	}
 
 	public async getCommands() {
-		return this.axios.get<Responses.Command[]>('/commands');
+		const {data: commands} = await this.axios.get<Responses.Command[]>('/commands');
+		return commands;
 	}
 
 	public async getStats() {
-		return this.axios.get<Responses.Stats>('/');
+		const {data: stats} = await this.axios.get<Responses.Stats>('/');
+		return stats;
 	}
 }

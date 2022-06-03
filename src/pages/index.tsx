@@ -144,8 +144,8 @@ export default function Home(props: Props) {
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const api = new StreamTickerAPI('http://178.62.5.127:8080');
 
-	const {data: commands} = await api.getCommands();
-	const {data: stats} = await api.getStats();
+	const commands = await api.getCommands();
+	const stats = await api.getStats();
 
 	return {
 		props: {commands, stats},
