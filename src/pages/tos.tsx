@@ -251,26 +251,17 @@ export default function TOSPage() {
 					in part, please stop using the website and the Service.
 				</p>
 				<h1>Contact Us</h1>
-				<p>If you have any questions about these Terms and Conditions, You can contact us:</p>
-
-				<ul>
-					<li>
-						<p>By email: hi@alistair.sh</p>
-					</li>
-
-					<li>
-						<p>
-							By visiting this page on our website:{' '}
-							<a
-								href="https://streamticker.bot/support"
-								rel="external nofollow noopener noreferrer"
-								target="_blank"
-							>
-								https://streamticker.bot/support
-							</a>
-						</p>
-					</li>
-				</ul>
+				<p>
+					If you have any questions about these Terms and Conditions, You can contact us By visiting
+					this page on our website:{' '}
+					<a
+						href="https://streamticker.bot/support"
+						rel="external nofollow noopener noreferrer"
+						target="_blank"
+					>
+						https://streamticker.bot/support
+					</a>
+				</p>
 			</main>
 		</div>
 	);
