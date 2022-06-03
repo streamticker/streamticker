@@ -72,6 +72,7 @@ export default function Home(props: Props) {
 
 					<div className="relative z-10 space-y-4">
 						<h1 className="text-4xl font-bold tracking-tight">What is StreamTicker?</h1>
+
 						<p className="opacity-75 leading-relaxed">
 							StreamTicker is a Discord bot that allows you to get realtime statistics about
 							anything online. It pulls data from Twitter, Twitch, YouTube and many more services.

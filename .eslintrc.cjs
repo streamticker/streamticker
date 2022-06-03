@@ -17,6 +17,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-tag-spacing': 'off',
 		'@typescript-eslint/naming-convention': 'off',
+		'react/no-unescaped-entities': 'off',
 	},
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
 };
