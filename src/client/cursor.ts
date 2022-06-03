@@ -7,7 +7,7 @@ export function loadCursor(ball: HTMLDivElement) {
 	let ballX = x;
 	let ballY = y;
 
-	let hideTimeout: NodeJS.Timeout | null = null;
+	let hideTimeout: number | null = null;
 
 	function drawBall() {
 		ballX += (x - ballX) * 0.2 - 1;
