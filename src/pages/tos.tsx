@@ -1,10 +1,8 @@
 export default function TOSPage() {
 	return (
 		<div className="py-24 mx-auto max-w-4xl px-5 relative z-10">
-			<main className="py-16 space-y-6">
-				<h1 className="text-5xl font-bold">Terms of Service</h1>
-
-				<h1>Terms and Conditions</h1>
+			<main className="py-16 prose">
+				<h1>Terms of Service</h1>
 				<p>Last updated: June 03, 2022</p>
 				<p>Please read these terms and conditions carefully before using Our Service.</p>
 				<h1>Interpretation and Definitions</h1>

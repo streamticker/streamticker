@@ -1,7 +1,7 @@
 export default function PrivacyPage() {
 	return (
 		<div className="py-24 mx-auto max-w-4xl px-5 relative z-10">
-			<main className="py-16 space-y-6">
+			<main className="py-16 prose">
 				<h1>Privacy Policy</h1>
 				<p>Last updated: June 03, 2022</p>
 				<p>
