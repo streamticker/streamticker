@@ -25,6 +25,7 @@ module.exports = {
 		'@typescript-eslint/indent': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/space-infix-ops': 'off',
+		'operator-linebreak': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],

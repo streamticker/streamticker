@@ -1,10 +1,8 @@
 import {
-	ApplicationCommandOptionType,
 	APIInteractionResponse,
-	InteractionResponseType,
-	APIInteraction,
-	ApplicationCommandType,
-	RESTPutAPIApplicationCommandsJSONBody,
+	APIApplicationCommandOption,
+	APIChatInputApplicationCommandInteraction,
+	ApplicationCommandOptionType,
 } from 'discord-api-types/v9';
 
 type Narrow<T> =
@@ -15,51 +13,80 @@ type Narrow<T> =
 			[K in keyof T]: T[K] extends (...args: any[]) => unknown ? T[K] : Narrow<T[K]>;
 	  };
 
-export type StreamTickerInteraction<T extends ApplicationCommandType> = Extract<
-	RESTPutAPIApplicationCommandsJSONBody[number],
-	{type?: T}
-> & {
-	run(interaction: Extract<APIInteraction, {type: T}>): Promise<APIInteractionResponse>;
+type ResolveOption<O extends APIApplicationCommandOption[], Name extends string> = Extract<
+	O[number],
+	{name: Name}
+>['required'] extends true
+	? Extract<O[number], {name: Name}>
+	: Extract<O[number], {name: Name}> | undefined;
+
+type Options<O extends APIApplicationCommandOption[]> = {
+	[K in O[number]['name']]: ResolveOption<O, K>;
 };
 
-export type AnyInteraction = StreamTickerInteraction<ApplicationCommandType>;
+type SlashCommandContext<O extends APIApplicationCommandOption[]> = {
+	interaction: APIChatInputApplicationCommandInteraction;
+	options: Options<O>;
+};
 
-export function interaction<T extends ApplicationCommandType>(data: StreamTickerInteraction<T>) {
-	return data as AnyInteraction;
+type SlashCommandHandler<O extends APIApplicationCommandOption[]> = (
+	context: SlashCommandContext<O>
+) => Promise<APIInteractionResponse>;
+
+type SlashCommandConfig<O extends APIApplicationCommandOption[]> = {
+	name: string;
+	description: string;
+	options: O;
+	run: SlashCommandHandler<O>;
+};
+
+export function slashCommand<O extends APIApplicationCommandOption[]>(
+	config: Narrow<SlashCommandConfig<O>>
+) {
+	//
 }
 
-interaction({
-	type: ApplicationCommandType.User,
-});
-
-interaction({
-	type: ApplicationCommandType.ChatInput,
-
-	description: 'ok',
-
-	name: 'ok',
-
+slashCommand({
+	name: 'bruh',
+	description: 'brhu ok',
 	options: [
 		{
+			name: 'animal',
+			description: 'The type of animal',
 			type: ApplicationCommandOptionType.String,
-			name: 'test',
-			description: 'The',
 			required: true,
+			choices: [
+				{
+					name: 'Dog',
+					value: 'animal_dog',
+				},
+				{
+					name: 'Cat',
+					value: 'animal_cat',
+				},
+				{
+					name: 'Penguin',
+					value: 'animal_penguin',
+				},
+			],
 		},
 
 		{
+			name: 'bruh',
+			type: ApplicationCommandOptionType.Subcommand,
+			description: 'o0k',
+			options: [],
+		},
+
+		{
+			name: 'only_smol',
+			description: 'Whether to show only baby animals',
 			type: ApplicationCommandOptionType.Boolean,
-			name: 'ok',
-			description: 'bruh',
+			required: true,
 		},
 	],
 
-	async run(i) {
-		return {
-			type: InteractionResponseType.ChannelMessageWithSource,
-			data: {
-				content: 'real',
-			},
-		};
+	async run(context) {
+		context.options.bruh?.options;
 	},
 });
