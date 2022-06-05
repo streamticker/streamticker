@@ -3,13 +3,17 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
+
 	extends: ['next', 'next/core-web-vitals', 'xo', 'xo-typescript', 'xo-react'],
 	parser: '@typescript-eslint/parser',
+
 	parserOptions: {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
+
 	plugins: ['@typescript-eslint'],
+
 	rules: {
 		'@typescript-eslint/comma-dangle': 'off',
 		'@typescript-eslint/triple-slash-reference': 'off',
@@ -18,7 +22,10 @@ module.exports = {
 		'react/jsx-tag-spacing': 'off',
 		'@typescript-eslint/naming-convention': 'off',
 		'react/no-unescaped-entities': 'off',
-		'@typescript-eslint/ban-types': 'off',
+		'@typescript-eslint/indent': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
+		'@typescript-eslint/space-infix-ops': 'off',
 	},
+
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
 };

@@ -1,40 +1,43 @@
 import {
-	APIApplicationCommandOption,
 	ApplicationCommandOptionType,
 	APIInteractionResponse,
 	InteractionResponseType,
-	APIApplicationCommand,
-	ApplicationCommandType,
 	APIInteraction,
+	ApplicationCommandType,
+	RESTPutAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v9';
 
 type Narrow<T> =
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	| (T extends [] ? [] : never)
 	| (T extends string | number | bigint | boolean ? T : never)
 	| {
 			[K in keyof T]: T[K] extends (...args: any[]) => unknown ? T[K] : Narrow<T[K]>;
 	  };
 
-export interface Command<T extends ApplicationCommandType, O extends APIApplicationCommandOption> {
-	options: O[];
-	type: T;
-	description: string;
+export type StreamTickerInteraction<T extends ApplicationCommandType> = Extract<
+	RESTPutAPIApplicationCommandsJSONBody[number],
+	{type?: T}
+> & {
 	run(interaction: Extract<APIInteraction, {type: T}>): Promise<APIInteractionResponse>;
+};
+
+export type AnyInteraction = StreamTickerInteraction<ApplicationCommandType>;
+
+export function interaction<T extends ApplicationCommandType>(data: StreamTickerInteraction<T>) {
+	return data as AnyInteraction;
 }
 
-export type AnyCommand = Command<ApplicationCommandType, APIApplicationCommandOption>;
+interaction({
+	type: ApplicationCommandType.User,
+});
 
-export function command<T extends ApplicationCommandType, O extends APIApplicationCommandOption>(
-	name: string,
-	command: Narrow<Omit<Command<T, O>, 'name'>>
-) {
-	return {...command, name} as AnyCommand;
-}
-
-command('bruh', {
-	description: 'bruh 2',
-
+interaction({
 	type: ApplicationCommandType.ChatInput,
+
+	description: 'ok',
+
+	name: 'ok',
 
 	options: [
 		{
