@@ -1,3 +1,12 @@
-import {AnyInteraction} from './command';
+import type {SlashCommand} from 'slash-create';
+import {InviteCommand} from './commands/util/invite';
+import {PingCommand} from './commands/util/ping';
+import {SupportCommand} from './commands/util/support';
+import {VoteCommand} from './commands/util/vote';
 
-export const commands: AnyInteraction[] = [];
+export const commands: typeof SlashCommand[] = [
+	VoteCommand,
+	PingCommand,
+	SupportCommand,
+	InviteCommand,
+];

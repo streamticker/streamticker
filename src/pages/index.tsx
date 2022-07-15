@@ -6,11 +6,11 @@ import footerAsset from '../client/images/footer-asset.png';
 import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
 import {GetStaticProps} from 'next';
-import {Responses, StreamTickerAPI} from '../server/streamticker-api';
+import {creator} from './api/interaction';
 
 interface Props {
-	commands: Responses.Command[];
-	stats: Responses.Stats;
+	commands: [name: string, description: string][];
+	stats: {totalTickers: number};
 }
 
 const cta = (
@@ -142,13 +142,13 @@ export default function Home(props: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	const api = new StreamTickerAPI('http://178.62.5.127:8080');
-
-	const commands = await api.getCommands();
-	const stats = await api.getStats();
-
 	return {
-		props: {commands, stats},
+		props: {
+			commands: creator.commands.map(cmd => [cmd.commandName, cmd.description ?? 'No description']),
+			stats: {
+				totalTickers: 120,
+			},
+		},
 		revalidate: 60 * 60 * 24, // 1 day
 	};
 };

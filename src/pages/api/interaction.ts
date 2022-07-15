@@ -1,54 +1,28 @@
-import {PageConfig} from 'next';
-import {NextkitError} from 'nextkit';
-import getRawBody from 'raw-body';
-import {api} from '../../server/api';
-import {APIInteraction, InteractionResponseType, InteractionType} from 'discord-api-types/v9';
-import {headerSchema, verifyKey} from '../../server/verify-interaction';
+import {SlashCreator, VercelServer} from 'slash-create';
+import {commands} from '../../interactions';
 import {env} from '../../server/env';
 
-export const config: PageConfig = {
-	api: {bodyParser: false},
-};
-
-export default api.raw({
-	async POST({req}) {
-		const body = await getRawBody(req);
-
-		const {'X-Signature-Ed25519': signature, 'X-Signature-Timestamp': timestamp} =
-			headerSchema.parse(req.headers);
-
-		const valid = verifyKey({
-			body,
-			signature,
-			timestamp,
-			clientPublicKey: env.DISCORD_INTERACTION_PUBLIC_KEY,
-		});
-
-		if (!valid) {
-			throw new NextkitError(401, 'Invalid signature');
-		}
-
-		const interaction = JSON.parse(body.toString()) as APIInteraction;
-
-		switch (interaction.type) {
-			case InteractionType.Ping: {
-				return {
-					type: InteractionResponseType.Pong,
-				};
-			}
-
-			case InteractionType.ApplicationCommand: {
-				return {
-					type: InteractionResponseType.ChannelMessageWithSource,
-					data: {
-						content: 'Pong',
-					},
-				};
-			}
-
-			default: {
-				throw new NextkitError(400, 'Unsupported interaction type');
-			}
-		}
-	},
+export const creator = new SlashCreator({
+	applicationID: env.DISCORD_APP_ID,
+	publicKey: env.DISCORD_INTERACTION_PUBLIC_KEY,
+	token: env.DISCORD_BOT_TOKEN,
 });
+
+const server = new VercelServer();
+
+creator.withServer(server).registerCommands(commands);
+
+creator.on('warn', message => console.warn(message));
+creator.on('error', error => console.error(error));
+
+creator.on('commandRun', (command, _, ctx) => {
+	console.info(
+		`${ctx.user.username}#${ctx.user.discriminator} (${ctx.user.id}) ran command ${command.commandName}`
+	);
+});
+
+creator.on('commandError', (command, error) => {
+	console.error(`Command ${command.commandName}:`, error);
+});
+
+export default server.vercelEndpoint;
