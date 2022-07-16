@@ -5,6 +5,7 @@ import {GITHUB_FOLLOWERS} from './impl/github/followers';
 import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
+import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
 
 export const harvesters: Record<TickerType, Harvester> = {
 	DISCORD_BOOSTS,
@@ -19,7 +20,7 @@ export const harvesters: Record<TickerType, Harvester> = {
 	DISCORD_MEMBERS_ROLE: undefined,
 	DISCORD_HUMANS: undefined,
 	DISCORD_BOTS: undefined,
-	REDDIT_SUBSCRIBERS: undefined,
+	REDDIT_SUBSCRIBERS,
 	OPENSEA_COLLECTION_FLOOR: undefined,
 	OPENSEA_COLLECTION_VOLUME: undefined,
 	OPENSEA_COLLECTION_UNIQUE_HOLDERS: undefined,
