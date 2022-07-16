@@ -24,4 +24,6 @@ export const env = envsafe({
 	LOWCAKE_QUEUE_ID: str({
 		default: 'queue_NzEyNTc5MDk2MzUzMzQxNDc',
 	}),
+
+	TWITTER_AUTH: str({}),
 });

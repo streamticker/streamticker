@@ -6,6 +6,7 @@ import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
+import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 
 export const harvesters: Record<TickerType, Harvester> = {
 	DISCORD_BOOSTS,
@@ -25,7 +26,7 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_VOLUME: undefined,
 	OPENSEA_COLLECTION_UNIQUE_HOLDERS: undefined,
 	OPENSEA_COLLECTION_SUPPLY: undefined,
-	TWITTER_FOLLOWERS: undefined,
+	TWITTER_FOLLOWERS,
 	SELF_TICKERS: undefined,
 	SELF_GUILDS: undefined,
 	GUILD_TICKERS: undefined,
