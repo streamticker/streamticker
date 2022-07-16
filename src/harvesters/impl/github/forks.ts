@@ -2,7 +2,7 @@ import {Ticker, TickerType} from '@prisma/client';
 import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
 import {GitHubAPI} from './api';
 
-export const GITHUB_REPO_STARS = createHarvester(TickerType.GITHUB_REPO_STARS, {
+export const GITHUB_REPO_FORKS = createHarvester(TickerType.GITHUB_REPO_FORKS, {
 	requirement: TickerRequirement.VOTE,
 	validateInput: async (value: string) => {
 		const [owner, repo] = value.split('/');
@@ -31,6 +31,6 @@ export const GITHUB_REPO_STARS = createHarvester(TickerType.GITHUB_REPO_STARS, {
 
 		const githubRepo = await GitHubAPI.getRepo(owner, repo);
 
-		return githubRepo.stargazers_count;
+		return githubRepo.forks_count;
 	},
 });
