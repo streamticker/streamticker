@@ -20,3 +20,8 @@ export function is<V extends Primitive, Arr extends readonly [V, ...V[]]>(
 export function enumerate<T extends string>(values: Mirror<T>) {
 	return Object.values(values) as [T, ...T[]];
 }
+
+export type Without<T, U> = {[P in Exclude<keyof T, keyof U>]?: never};
+export type XOR<T, U> = T | U extends Record<string, unknown>
+	? (Without<T, U> & U) | (Without<U, T> & T)
+	: T | U;

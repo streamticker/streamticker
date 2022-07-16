@@ -12,7 +12,7 @@ model Ticker {
   channel_id    String     @id @unique
   guild_id      String
   type          TickerType
-  last_updated  DateTime?  @updatedAt
+  last_updated  DateTime   @updatedAt
   refresh_after DateTime   @default(now())
   format        String
   platform_id   String?
@@ -50,7 +50,6 @@ enum TickerType {
   OPENSEA_COLLECTION_UNIQUE_HOLDERS
   OPENSEA_COLLECTION_SUPPLY
   TWITTER_FOLLOWERS
-  INSTAGRAM_FOLLOWERS
   SELF_TICKERS
   SELF_GUILDS
   GUILD_TICKERS

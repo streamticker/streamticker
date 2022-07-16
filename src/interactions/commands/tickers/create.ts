@@ -48,6 +48,10 @@ export class CreateCommand extends SlashCommand {
 	async run(ctx: CommandContext) {
 		ctx.defer();
 
+		if (!ctx.guildID) {
+			throw new Error('This command can only be ran inside of a guild!');
+		}
+
 		if (!is(ctx.options.type, enumerate(TickerType))) {
 			throw new Error('Invalid ticker type!');
 		}
@@ -68,7 +72,16 @@ export class CreateCommand extends SlashCommand {
 
 		// TODO: check if harvester has input, and if it does & user didn't provide input, throw error
 
-		// TODO: create ticker in Prisma if all is valid
+		await prisma.ticker.create({
+			data: {
+				channel_id: ctx.options.channel.id,
+				guild_id: ctx.guildID,
+				type: ctx.options.type,
+				refresh_after: new Date(),
+				format: '%v', // TODO: get format from harvester
+				platform_id: ctx.options.platform_id ? ctx.options.platform_id : null,
+			},
+		});
 
 		// TODO: run harvester on newly-created ticker
 
