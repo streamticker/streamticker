@@ -1,3 +1,6 @@
+// TODO: Eventually rewrite this command
+// I don't like the look of it and it should use a dropdown or something. just having a huge list is ugly as fuck
+
 import {TickerType} from '@prisma/client';
 import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
 import {tickerDescriptions, tickerTypeNames} from '../../types/type-names';
