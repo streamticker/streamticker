@@ -2,7 +2,8 @@ import axios from 'axios';
 import {api} from './api';
 import {env} from './env';
 import {harvesters} from '../harvesters';
-import {Routes} from 'discord-api-types/v10';
+import {prisma} from './prisma';
+import dayjs from 'dayjs';
 
 export const handler = api({
 	async POST({ctx, req}) {
@@ -25,7 +26,16 @@ export const handler = api({
 
 			try {
 				await harvester.harvest(ticker);
-			} catch (e) {}
+			} catch (e) {
+				console.log(e);
+			} finally {
+				await prisma.ticker.update({
+					where: {channel_id: ticker.channel_id},
+					data: {
+						refresh_after: dayjs().add(1, 'hour').toDate(),
+					},
+				});
+			}
 		}
 	},
 });

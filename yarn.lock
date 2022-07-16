@@ -1099,6 +1099,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.3":
+  version: 1.11.3
+  resolution: "dayjs@npm:1.11.3"
+  checksum: c87e06b562a51ae6568cc5b840c7579d82a0f8af7163128c858fe512d3d71d07bd8e8e464b8cc41b8698a9e26b80ab2c082d14a1cd4c33df5692d77ccdfc5a43
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.3.3, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
@@ -3897,6 +3904,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.30.6
     autoprefixer: ^10.4.7
     axios: ^0.27.2
+    dayjs: ^1.11.3
     discord-api-types: ^0.36.2
     envsafe: ^2.0.3
     eslint: ^8.19.0
