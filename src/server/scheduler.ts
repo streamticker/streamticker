@@ -1,10 +1,29 @@
 import axios from 'axios';
 import {api} from './api';
 import {env} from './env';
+import {harvesters} from '../harvesters';
 
 export const handler = api({
-	async POST({req}) {
+	async POST({ctx, req}) {
 		console.log('Received data from lowcake:', Date.now(), req.body);
+
+		const tickers = await ctx.prisma.ticker.findMany({
+			take: 50,
+			where: {
+				refresh_after: {
+					lt: new Date(),
+				},
+			},
+			orderBy: {
+				refresh_after: 'desc',
+			},
+		});
+
+		for (const ticker of tickers) {
+			const harvester = harvesters[ticker.type];
+
+			await harvester.harvest(ticker, client);
+		}
 	},
 });
 

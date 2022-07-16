@@ -18,7 +18,7 @@ export default api({
 	async GET({req}) {
 		const {secret, guild} = query.parse(req.query);
 
-		if (secret !== env.SYNC_SECRET) {
+		if (secret !== env.ADMIN_AUTH) {
 			throw new NextkitError(401, 'Invalid secret');
 		}
 
