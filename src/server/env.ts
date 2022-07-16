@@ -11,9 +11,7 @@ export const env = envsafe({
 
 	DISCORD_BOT_TOKEN: str({}),
 
-	SYNC_SECRET: str({
-		default: 'lol',
-	}),
+	ADMIN_AUTH: str(),
 
 	DISCORD_DEVELOPMENT_SERVER: str({
 		default: '822168015956475945',

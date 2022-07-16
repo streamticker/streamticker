@@ -37,6 +37,11 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 	return data;
 }
 
-export async function dequeue() {
-	throw new Error('Dequeueing is not implemented yet.');
+export async function dequeue(queue: string, job: string) {
+	const {data} = await axios.delete(
+		`https://lowcake-api.otters.app/v1/queues/${queue}/jobs/${job}`,
+		{headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`}}
+	);
+
+	return data;
 }
