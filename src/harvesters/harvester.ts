@@ -42,7 +42,10 @@ export function createHarvester<T extends TickerType>(
 	config: {
 		requirement: TickerRequirement;
 		validateInput?: null | ValidateInput;
-		harvest(ticker: Omit<Ticker, 'type'> & {type: T}, utils: HarvesterUtils): Promise<number>;
+		harvest(
+			ticker: Omit<Ticker, 'type'> & {type: T},
+			utils: HarvesterUtils
+		): Promise<number | string>;
 	}
 ): Harvester {
 	const utils: HarvesterUtils = {

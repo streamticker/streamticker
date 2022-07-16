@@ -28,4 +28,6 @@ export const env = envsafe({
 	TWITTER_AUTH: str({}),
 
 	YOUTUBE_SECRET: str({}),
+
+	OPENSEA_API_KEY: str({}),
 });

@@ -5,6 +5,10 @@ import {GITHUB_FOLLOWERS} from './impl/github/followers';
 import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
+import {OPENSEA_COLLECTION_FLOOR} from './impl/opensea/floor';
+import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
+import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
+import {OPENSEA_COLLECTION_VOLUME} from './impl/opensea/volume';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
@@ -24,10 +28,10 @@ export const harvesters: Record<TickerType, Harvester> = {
 	DISCORD_HUMANS: undefined,
 	DISCORD_BOTS: undefined,
 	REDDIT_SUBSCRIBERS,
-	OPENSEA_COLLECTION_FLOOR: undefined,
-	OPENSEA_COLLECTION_VOLUME: undefined,
-	OPENSEA_COLLECTION_UNIQUE_HOLDERS: undefined,
-	OPENSEA_COLLECTION_SUPPLY: undefined,
+	OPENSEA_COLLECTION_FLOOR,
+	OPENSEA_COLLECTION_VOLUME,
+	OPENSEA_COLLECTION_UNIQUE_HOLDERS,
+	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
 	SELF_TICKERS: undefined,
 	SELF_GUILDS: undefined,
