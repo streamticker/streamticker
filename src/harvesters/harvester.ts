@@ -29,7 +29,7 @@ export type ValidateInput = (value: string) => Promise<
 >;
 
 export interface Harvester {
-	harvest(ticker: Ticker, utils: HarvesterUtils): Promise<void>;
+	harvest(ticker: Ticker): Promise<void>;
 	validateInput: ValidateInput | null;
 }
 
@@ -42,17 +42,25 @@ export function createHarvester<T extends TickerType>(
 	config: {
 		requirement: TickerRequirement;
 		validateInput?: null | ValidateInput;
-		harvest(ticker: Omit<Ticker, 'type'> & {type: T}): Promise<number>;
+		harvest(ticker: Omit<Ticker, 'type'> & {type: T}, utils: HarvesterUtils): Promise<number>;
 	}
 ): Harvester {
+	const utils: HarvesterUtils = {
+		ensureId(ticker) {
+			if (!ticker.platform_id) {
+				throw new Error('Expected `.platform_id` for ticker ' + ticker.channel_id);
+			}
+		},
+	};
+
 	return {
 		validateInput: config.validateInput ?? null,
-		async harvest(ticker: Ticker, utils: HarvesterUtils) {
+		async harvest(ticker) {
 			if (ticker.type !== type) {
 				throw new Error('Received mismatch ticker type! Expected ' + type);
 			}
 
-			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T});
+			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
 
 			const formatted = format(ticker, value);
 
