@@ -16,7 +16,7 @@ export const handler = api({
  * @param queue The queue ID to use. Defaults to the one configured from environment
  */
 export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOWCAKE_QUEUE_ID) {
-	await axios.post(
+	const {data} = await axios.post(
 		`https://lowcake-api.otters.app/v1/queues/${queue}`,
 		{
 			url,
@@ -33,6 +33,8 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 			headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`},
 		}
 	);
+
+	return data;
 }
 
 export async function dequeue() {
