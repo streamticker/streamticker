@@ -22,7 +22,7 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 			url,
 			payload: null,
 			exclusive: false,
-			override: false,
+			override: true,
 			retry: [],
 			schedule: {
 				type: 'cron',
