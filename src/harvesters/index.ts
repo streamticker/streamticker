@@ -7,6 +7,8 @@ import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
+import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
+import {YOUTUBE_VIEWCOUNT} from './impl/youtube/viewcount';
 
 export const harvesters: Record<TickerType, Harvester> = {
 	DISCORD_BOOSTS,
@@ -15,8 +17,8 @@ export const harvesters: Record<TickerType, Harvester> = {
 	GITHUB_REPO_ISSUES,
 	GITHUB_FOLLOWERS,
 	TWITCH_FOLLOWERS: undefined,
-	YOUTUBE_SUBSCRIBERS: undefined,
-	YOUTUBE_VIEWCOUNT: undefined,
+	YOUTUBE_SUBSCRIBERS,
+	YOUTUBE_VIEWCOUNT,
 	DISCORD_MEMBERS: undefined,
 	DISCORD_MEMBERS_ROLE: undefined,
 	DISCORD_HUMANS: undefined,
