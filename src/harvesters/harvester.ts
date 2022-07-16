@@ -29,8 +29,12 @@ export type ValidateInput = (value: string) => Promise<
 >;
 
 export interface Harvester {
-	harvest(ticker: Ticker): Promise<void>;
+	harvest(ticker: Ticker, utils: HarvesterUtils): Promise<void>;
 	validateInput: ValidateInput | null;
+}
+
+export interface HarvesterUtils {
+	ensureId(ticker: Ticker): asserts ticker is Ticker & {platform_id: string};
 }
 
 export function createHarvester<T extends TickerType>(
@@ -43,7 +47,7 @@ export function createHarvester<T extends TickerType>(
 ): Harvester {
 	return {
 		validateInput: config.validateInput ?? null,
-		async harvest(ticker: Ticker) {
+		async harvest(ticker: Ticker, utils: HarvesterUtils) {
 			if (ticker.type !== type) {
 				throw new Error('Received mismatch ticker type! Expected ' + type);
 			}
