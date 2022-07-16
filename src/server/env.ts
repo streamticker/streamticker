@@ -18,4 +18,12 @@ export const env = envsafe({
 	DISCORD_DEVELOPMENT_SERVER: str({
 		default: '822168015956475945',
 	}),
+
+	LOWCAKE_API_KEY: str({
+		desc: 'Lowcake API key',
+	}),
+
+	LOWCAKE_QUEUE_ID: str({
+		default: 'queue_NzEyNTc5MDk2MzUzMzQxNDc',
+	}),
 });
