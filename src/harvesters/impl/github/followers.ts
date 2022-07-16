@@ -2,7 +2,7 @@ import {Ticker, TickerType} from '@prisma/client';
 import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
 import {GitHubAPI} from './api';
 
-export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_REPO_STARS, {
+export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {
 	requirement: TickerRequirement.VOTE,
 	validateInput: async (username: string) => {
 		if (!username) {
