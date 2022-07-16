@@ -11,7 +11,7 @@ export const handler = api({
 	},
 
 	async POST({req}) {
-		console.log('Received data from lowcake:', req.body);
+		console.log('Received data from lowcake:', Date.now(), req.body);
 	},
 });
 
