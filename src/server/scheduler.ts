@@ -30,7 +30,7 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 			},
 		},
 		{
-			headers: {Authorization: env.LOWCAKE_API_KEY},
+			headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`},
 		}
 	);
 }
