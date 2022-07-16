@@ -14,7 +14,10 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
-		"incremental": true
+		"incremental": true,
+		"allowUnreachableCode": false,
+		"useUnknownInCatchVariables": true,
+		"allowUnusedLabels": false
 	},
 	"exclude": ["node_modules"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

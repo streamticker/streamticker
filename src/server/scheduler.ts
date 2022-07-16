@@ -2,6 +2,7 @@ import axios from 'axios';
 import {api} from './api';
 import {env} from './env';
 import {harvesters} from '../harvesters';
+import {Routes} from 'discord-api-types/v10';
 
 export const handler = api({
 	async POST({ctx, req}) {
@@ -22,7 +23,9 @@ export const handler = api({
 		for (const ticker of tickers) {
 			const harvester = harvesters[ticker.type];
 
-			await harvester.harvest(ticker, client);
+			try {
+				await harvester.harvest(ticker);
+			} catch (e) {}
 		}
 	},
 });

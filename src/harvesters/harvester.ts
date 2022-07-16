@@ -1,7 +1,7 @@
 import {Ticker, TickerType} from '@prisma/client';
+import {APIChannel, ChannelType} from 'discord-api-types/v10';
 import {prisma} from '../server/prisma';
-import {XOR} from '../interactions/util';
-import type {Client} from 'discord.js';
+import {discord, Routes} from './impl/discord/api';
 
 export enum TickerRequirement {
 	NONE = 1 << 0,
@@ -18,31 +18,43 @@ export function format(ticker: Ticker, value: number | string) {
 	return ticker.format.replace(FORMATTER_REPLACER, humanized);
 }
 
+export type ValidateInput = (value: string) => Promise<
+	| {
+			success: true;
+	  }
+	| {
+			success: false;
+			message: string;
+	  }
+>;
+
 export interface Harvester {
-	harvest(ticker: Ticker, client: Client<true>): Promise<void>;
-	validateInput: ((value: string) => Promise<boolean>) | null;
+	harvest(ticker: Ticker): Promise<void>;
+	validateInput: ValidateInput | null;
 }
 
 export function createHarvester<T extends TickerType>(
 	type: T,
 	config: {
 		requirement: TickerRequirement;
-		validateInput?: null | ((value: string) => Promise<boolean>);
-		harvest(ticker: Omit<Ticker, 'type'> & {type: T}, client: Client<true>): Promise<number>;
+		validateInput?: null | ValidateInput;
+		harvest(ticker: Omit<Ticker, 'type'> & {type: T}): Promise<number>;
 	}
 ): Harvester {
 	return {
 		validateInput: config.validateInput ?? null,
-		async harvest(ticker: Ticker, client: Client<true>) {
+		async harvest(ticker: Ticker) {
 			if (ticker.type !== type) {
 				throw new Error('Received mismatch ticker type! Expected ' + type);
 			}
 
-			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, client);
+			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T});
 
 			const formatted = format(ticker, value);
 
-			const channel = await client.channels.fetch(ticker.channel_id);
+			const channel = (await discord
+				.get(Routes.channel(ticker.channel_id))
+				.catch(() => null)) as APIChannel | null;
 
 			if (!channel) {
 				await prisma.ticker.delete({
@@ -54,12 +66,14 @@ export function createHarvester<T extends TickerType>(
 				throw new Error('Channel was deleted!');
 			}
 
-			if (channel.type !== 'GUILD_VOICE') {
+			if (channel.type !== ChannelType.GuildVoice) {
 				throw new Error('Channel is not a voice channel!');
 			}
 
-			await channel.edit({
-				name: formatted,
+			await discord.patch(Routes.channel(ticker.channel_id), {
+				body: {
+					name: formatted,
+				},
 			});
 		},
 	};
