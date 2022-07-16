@@ -1,4 +1,5 @@
 import type {SlashCommand} from 'slash-create';
+import {CreateCommand} from './commands/tickers/create';
 import {InviteCommand} from './commands/util/invite';
 import {PingCommand} from './commands/util/ping';
 import {SupportCommand} from './commands/util/support';
@@ -9,4 +10,5 @@ export const commands: typeof SlashCommand[] = [
 	PingCommand,
 	SupportCommand,
 	InviteCommand,
+	CreateCommand,
 ];

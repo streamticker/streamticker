@@ -3,8 +3,6 @@ import {
 	SlashCommand,
 	SlashCreator,
 	CommandContext,
-	ComponentType,
-	ButtonStyle,
 	CommandOptionType,
 	ChannelType,
 	ApplicationCommandOptionChoice,
@@ -66,6 +64,16 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('A ticker already exists on this channel!');
 		}
 
-		//
+		// TODO: get harvester for ticker
+
+		// TODO: check if harvester has input, and if it does & user didn't provide input, throw error
+
+		// TODO: create ticker in Prisma if all is valid
+
+		// TODO: run harvester on newly-created ticker
+
+		// TODO: provide user input about ticker completion
+
+		// TODO: post analytics about ticker creation
 	}
 }
