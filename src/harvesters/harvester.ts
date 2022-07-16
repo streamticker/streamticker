@@ -1,7 +1,7 @@
 import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
 import {prisma} from '../server/prisma';
-import {discord, Routes} from './impl/discord/api';
+import {DiscordAPI} from './impl/discord/api';
 
 export enum TickerRequirement {
 	NONE = 1 << 0,
@@ -61,18 +61,11 @@ export function createHarvester<T extends TickerType>(
 			}
 
 			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
-
-			const formatted = format(ticker, value);
-
-			const channel = (await discord
-				.get(Routes.channel(ticker.channel_id))
-				.catch(() => null)) as APIChannel | null;
+			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(() => null);
 
 			if (!channel) {
 				await prisma.ticker.delete({
-					where: {
-						channel_id: ticker.channel_id,
-					},
+					where: {channel_id: ticker.channel_id},
 				});
 
 				throw new Error('Channel was deleted!');
@@ -82,10 +75,8 @@ export function createHarvester<T extends TickerType>(
 				throw new Error('Channel is not a voice channel!');
 			}
 
-			await discord.patch(Routes.channel(ticker.channel_id), {
-				body: {
-					name: formatted,
-				},
+			await DiscordAPI.editChannel(ticker.channel_id, {
+				name: format(ticker, value),
 			});
 		},
 	};
