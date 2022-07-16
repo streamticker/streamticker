@@ -1,8 +1,13 @@
 import {SlashCreator, VercelServer} from 'slash-create';
 import {commands} from '../../interactions';
 import {env} from '../../server/env';
+const Discord = require('discord.js');
+const client = new Discord.Client({
+	intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES'],
+});
 
 export const creator = new SlashCreator({
+	client,
 	applicationID: env.DISCORD_APP_ID,
 	publicKey: env.DISCORD_INTERACTION_PUBLIC_KEY,
 	token: env.DISCORD_BOT_TOKEN,

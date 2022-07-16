@@ -1,12 +1,16 @@
+import {TickerType} from '@prisma/client';
 import {
 	SlashCommand,
 	SlashCreator,
 	CommandContext,
-	ComponentType,
-	ButtonStyle,
 	CommandOptionType,
 	ChannelType,
+	ApplicationCommandOptionChoice,
 } from 'slash-create';
+import {harvesters} from '../../../harvesters';
+import {prisma} from '../../../server/prisma';
+import {tickerTypeNames} from '../../types/type-names';
+import {is, enumerate} from '../../util';
 
 export class CreateCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {
@@ -21,35 +25,55 @@ export class CreateCommand extends SlashCommand {
 					type: CommandOptionType.CHANNEL,
 					channel_types: [ChannelType.GUILD_VOICE],
 				},
+				{
+					name: 'type',
+					description: 'The type of ticker to create',
+					required: true,
+					type: CommandOptionType.STRING,
+					choices: Object.entries(tickerTypeNames).map<ApplicationCommandOptionChoice>(entry => {
+						const [value, name] = entry;
+						return {name, value};
+					}),
+				},
+				{
+					name: 'input',
+					description: 'Any input required for the ticker',
+					required: false,
+					type: CommandOptionType.STRING,
+				},
 			],
 		});
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.send({
-			embeds: [
-				{
-					title: 'Vote for StreamTicker on top.gg',
-					description:
-						'Top.gg is a Discord bot list that people can discover StreamTicker on - voting for us helps us reach more people and lets you create Discord, Twitter and YouTube tickers for 12 hours!',
-				},
-			],
-			components: [
-				{
-					type: ComponentType.ACTION_ROW,
-					components: [
-						{
-							type: ComponentType.BUTTON,
-							label: 'Click to vote!',
-							style: ButtonStyle.LINK,
-							url: 'https://top.gg/bot/822117936251928586/vote',
-							emoji: {
-								name: '🎉',
-							},
-						},
-					],
-				},
-			],
+		ctx.defer();
+
+		if (!is(ctx.options.type, enumerate(TickerType))) {
+			throw new Error('Invalid ticker type!');
+		}
+
+		if (ctx.options.channel.type !== 'GUILD_VOICE' || !ctx.options.channel.isVoice()) {
+			throw new Error('Channel must be a voice channel!');
+		}
+
+		const existingOnChannel = await prisma.ticker.findFirst({
+			where: {channel_id: ctx.channelID},
 		});
+
+		if (existingOnChannel) {
+			throw new Error('A ticker already exists on this channel!');
+		}
+
+		// TODO: get harvester for ticker
+
+		// TODO: check if harvester has input, and if it does & user didn't provide input, throw error
+
+		// TODO: create ticker in Prisma if all is valid
+
+		// TODO: run harvester on newly-created ticker
+
+		// TODO: provide user input about ticker completion
+
+		// TODO: post analytics about ticker creation
 	}
 }
