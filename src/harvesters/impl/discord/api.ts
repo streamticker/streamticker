@@ -7,15 +7,37 @@ import {
 	RESTGetAPIGuildMembersResult,
 	RESTPostAPIGuildChannelJSONBody,
 	RESTPostAPIGuildChannelResult,
-	APIRole,
 	RESTGetAPIGuildResult,
 	RESTGetAPIGuildRolesResult,
+	RESTGetAPICurrentUserGuildsResult,
 } from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
 const client = new REST({version: '10'}).setToken(env.DISCORD_BOT_TOKEN);
 
 export class DiscordAPI {
+	public static async getBotGuilds(lastId?: string): Promise<RESTGetAPICurrentUserGuildsResult> {
+		const limit = 200;
+
+		const query = new URLSearchParams({
+			limit: limit.toString(),
+		});
+
+		if (lastId) {
+			query.set('after', lastId);
+		}
+
+		const guilds = (await client.get(Routes.userGuilds(), {
+			query,
+		})) as RESTGetAPICurrentUserGuildsResult;
+
+		if (guilds.length === limit) {
+			guilds.push(...(await DiscordAPI.getBotGuilds(guilds[guilds.length - 1].id)));
+		}
+
+		return guilds;
+	}
+
 	public static async getGuildMembers(
 		guild: string,
 		lastId?: string
@@ -35,22 +57,19 @@ export class DiscordAPI {
 		})) as RESTGetAPIGuildMembersResult;
 
 		if (members.length === limit) {
-			const newMembers = await DiscordAPI.getGuildMembers(
-				guild,
-				members[members.length - 1].user?.id
+			members.push(
+				...(await DiscordAPI.getGuildMembers(guild, members[members.length - 1].user?.id))
 			);
-
-			members.push(...newMembers);
 		}
 
 		return members;
 	}
 
-	public static getChannel(id: string) {
+	public static async getChannel(id: string) {
 		return client.get(Routes.channel(id)) as Promise<APIChannel>;
 	}
 
-	public static createChannel(guild: string, data: RESTPostAPIGuildChannelJSONBody) {
+	public static async createChannel(guild: string, data: RESTPostAPIGuildChannelJSONBody) {
 		return client.post(Routes.guildChannels(guild), {
 			body: data,
 		}) as Promise<RESTPostAPIGuildChannelResult>;
@@ -60,7 +79,7 @@ export class DiscordAPI {
 		return client.get(Routes.guild(guild)) as Promise<RESTGetAPIGuildResult>;
 	}
 
-	public static editChannel(id: string, data: RESTPatchAPIChannelJSONBody) {
+	public static async editChannel(id: string, data: RESTPatchAPIChannelJSONBody) {
 		return client.patch(Routes.channel(id), {
 			body: data,
 		}) as Promise<RESTPatchAPIChannelResult>;

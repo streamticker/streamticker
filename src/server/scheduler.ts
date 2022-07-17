@@ -6,7 +6,6 @@ import {harvesters} from '../harvesters';
 import {prisma} from './prisma';
 import dayjs from 'dayjs';
 import {logsnag} from './logsnag';
-import {stripIndent} from 'common-tags';
 
 export const handler = api({
 	async POST({ctx}) {
@@ -98,20 +97,6 @@ export const handler = api({
 
 				stats.fails++;
 			}
-		}
-
-		if (tickers.length !== 0) {
-			await logsnag({
-				channel: 'refreshes',
-				event: 'Refreshed tickers',
-				icon: '🔁',
-				description: stripIndent`
-					Refreshed ${tickers.length} tickers
-					Deleted ${stats.deleted} tickers
-					Updated ${stats.updated} tickers
-					Failed to update ${stats.fails} tickers
-				`,
-			});
 		}
 	},
 });
