@@ -44,7 +44,7 @@ export const handler = api({
 
 					stats.updated++;
 				} else {
-					if (result.code === 'TIMEOUT') {
+					if (result.discord_error) {
 						await prisma.ticker.update({
 							where: {channel_id: ticker.channel_id},
 							data: {refresh_after: dayjs().add(2, 'days').toDate()},
