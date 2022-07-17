@@ -9,7 +9,7 @@ export const api = create({
 		};
 	},
 
-	onError: async (req, res, err) => {
+	async onError(req, res, err) {
 		console.log(err);
 
 		return {
