@@ -79,7 +79,7 @@ export const handler = api({
 							.catch(console.log);
 					}
 
-					stats.deleted++;
+					stats.fails++;
 				}
 			} catch (e: unknown) {
 				await logsnag
