@@ -29,6 +29,7 @@ module.exports = {
 		'jsx-quotes': 'off',
 		'@typescript-eslint/ban-types': 'off',
 		'no-bitwise': 'off',
+		'@typescript-eslint/quotes': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
