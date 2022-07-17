@@ -30,7 +30,7 @@ export class FormatCommand extends SlashCommand {
 				{
 					name: 'format',
 					description: `The channel to edit a format of. Use "${FORMATTER_REPLACER}" where you would like the value to appear.`,
-					required: false,
+					required: true,
 					type: CommandOptionType.STRING,
 				},
 			],
@@ -60,6 +60,7 @@ export class FormatCommand extends SlashCommand {
 			},
 			data: {
 				format: ctx.options.format,
+				refresh_after: new Date(),
 			},
 		});
 
