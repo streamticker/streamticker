@@ -34,7 +34,10 @@ const onError = async (error: string | Error) => {
 
 creator.on('warn', onError);
 creator.on('error', onError);
-creator.on('commandError', (command, error) => onError(error));
+
+creator.on('commandError', (command, error, ctx) => {
+	ctx.send(error.message);
+});
 
 creator.on('commandRun', (command, _, ctx) => {
 	logsnag.publish({
