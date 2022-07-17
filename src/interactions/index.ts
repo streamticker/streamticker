@@ -3,6 +3,7 @@ import {CreateCommand} from './commands/tickers/create';
 import {FormatCommand} from './commands/tickers/format';
 import {RefreshCommand} from './commands/tickers/refresh';
 import {RemoveCommand} from './commands/tickers/remove';
+import {SetupCommand} from './commands/tickers/setup';
 import {FeedbackCommand} from './commands/util/feedback';
 import {InviteCommand} from './commands/util/invite';
 import {PingCommand} from './commands/util/ping';
@@ -21,4 +22,5 @@ export const commands: typeof SlashCommand[] = [
 	FormatCommand,
 	RefreshCommand,
 	RemoveCommand,
+	SetupCommand,
 ];
