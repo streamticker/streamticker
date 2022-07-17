@@ -10,7 +10,7 @@ import {
 import {harvesters} from '../../../harvesters';
 import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
-import {tickerTypeNames} from '../../types/type-names';
+import {defaultTickerFormats, tickerTypeNames} from '../../types/type-names';
 import {is, enumerate} from '../../util';
 
 export class CreateCommand extends SlashCommand {
@@ -85,7 +85,7 @@ export class CreateCommand extends SlashCommand {
 				guild_id: ctx.guildID,
 				type: ctx.options.type,
 				refresh_after: new Date(),
-				format: '%v', // TODO: get format from harvester
+				format: defaultTickerFormats[ctx.options.type], // TODO: get format from harvester
 				platform_id: platformId,
 			},
 		});

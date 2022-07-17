@@ -20,8 +20,6 @@ export const handler = api({
 			},
 		});
 
-		// TODO: add scheduler notice to webhook or something
-
 		for (const ticker of tickers) {
 			const harvester = harvesters[ticker.type];
 

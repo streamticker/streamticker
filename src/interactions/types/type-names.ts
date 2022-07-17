@@ -1,4 +1,5 @@
 import {TickerType} from '@prisma/client';
+import {FORMATTER_REPLACER} from '../../harvesters/harvester';
 
 export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.GITHUB_REPO_STARS]: 'GitHub repository stars (input required)',
@@ -52,30 +53,29 @@ export const tickerDescriptions: Record<TickerType, string> = {
 	[TickerType.GUILD_TICKERS]: 'The amount of tickers created by the bot in this server',
 };
 
-// export const defaultTickerFormats: Record<
-// 	TickerType,
-// 	`${string}${typeof AbstractHarvester.FORMATTER_REPLACER}${string}`
-// > = {
-// 	[TickerType.GITHUB_REPO_STARS]: 'Repo Stars: %v',
-// 	[TickerType.GITHUB_REPO_FORKS]: 'Repo Forks: %v',
-// 	[TickerType.GITHUB_REPO_ISSUES]: 'Repo Issues: %v',
-// 	[TickerType.GITHUB_FOLLOWERS]: 'GitHub Followers: %v',
-// 	[TickerType.TWITCH_FOLLOWERS]: 'Twitch Followers: %v',
-// 	[TickerType.TWITTER_FOLLOWERS]: 'Twitter Followers: %v',
-// 	[TickerType.YOUTUBE_SUBSCRIBERS]: 'Subscribers: %v',
-// 	[TickerType.YOUTUBE_VIEWCOUNT]: 'Views: %v',
-// 	[TickerType.DISCORD_MEMBERS]: 'Members: %v',
-// 	[TickerType.DISCORD_MEMBERS_ROLE]: 'Humans with role: %v',
-// 	[TickerType.DISCORD_BOOSTS]: 'Server Boosts: %v',
-// 	[TickerType.DISCORD_HUMANS]: 'Humans: %v',
-// 	[TickerType.DISCORD_BOTS]: 'Bots: %v',
-// 	[TickerType.REDDIT_SUBSCRIBERS]: 'Reddit Subscribers: %v',
-// 	[TickerType.OPENSEA_COLLECTION_FLOOR]: 'Floor: %v Ξ',
-// 	[TickerType.OPENSEA_COLLECTION_VOLUME]: 'Volume: %v Ξ',
-// 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]: 'Unique Holders: %v',
-// 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'Supply: %v',
-// 	[TickerType.SELF_TICKERS]: 'Global Tickers: %v',
-// 	[TickerType.SELF_GUILDS]: 'Servers: %v',
-// 	[TickerType.GUILD_TICKERS]: 'Tickers: %v',
-// 	[TickerType.INSTAGRAM_FOLLOWERS]: 'Followers: %v',
-// };
+export const defaultTickerFormats: Record<
+	TickerType,
+	`${string}${typeof FORMATTER_REPLACER}${string}`
+> = {
+	[TickerType.GITHUB_REPO_STARS]: 'Repo Stars: %v',
+	[TickerType.GITHUB_REPO_FORKS]: 'Repo Forks: %v',
+	[TickerType.GITHUB_REPO_ISSUES]: 'Repo Issues: %v',
+	[TickerType.GITHUB_FOLLOWERS]: 'GitHub Followers: %v',
+	[TickerType.TWITCH_FOLLOWERS]: 'Twitch Followers: %v',
+	[TickerType.TWITTER_FOLLOWERS]: 'Twitter Followers: %v',
+	[TickerType.YOUTUBE_SUBSCRIBERS]: 'Subscribers: %v',
+	[TickerType.YOUTUBE_VIEWCOUNT]: 'Views: %v',
+	[TickerType.DISCORD_MEMBERS]: 'Members: %v',
+	[TickerType.DISCORD_MEMBERS_ROLE]: 'Humans with role: %v',
+	[TickerType.DISCORD_BOOSTS]: 'Server Boosts: %v',
+	[TickerType.DISCORD_HUMANS]: 'Humans: %v',
+	[TickerType.DISCORD_BOTS]: 'Bots: %v',
+	[TickerType.REDDIT_SUBSCRIBERS]: 'Reddit Subscribers: %v',
+	[TickerType.OPENSEA_COLLECTION_FLOOR]: 'Floor: %v Ξ',
+	[TickerType.OPENSEA_COLLECTION_VOLUME]: 'Volume: %v Ξ',
+	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]: 'Unique Holders: %v',
+	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'Supply: %v',
+	[TickerType.SELF_TICKERS]: 'Global Tickers: %v',
+	[TickerType.SELF_GUILDS]: 'Servers: %v',
+	[TickerType.GUILD_TICKERS]: 'Tickers: %v',
+};
