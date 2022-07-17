@@ -9,7 +9,7 @@ import {GetStaticProps} from 'next';
 import {creator} from './api/interaction';
 
 interface Props {
-	commands: [name: string, description: string][];
+	commands: Array<[name: string, description: string]>;
 	stats: {totalTickers: number};
 }
 
@@ -141,14 +141,12 @@ export default function Home(props: Props) {
 	);
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			commands: creator.commands.map(cmd => [cmd.commandName, cmd.description ?? 'No description']),
-			stats: {
-				totalTickers: 120,
-			},
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+	props: {
+		commands: creator.commands.map(cmd => [cmd.commandName, cmd.description ?? 'No description']),
+		stats: {
+			totalTickers: 120,
 		},
-		revalidate: 60 * 60 * 24, // 1 day
-	};
-};
+	},
+	revalidate: 60 * 60 * 24, // 1 day
+});

@@ -21,9 +21,6 @@ export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]:
 		'OpenSea collection unique holders (input required)',
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'OpenSea collection supply (input required)',
-	[TickerType.SELF_TICKERS]: 'Global ticker count',
-	[TickerType.SELF_GUILDS]: 'Global servers StreamTicker is in',
-	[TickerType.GUILD_TICKERS]: 'Server ticker count',
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -48,9 +45,6 @@ export const tickerDescriptions: Record<TickerType, string> = {
 		'The amount of unique holders of an OpenSea collection',
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'The supply of an OpenSea collection',
 	[TickerType.TWITTER_FOLLOWERS]: 'The amount of followers on a Twitter user',
-	[TickerType.SELF_TICKERS]: 'The amount of tickers created by the bot globally',
-	[TickerType.SELF_GUILDS]: 'The amount of guilds StreamTicker is used in',
-	[TickerType.GUILD_TICKERS]: 'The amount of tickers created by the bot in this server',
 };
 
 export const defaultTickerFormats: Record<
@@ -75,7 +69,4 @@ export const defaultTickerFormats: Record<
 	[TickerType.OPENSEA_COLLECTION_VOLUME]: `Volume: ${FORMATTER_REPLACER} Ξ`,
 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]: `Unique Holders: ${FORMATTER_REPLACER}`,
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: `Supply: ${FORMATTER_REPLACER}`,
-	[TickerType.SELF_TICKERS]: `Global Tickers: ${FORMATTER_REPLACER}`,
-	[TickerType.SELF_GUILDS]: `Servers: ${FORMATTER_REPLACER}`,
-	[TickerType.GUILD_TICKERS]: `Tickers: ${FORMATTER_REPLACER}`,
 };

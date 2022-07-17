@@ -26,6 +26,8 @@ module.exports = {
 		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/space-infix-ops': 'off',
 		'operator-linebreak': 'off',
+		'jsx-quotes': 'off',
+		'@typescript-eslint/ban-types': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],

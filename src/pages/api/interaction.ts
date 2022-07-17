@@ -36,22 +36,20 @@ creator.on('warn', reportError);
 creator.on('error', reportError);
 
 creator.on('commandError', async (command, error, ctx) => {
-	ctx.send(error.message);
+	await ctx.send(error.message);
 	await reportError(error, false, ctx.user.id);
 });
 
-creator.on('commandRun', (command, _, ctx) => {
+creator.on('commandRun', async (command, _, ctx) => {
 	let options = '\nOptions:\n';
 
 	if (command.options) {
 		options += command.options
-			.map(option => {
-				return `${option.name}: ${ctx.options[option.name]}`;
-			})
+			.map(option => `${option.name}: ${ctx.options[option.name] as string}`)
 			.join('\n');
 	}
 
-	logsnag.publish({
+	await logsnag.publish({
 		channel: 'commands',
 		event: 'User ran command',
 		icon: '🏃🏻',

@@ -47,7 +47,7 @@ export class CreateCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.defer();
+		await ctx.defer();
 
 		if (!ctx.guildID) {
 			throw new Error('This command can only be ran inside of a guild!');
@@ -58,7 +58,7 @@ export class CreateCommand extends SlashCommand {
 		}
 
 		const existingOnChannel = await prisma.ticker.findFirst({
-			where: {channel_id: ctx.options.channel},
+			where: {channel_id: ctx.options.channel as string},
 		});
 
 		if (existingOnChannel) {

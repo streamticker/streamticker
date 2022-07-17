@@ -9,9 +9,7 @@ const query = z.object({
 	guild: z
 		.enum(['true', 'false'])
 		.optional()
-		.transform(value => {
-			return value === 'true';
-		}),
+		.transform(value => value === 'true'),
 });
 
 export default api({

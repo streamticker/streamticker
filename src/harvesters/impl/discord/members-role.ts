@@ -19,8 +19,6 @@ export const DISCORD_MEMBERS_ROLE = createHarvester(TickerType.DISCORD_MEMBERS_R
 
 		const members = await DiscordAPI.getGuildMembers(ticker.guild_id);
 
-		return members.filter(member => {
-			return member.roles.includes(ticker.platform_id);
-		}).length;
+		return members.filter(member => member.roles.includes(ticker.platform_id)).length;
 	},
 });
