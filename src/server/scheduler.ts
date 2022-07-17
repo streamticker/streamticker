@@ -79,20 +79,22 @@ export const handler = api({
 			}
 		}
 
-		await logsnag.publish({
-			channel: 'refreshes',
-			event: 'Refreshed tickers',
-			icon: '🔁',
-			description: stripIndent`
+		if (tickers.length !== 0) {
+			await logsnag.publish({
+				channel: 'refreshes',
+				event: 'Refreshed tickers',
+				icon: '🔁',
+				description: stripIndent`
 				Refreshed ${tickers.length} tickers
 				Deleted ${stats.deleted} tickers
 				Updated ${stats.updated} tickers
 				Failed to update ${stats.fails} tickers
 			`,
-			tags: {
-				count: tickers.length,
-			},
-		});
+				tags: {
+					count: tickers.length,
+				},
+			});
+		}
 	},
 });
 
