@@ -17,7 +17,7 @@ const onError = async (error: string | Error) => {
 	const c = {
 		event: 'Interaction error',
 		channel: 'errors',
-		description: typeof error === 'string' ? error : error.message,
+		description: typeof error === 'string' ? error : JSON.stringify(error.message),
 		icon: '🚨',
 		tags: {
 			error_name: typeof error === 'string' ? 'n/a' : error.name,
