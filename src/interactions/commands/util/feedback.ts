@@ -23,23 +23,6 @@ export class FeedbackCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		// await axios
-		// 	.post(
-		// 		'https://canary.discord.com/api/webhooks/997683651615662091/psE-cPkGU1qKThPi1zKE6UaGjb39XZ_HZU5pryhBVtQtVlatn7Zhc693VMGoXnhl0sNd',
-		// 		{
-		// 			embeds: [
-		// 				{
-		// 					description: ctx.options.feedback,
-		// 					author: {
-		// 						name: ctx.user.username,
-		// 						icon_url: ctx.user.avatarURL,
-		// 					},
-		// 				},
-		// 			],
-		// 		}
-		// 	)
-		//
-
 		logsnag
 			.publish({
 				channel: 'feedback',
