@@ -5,14 +5,16 @@ import {
 	RESTPatchAPIChannelJSONBody,
 	RESTPatchAPIChannelResult,
 	RESTGetAPIGuildMembersResult,
-	RESTGetAPIGuildMembersQuery,
 } from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
 const client = new REST({version: '10'}).setToken(env.DISCORD_BOT_TOKEN);
 
 export class DiscordAPI {
-	public static async getGuildMemberCount(guild: string, lastId?: string): Promise<number> {
+	public static async getGuildMembers(
+		guild: string,
+		lastId?: string
+	): Promise<RESTGetAPIGuildMembersResult> {
 		const limit = 1000;
 
 		const query = new URLSearchParams({
@@ -27,18 +29,16 @@ export class DiscordAPI {
 			query,
 		})) as RESTGetAPIGuildMembersResult;
 
-		let count = members.length;
-
 		if (members.length === limit) {
-			const newMembers = await this.getGuildMemberCount(
+			const newMembers = await DiscordAPI.getGuildMembers(
 				guild,
 				members[members.length - 1].user?.id
 			);
 
-			count += newMembers;
+			members.push(...newMembers);
 		}
 
-		return count;
+		return members;
 	}
 
 	public static getChannel(id: string) {
