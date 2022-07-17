@@ -14,6 +14,7 @@ import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
 import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
 import {OPENSEA_COLLECTION_VOLUME} from './impl/opensea/volume';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
+import {TWITCH_FOLLOWERS} from './impl/twitch/followers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
 import {YOUTUBE_VIEWCOUNT} from './impl/youtube/viewcount';
@@ -23,7 +24,7 @@ export const harvesters: Record<TickerType, Harvester> = {
 	GITHUB_REPO_FORKS,
 	GITHUB_REPO_ISSUES,
 	GITHUB_FOLLOWERS,
-	TWITCH_FOLLOWERS: undefined,
+	TWITCH_FOLLOWERS,
 	YOUTUBE_SUBSCRIBERS,
 	YOUTUBE_VIEWCOUNT,
 	DISCORD_BOOSTS,
@@ -37,6 +38,4 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_UNIQUE_HOLDERS,
 	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
-	SELF_TICKERS: undefined,
-	SELF_GUILDS: undefined,
 };
