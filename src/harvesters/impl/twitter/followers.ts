@@ -20,6 +20,7 @@ export const TWITTER_FOLLOWERS = createHarvester(TickerType.TWITTER_FOLLOWERS, {
 
 		return {
 			success: true,
+			platform_id: body,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {

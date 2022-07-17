@@ -70,10 +70,14 @@ export class CreateCommand extends SlashCommand {
 
 		const harvester = harvesters[ctx.options.type];
 
+		let platformId: string | null = null;
+
 		if (harvester.validateInput) {
 			const result = await harvester.validateInput(ctx.options.input);
 
-			if (!result.success) {
+			if (result.success) {
+				platformId = result.platform_id;
+			} else {
 				throw new Error(result.message);
 			}
 		}
@@ -85,7 +89,7 @@ export class CreateCommand extends SlashCommand {
 				type: ctx.options.type,
 				refresh_after: new Date(),
 				format: '%v', // TODO: get format from harvester
-				platform_id: ctx.options.input ? ctx.options.input : null,
+				platform_id: platformId,
 			},
 		});
 

@@ -21,6 +21,7 @@ export function format(ticker: Ticker, value: number | string) {
 export type ValidateInput = (value: string) => Promise<
 	| {
 			success: true;
+			platform_id: string;
 	  }
 	| {
 			success: false;
