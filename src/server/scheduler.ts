@@ -82,7 +82,7 @@ export const handler = api({
 			channel: 'refreshes',
 			event: 'Refreshed tickers',
 			icon: '🔁',
-			description: `Refreshed ${tickers.length} tickers. Deleted ${stats.deleted}, updated ${stats.updated}, fails ${stats.fails}`,
+			description: `Refreshed ${tickers.length} tickers\nDeleted ${stats.deleted} tickers\nUpdated ${stats.updated} tickers\Failed to update ${stats.fails} tickers`,
 			tags: {
 				count: tickers.length,
 			},
