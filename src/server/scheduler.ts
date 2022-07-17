@@ -106,7 +106,7 @@ export const handler = api({
  * @param cron The cron to use for the interval. Defaults to "At every fifth minute"
  * @param queue The queue ID to use. Defaults to the one configured from environment
  */
-export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOWCAKE_QUEUE_ID) {
+export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
 	const {data} = await axios.post<unknown>(
 		`https://lowcake-api.otters.app/v1/queues/${queue}`,
 		{
@@ -116,8 +116,8 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 			override: true,
 			retry: [],
 			schedule: {
-				type: 'cron',
-				meta: cron,
+				type: 'every',
+				meta: interval.toString(),
 			},
 		},
 		{
