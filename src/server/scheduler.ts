@@ -25,16 +25,22 @@ export const handler = api({
 			const harvester = harvesters[ticker.type];
 
 			try {
-				await harvester.harvest(ticker);
+				const result = await harvester.harvest(ticker);
+
+				if (!result.success) {
+					await prisma.ticker.delete({
+						where: {channel_id: ticker.channel_id},
+					});
+				} else {
+					await prisma.ticker.update({
+						where: {channel_id: ticker.channel_id},
+						data: {
+							refresh_after: dayjs().add(1, 'hour').toDate(),
+						},
+					});
+				}
 			} catch (e) {
 				console.log(e);
-			} finally {
-				await prisma.ticker.update({
-					where: {channel_id: ticker.channel_id},
-					data: {
-						refresh_after: dayjs().add(1, 'hour').toDate(),
-					},
-				});
 			}
 		}
 	},

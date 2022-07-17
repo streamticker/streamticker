@@ -30,7 +30,15 @@ export type ValidateInput = (value: string) => Promise<
 >;
 
 export interface Harvester {
-	harvest(ticker: Ticker): Promise<void>;
+	harvest(ticker: Ticker): Promise<
+		| {
+				success: true;
+		  }
+		| {
+				success: false;
+				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH';
+		  }
+	>;
 	validateInput: ValidateInput | null;
 }
 
@@ -61,7 +69,10 @@ export function createHarvester<T extends TickerType>(
 		validateInput: config.validateInput ?? null,
 		async harvest(ticker) {
 			if (ticker.type !== type) {
-				throw new Error('Received mismatch ticker type! Expected ' + type);
+				return {
+					success: false,
+					code: 'TYPE_MISMATCH',
+				};
 			}
 
 			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
@@ -72,16 +83,26 @@ export function createHarvester<T extends TickerType>(
 					where: {channel_id: ticker.channel_id},
 				});
 
-				throw new Error('Channel was deleted!');
+				return {
+					success: false,
+					code: 'CHANNEL_DELETED',
+				};
 			}
 
 			if (channel.type !== ChannelType.GuildVoice) {
-				throw new Error('Channel is not a voice channel!');
+				return {
+					success: false,
+					code: 'NOT_VOICE_CHANNEL',
+				};
 			}
 
 			await DiscordAPI.editChannel(ticker.channel_id, {
 				name: format(ticker, value),
 			});
+
+			return {
+				success: true,
+			};
 		},
 	};
 }
