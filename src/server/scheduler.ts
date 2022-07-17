@@ -23,6 +23,7 @@ export const handler = api({
 		const stats = {
 			deleted: 0,
 			updated: 0,
+			fails: 0,
 		};
 
 		for (const ticker of tickers) {
@@ -61,7 +62,19 @@ export const handler = api({
 					stats.updated++;
 				}
 			} catch (e) {
-				console.log(e);
+				await logsnag.publish({
+					channel: 'errors',
+					event: 'Ticker update failed',
+					icon: '🚨',
+					description: JSON.stringify(e),
+					tags: {
+						ticker: ticker.channel_id,
+						ticker_last_updated: ticker.last_updated?.getTime() ?? 'n/a',
+					},
+					notify: true,
+				});
+
+				stats.fails++;
 			}
 		}
 
@@ -69,7 +82,7 @@ export const handler = api({
 			channel: 'refreshes',
 			event: 'Refreshed tickers',
 			icon: '🔁',
-			description: `Refreshed ${tickers.length} tickers. Deleted ${stats.deleted}, updated ${stats.updated}`,
+			description: `Refreshed ${tickers.length} tickers. Deleted ${stats.deleted}, updated ${stats.updated}, fails ${stats.fails}`,
 			tags: {
 				count: tickers.length,
 			},
