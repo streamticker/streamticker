@@ -34,16 +34,25 @@ creator.on('commandError', (command, error, ctx) => {
 });
 
 creator.on('commandRun', (command, _, ctx) => {
+	let options = '\nOptions:\n';
+
+	if (command.options) {
+		options += command.options
+			.map(option => {
+				return `${option.name}: ${ctx.options[option.name]}`;
+			})
+			.join('\n');
+	}
+
 	logsnag.publish({
 		channel: 'commands',
 		event: 'User ran command',
 		icon: '🏃🏻',
-		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}`,
+		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}\n${options}`,
 		tags: {
 			command: command.commandName,
 			guild: ctx.guildID ? ctx.guildID : 'DM',
 			user: ctx.user.id,
-			options: command.options ? command.options.join(' ') : '',
 		},
 		notify: false,
 	});
