@@ -11,7 +11,7 @@ import {stripIndent} from 'common-tags';
 export const handler = api({
 	async POST({ctx}) {
 		const tickers = await ctx.prisma.ticker.findMany({
-			take: 50,
+			take: 5,
 			where: {
 				refresh_after: {
 					lt: new Date(),
