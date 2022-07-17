@@ -27,7 +27,7 @@ const onError = async (error: string | Error) => {
 
 	console.log(c);
 
-	await logsnag.publish(c);
+	await logsnag.publish(c).catch(console.log);
 };
 
 creator.on('warn', onError);
