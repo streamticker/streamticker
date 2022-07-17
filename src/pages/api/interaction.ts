@@ -14,7 +14,7 @@ const server = new VercelServer();
 creator.withServer(server).registerCommands(commands);
 
 const onError = async (error: string | Error) => {
-	const c = {
+	await logsnag.publish({
 		event: 'Interaction error',
 		channel: 'errors',
 		description: typeof error === 'string' ? error : JSON.stringify(error.message),
@@ -23,12 +23,6 @@ const onError = async (error: string | Error) => {
 			'error-name': typeof error === 'string' ? 'n/a' : error.name,
 		},
 		notify: true,
-	};
-
-	console.log(c);
-
-	await logsnag.publish(c).catch(e => {
-		console.log(e.constructor);
 	});
 };
 
