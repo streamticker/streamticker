@@ -28,6 +28,7 @@ export class RemoveCommand extends SlashCommand {
 					channel_types: [ChannelType.GUILD_VOICE],
 				},
 			],
+			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
 

@@ -12,6 +12,7 @@ export class SetupCommand extends SlashCommand {
 		super(creator, {
 			name: 'setup',
 			description: 'Setup StreamTicker in your server.',
+			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
 

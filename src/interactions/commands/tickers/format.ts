@@ -34,6 +34,7 @@ export class FormatCommand extends SlashCommand {
 					type: CommandOptionType.STRING,
 				},
 			],
+			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
 
