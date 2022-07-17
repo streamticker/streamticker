@@ -4,6 +4,7 @@ import {env} from './env';
 import {harvesters} from '../harvesters';
 import {prisma} from './prisma';
 import dayjs from 'dayjs';
+import {logsnag} from './logsnag';
 
 export const handler = api({
 	async POST({ctx, req}) {
@@ -31,6 +32,19 @@ export const handler = api({
 					await prisma.ticker.delete({
 						where: {channel_id: ticker.channel_id},
 					});
+
+					await logsnag.publish({
+						channel: 'errors',
+						event: "Couldn't refresh ticker",
+						icon: '⚠️',
+						description: `Was unable to refresh ${ticker.channel_id}`,
+						tags: {
+							code: result.code,
+							ticker: ticker.channel_id,
+							ticker_last_updated: ticker.last_updated?.getTime() ?? 'n/a',
+						},
+						notify: true,
+					});
 				} else {
 					await prisma.ticker.update({
 						where: {channel_id: ticker.channel_id},
@@ -43,6 +57,16 @@ export const handler = api({
 				console.log(e);
 			}
 		}
+
+		await logsnag.publish({
+			channel: 'refreshes',
+			event: 'Refreshed tickers',
+			icon: '🔁',
+			description: `Refreshed ${tickers.length} tickers.`,
+			tags: {
+				count: tickers.length,
+			},
+		});
 	},
 });
 
