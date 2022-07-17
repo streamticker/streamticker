@@ -20,6 +20,11 @@ export const handler = api({
 			},
 		});
 
+		const stats = {
+			deleted: 0,
+			updated: 0,
+		};
+
 		for (const ticker of tickers) {
 			const harvester = harvesters[ticker.type];
 
@@ -43,6 +48,8 @@ export const handler = api({
 						},
 						notify: true,
 					});
+
+					stats.deleted++;
 				} else {
 					await prisma.ticker.update({
 						where: {channel_id: ticker.channel_id},
@@ -50,6 +57,8 @@ export const handler = api({
 							refresh_after: dayjs().add(1, 'hour').toDate(),
 						},
 					});
+
+					stats.updated++;
 				}
 			} catch (e) {
 				console.log(e);
@@ -60,7 +69,7 @@ export const handler = api({
 			channel: 'refreshes',
 			event: 'Refreshed tickers',
 			icon: '🔁',
-			description: `Refreshed ${tickers.length} tickers.`,
+			description: `Refreshed ${tickers.length} tickers. Deleted ${stats.deleted}, updated ${stats.updated}`,
 			tags: {
 				count: tickers.length,
 			},
