@@ -8,6 +8,7 @@ import {
 	ApplicationCommandOptionChoice,
 } from 'slash-create';
 import {harvesters} from '../../../harvesters';
+import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
 import {tickerTypeNames} from '../../types/type-names';
 import {is, enumerate} from '../../util';
@@ -97,6 +98,19 @@ export class CreateCommand extends SlashCommand {
 
 		ctx.send('Ticker created (add more data here)');
 
-		// TODO: post analytics about ticker creation
+		logsnag.publish({
+			channel: 'ticker',
+			event: 'User created ticker',
+			icon: '🆕',
+			description: `${ctx.user.username}#${ctx.user.discriminator} created a ticker at ${
+				ctx.guildID
+			} ${ctx.options.input ? `with input ${ctx.options.input}` : ''}`,
+			tags: {
+				ticker: ctx.options.type,
+				channel: ctx.options.channel,
+				user: ctx.user.id,
+			},
+			notify: true,
+		});
 	}
 }

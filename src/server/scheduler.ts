@@ -7,8 +7,6 @@ import dayjs from 'dayjs';
 
 export const handler = api({
 	async POST({ctx, req}) {
-		console.log('Received data from lowcake:', Date.now(), req.body);
-
 		const tickers = await ctx.prisma.ticker.findMany({
 			take: 50,
 			where: {
@@ -20,6 +18,8 @@ export const handler = api({
 				refresh_after: 'desc',
 			},
 		});
+
+		// TODO: add scheduler notice to webhook or something
 
 		for (const ticker of tickers) {
 			const harvester = harvesters[ticker.type];
