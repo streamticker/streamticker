@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import axios from 'axios';
 import {api} from './api';
 import {env} from './env';
@@ -33,7 +34,16 @@ export const handler = api({
 			try {
 				const result = await harvester.harvest(ticker);
 
-				if (!result.success) {
+				if (result.success) {
+					await prisma.ticker.update({
+						where: {channel_id: ticker.channel_id},
+						data: {
+							refresh_after: dayjs().add(1, 'hour').toDate(),
+						},
+					});
+
+					stats.updated++;
+				} else {
 					await prisma.ticker.delete({
 						where: {channel_id: ticker.channel_id},
 					});
@@ -52,17 +62,8 @@ export const handler = api({
 					});
 
 					stats.deleted++;
-				} else {
-					await prisma.ticker.update({
-						where: {channel_id: ticker.channel_id},
-						data: {
-							refresh_after: dayjs().add(1, 'hour').toDate(),
-						},
-					});
-
-					stats.updated++;
 				}
-			} catch (e) {
+			} catch (e: unknown) {
 				await logsnag.publish({
 					channel: 'errors',
 					event: 'Ticker update failed',
@@ -85,11 +86,11 @@ export const handler = api({
 				event: 'Refreshed tickers',
 				icon: '🔁',
 				description: stripIndent`
-				Refreshed ${tickers.length} tickers
-				Deleted ${stats.deleted} tickers
-				Updated ${stats.updated} tickers
-				Failed to update ${stats.fails} tickers
-			`,
+					Refreshed ${tickers.length} tickers
+					Deleted ${stats.deleted} tickers
+					Updated ${stats.updated} tickers
+					Failed to update ${stats.fails} tickers
+				`,
 				tags: {
 					count: tickers.length,
 				},
@@ -106,7 +107,7 @@ export const handler = api({
  * @param queue The queue ID to use. Defaults to the one configured from environment
  */
 export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOWCAKE_QUEUE_ID) {
-	const {data} = await axios.post(
+	const {data} = await axios.post<unknown>(
 		`https://lowcake-api.otters.app/v1/queues/${queue}`,
 		{
 			url,
@@ -128,7 +129,7 @@ export async function enqueue(url: string, cron = '*/5 * * * *', queue = env.LOW
 }
 
 export async function dequeue(queue: string, job: string) {
-	const {data} = await axios.delete(
+	const {data} = await axios.delete<unknown>(
 		`https://lowcake-api.otters.app/v1/queues/${queue}/jobs/${job}`,
 		{headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`}}
 	);
