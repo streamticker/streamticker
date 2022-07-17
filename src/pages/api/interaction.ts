@@ -14,16 +14,20 @@ const server = new VercelServer();
 creator.withServer(server).registerCommands(commands);
 
 const onError = async (error: string | Error) => {
-	await logsnag.publish({
+	const c = {
 		event: 'Interaction error',
-		description: typeof error === 'string' ? error : error.message,
 		channel: 'errors',
+		description: typeof error === 'string' ? error : error.message,
 		icon: '🚨',
 		tags: {
 			error_name: typeof error === 'string' ? 'n/a' : error.name,
 		},
 		notify: true,
-	});
+	};
+
+	console.log(c);
+
+	await logsnag.publish(c);
 };
 
 creator.on('warn', onError);
