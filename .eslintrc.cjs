@@ -28,6 +28,7 @@ module.exports = {
 		'operator-linebreak': 'off',
 		'jsx-quotes': 'off',
 		'@typescript-eslint/ban-types': 'off',
+		'no-bitwise': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
