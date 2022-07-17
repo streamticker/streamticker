@@ -24,7 +24,7 @@ creator.on('commandRun', (command, _, ctx) => {
 		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}`,
 		tags: {
 			command: command.commandName,
-			guild: ctx.guildID ? ctx.guildID : 'DM',c
+			guild: ctx.guildID ? ctx.guildID : 'DM',
 			user: ctx.user.id,
 			options: command.options ? command.options.join(' ') : '',
 		},
