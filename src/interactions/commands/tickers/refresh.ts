@@ -51,7 +51,7 @@ export class RefreshCommand extends SlashCommand {
 
 		const result = await harvester.harvest(ticker);
 
-		if (!result.success) return ctx.send(result.code);
+		if (!result.success) ctx.send(result.code);
 
 		await prisma.ticker.update({
 			where: {
@@ -62,6 +62,6 @@ export class RefreshCommand extends SlashCommand {
 			},
 		});
 
-		return ctx.send('Ticker refreshed.');
+		await ctx.send('Ticker refreshed.');
 	}
 }
