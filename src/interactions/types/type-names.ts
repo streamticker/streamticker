@@ -23,7 +23,6 @@ export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.SELF_TICKERS]: 'Global ticker count',
 	[TickerType.SELF_GUILDS]: 'Global servers StreamTicker is in',
 	[TickerType.GUILD_TICKERS]: 'Server ticker count',
-	[TickerType.INSTAGRAM_FOLLOWERS]: 'Instagram followers (input required)',
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -51,7 +50,6 @@ export const tickerDescriptions: Record<TickerType, string> = {
 	[TickerType.SELF_TICKERS]: 'The amount of tickers created by the bot globally',
 	[TickerType.SELF_GUILDS]: 'The amount of guilds StreamTicker is used in',
 	[TickerType.GUILD_TICKERS]: 'The amount of tickers created by the bot in this server',
-	[TickerType.INSTAGRAM_FOLLOWERS]: 'The amount of followers an Instagram user has',
 };
 
 // export const defaultTickerFormats: Record<
