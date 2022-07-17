@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import {logsnag} from './logsnag';
 
 export const handler = api({
-	async POST({ctx, req}) {
+	async POST({ctx}) {
 		const tickers = await ctx.prisma.ticker.findMany({
 			take: 50,
 			where: {
