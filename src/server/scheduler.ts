@@ -44,23 +44,39 @@ export const handler = api({
 
 					stats.updated++;
 				} else {
-					await prisma.ticker.delete({
-						where: {channel_id: ticker.channel_id},
-					});
+					if (result.code === 'TIMEOUT') {
+						await prisma.ticker.delete({
+							where: {channel_id: ticker.channel_id},
+						});
 
-					await logsnag
-						.publish({
-							channel: 'errors',
-							event: "Couldn't refresh ticker",
-							icon: '⚠️',
-							description: `Was unable to refresh ${ticker.channel_id}`,
-							tags: {
-								code: result.code,
-								ticker: ticker.channel_id,
-							},
-							notify: true,
-						})
-						.catch(console.log);
+						await logsnag
+							.publish({
+								channel: 'errors',
+								event: 'Ticker timed out',
+								icon: '⚠️',
+								description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
+								tags: {
+									code: result.code,
+									ticker: ticker.channel_id,
+								},
+								notify: true,
+							})
+							.catch(console.log);
+					} else {
+						await logsnag
+							.publish({
+								channel: 'errors',
+								event: "Couldn't refresh ticker",
+								icon: '⚠️',
+								description: `Was unable to refresh ${ticker.channel_id}`,
+								tags: {
+									code: result.code,
+									ticker: ticker.channel_id,
+								},
+								notify: true,
+							})
+							.catch(console.log);
+					}
 
 					stats.deleted++;
 				}
