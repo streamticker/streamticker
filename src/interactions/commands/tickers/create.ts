@@ -85,7 +85,7 @@ export class CreateCommand extends SlashCommand {
 				guild_id: ctx.guildID,
 				type: ctx.options.type,
 				refresh_after: new Date(),
-				format: defaultTickerFormats[ctx.options.type], // TODO: get format from harvester
+				format: defaultTickerFormats[ctx.options.type],
 				platform_id: platformId,
 			},
 		});
