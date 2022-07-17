@@ -5,6 +5,7 @@ import {DiscordAPI} from './api';
 export const DISCORD_BOOSTS = createHarvester(TickerType.DISCORD_BOOSTS, {
 	requirement: TickerRequirement.VOTE,
 	async harvest(ticker, utils) {
-		throw new Error('not implemented');
+		const guild = await DiscordAPI.getGuild(ticker.guild_id);
+		return guild.premium_subscription_count ?? 0;
 	},
 });

@@ -8,6 +8,7 @@ import {
 	RESTPostAPIGuildChannelJSONBody,
 	RESTPostAPIGuildChannelResult,
 	ChannelType,
+	RESTGetAPIGuildResult,
 } from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
@@ -52,6 +53,10 @@ export class DiscordAPI {
 		return client.post(Routes.guildChannels(guild), {
 			body: data,
 		}) as Promise<RESTPostAPIGuildChannelResult>;
+	}
+
+	public static async getGuild(guild: string) {
+		return client.get(Routes.guild(guild)) as Promise<RESTGetAPIGuildResult>;
 	}
 
 	public static editChannel(id: string, data: RESTPatchAPIChannelJSONBody) {
