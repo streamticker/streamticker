@@ -53,7 +53,7 @@ export class RemoveCommand extends SlashCommand {
 
 		await ctx.send(`Deleted ticker!`);
 
-		await logsnag.publish({
+		await logsnag({
 			channel: 'tickers',
 			event: 'User deleted ticker',
 			icon: '🚮',

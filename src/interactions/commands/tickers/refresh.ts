@@ -5,13 +5,9 @@ import {
 	CommandContext,
 	CommandOptionType,
 	ChannelType,
-	ApplicationCommandOptionChoice,
 } from 'slash-create';
 import {harvesters} from '../../../harvesters';
-import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
-import {defaultTickerFormats, tickerTypeNames} from '../../types/type-names';
-import {is, enumerate} from '../../util';
 
 export class RefreshCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {
@@ -44,11 +40,11 @@ export class RefreshCommand extends SlashCommand {
 		}
 
 		const harvester = harvesters[ticker.type];
-
 		const result = await harvester.harvest(ticker);
 
 		if (!result.success) {
 			await ctx.send(`Could not refresh: ${result.code}`);
+			return;
 		}
 
 		await prisma.ticker.update({

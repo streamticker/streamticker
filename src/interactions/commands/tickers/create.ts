@@ -95,7 +95,7 @@ export class CreateCommand extends SlashCommand {
 
 		await ctx.send('Ticker created (add more data here)');
 
-		await logsnag.publish({
+		await logsnag({
 			channel: 'tickers',
 			event: 'User created ticker',
 			icon: '🆕',

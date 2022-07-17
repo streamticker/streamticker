@@ -50,50 +50,44 @@ export const handler = api({
 					});
 
 					if (result.discord_error) {
-						await logsnag
-							.publish({
-								channel: 'errors',
-								event: "Couldn't resolve channel",
-								icon: '⚠️',
-								description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
-								tags: {
-									code: result.code,
-									ticker: ticker.channel_id,
-								},
-								notify: true,
-							})
-							.catch(console.log);
+						await logsnag({
+							channel: 'errors',
+							event: "Couldn't resolve channel",
+							icon: '⚠️',
+							description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
+							tags: {
+								code: result.code,
+								ticker: ticker.channel_id,
+							},
+							notify: true,
+						});
 					} else {
-						await logsnag
-							.publish({
-								channel: 'errors',
-								event: "Couldn't refresh ticker",
-								icon: '⚠️',
-								description: `Was unable to refresh ${ticker.channel_id} (${ticker.type})`,
-								tags: {
-									code: result.code,
-									ticker: ticker.channel_id,
-								},
-								notify: true,
-							})
-							.catch(console.log);
+						await logsnag({
+							channel: 'errors',
+							event: "Couldn't refresh ticker",
+							icon: '⚠️',
+							description: `Was unable to refresh ${ticker.channel_id} (${ticker.type})`,
+							tags: {
+								code: result.code,
+								ticker: ticker.channel_id,
+							},
+							notify: true,
+						});
 					}
 
 					stats.fails++;
 				}
 			} catch (e: unknown) {
-				await logsnag
-					.publish({
-						channel: 'errors',
-						event: 'Ticker update failed',
-						icon: '🚨',
-						description: JSON.stringify(e),
-						tags: {
-							ticker: ticker.channel_id,
-						},
-						notify: true,
-					})
-					.catch(console.log);
+				await logsnag({
+					channel: 'errors',
+					event: 'Ticker update failed',
+					icon: '🚨',
+					description: JSON.stringify(e),
+					tags: {
+						ticker: ticker.channel_id,
+					},
+					notify: true,
+				});
 
 				await prisma.ticker.update({
 					where: {channel_id: ticker.channel_id},
@@ -107,19 +101,17 @@ export const handler = api({
 		}
 
 		if (tickers.length !== 0) {
-			await logsnag
-				.publish({
-					channel: 'refreshes',
-					event: 'Refreshed tickers',
-					icon: '🔁',
-					description: stripIndent`
-						Refreshed ${tickers.length} tickers
-						Deleted ${stats.deleted} tickers
-						Updated ${stats.updated} tickers
-						Failed to update ${stats.fails} tickers
-					`,
-				})
-				.catch(console.log);
+			await logsnag({
+				channel: 'refreshes',
+				event: 'Refreshed tickers',
+				icon: '🔁',
+				description: stripIndent`
+					Refreshed ${tickers.length} tickers
+					Deleted ${stats.deleted} tickers
+					Updated ${stats.updated} tickers
+					Failed to update ${stats.fails} tickers
+				`,
+			});
 		}
 	},
 });

@@ -23,25 +23,23 @@ export class FeedbackCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		logsnag
-			.publish({
-				channel: 'feedback',
-				event: 'User sent feedback',
-				icon: '💬',
-				description: ctx.options.feedback,
-				tags: {
-					user: ctx.user.id,
-				},
-				notify: true,
+		await logsnag({
+			channel: 'feedback',
+			event: 'User sent feedback',
+			icon: '💬',
+			description: ctx.options.feedback as string,
+			tags: {
+				user: ctx.user.id,
+			},
+			notify: true,
+		}).then(async () =>
+			ctx.send({
+				embeds: [
+					{
+						description: "Feedback sent directly to the developer's phones!",
+					},
+				],
 			})
-			.then(() => {
-				ctx.send({
-					embeds: [
-						{
-							description: "Feedback sent directly to the developer's phones!",
-						},
-					],
-				});
-			});
+		);
 	}
 }

@@ -22,16 +22,14 @@ const reportError = async (error: string | Error, notify = true, userId?: string
 		tags.user = userId;
 	}
 
-	await logsnag
-		.publish({
-			event: 'Interaction error',
-			channel: 'errors',
-			description: typeof error === 'string' ? error : JSON.stringify(error.message),
-			icon: '🚨',
-			tags,
-			notify,
-		})
-		.catch(console.log);
+	await logsnag({
+		event: 'Interaction error',
+		channel: 'errors',
+		description: typeof error === 'string' ? error : JSON.stringify(error.message),
+		icon: '🚨',
+		tags,
+		notify,
+	});
 };
 
 creator.on('warn', reportError);
@@ -53,20 +51,18 @@ creator.on('commandRun', async (command, _, ctx) => {
 		options += 'none';
 	}
 
-	void logsnag
-		.publish({
-			channel: 'commands',
-			event: 'User ran command',
-			icon: '🏃🏻',
-			description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}\n${options}`,
-			tags: {
-				command: command.commandName,
-				guild: ctx.guildID ? ctx.guildID : 'DM',
-				user: ctx.user.id,
-			},
-			notify: false,
-		})
-		.catch(console.log);
+	void logsnag({
+		channel: 'commands',
+		event: 'User ran command',
+		icon: '🏃🏻',
+		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}\n${options}`,
+		tags: {
+			command: command.commandName,
+			guild: ctx.guildID ? ctx.guildID : 'DM',
+			user: ctx.user.id,
+		},
+		notify: false,
+	});
 });
 
 export default server.vercelEndpoint;
