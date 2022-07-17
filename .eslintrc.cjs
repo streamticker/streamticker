@@ -30,6 +30,7 @@ module.exports = {
 		'@typescript-eslint/ban-types': 'off',
 		'no-bitwise': 'off',
 		'@typescript-eslint/quotes': 'off',
+		'@typescript-eslint/prefer-literal-enum-member': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],

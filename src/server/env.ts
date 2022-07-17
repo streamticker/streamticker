@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {envsafe, str} from 'envsafe';
 
 export const env = envsafe({

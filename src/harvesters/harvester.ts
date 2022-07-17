@@ -1,6 +1,5 @@
 import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
-import {prisma} from '../server/prisma';
 import {DiscordAPI} from './impl/discord/api';
 
 export enum TickerRequirement {
@@ -33,16 +32,16 @@ export type ValidateInput = (
 >;
 
 export interface Harvester {
+	validateInput: ValidateInput | null;
 	harvest(ticker: Ticker): Promise<
 		| {
 				success: true;
 		  }
 		| {
 				success: false;
-				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH';
+				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH' | 'TIMEOUT';
 		  }
 	>;
-	validateInput: ValidateInput | null;
 }
 
 export interface HarvesterUtils {
@@ -78,7 +77,22 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
+			const promise = config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
+
+			const value = await Promise.race([
+				promise,
+				new Promise<never>((resolve, reject) => {
+					setTimeout(reject, 10_000);
+				}),
+			]).catch(() => null);
+
+			if (!value) {
+				return {
+					success: false,
+					code: 'TIMEOUT',
+				};
+			}
+
 			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(() => null);
 
 			if (!channel) {
