@@ -82,10 +82,6 @@ export function createHarvester<T extends TickerType>(
 			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(() => null);
 
 			if (!channel) {
-				await prisma.ticker.delete({
-					where: {channel_id: ticker.channel_id},
-				});
-
 				return {
 					success: false,
 					code: 'CHANNEL_DELETED',
