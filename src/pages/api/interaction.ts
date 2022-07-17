@@ -22,14 +22,16 @@ const reportError = async (error: string | Error, notify = true, userId?: string
 		tags.user = userId;
 	}
 
-	await logsnag.publish({
-		event: 'Interaction error',
-		channel: 'errors',
-		description: typeof error === 'string' ? error : JSON.stringify(error.message),
-		icon: '🚨',
-		tags,
-		notify,
-	});
+	await logsnag
+		.publish({
+			event: 'Interaction error',
+			channel: 'errors',
+			description: typeof error === 'string' ? error : JSON.stringify(error.message),
+			icon: '🚨',
+			tags,
+			notify,
+		})
+		.catch(console.log);
 };
 
 creator.on('warn', reportError);
