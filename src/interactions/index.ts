@@ -1,6 +1,7 @@
 import type {SlashCommand} from 'slash-create';
 import {CreateCommand} from './commands/tickers/create';
 import {FormatCommand} from './commands/tickers/format';
+import {ListCommand} from './commands/tickers/list';
 import {RefreshCommand} from './commands/tickers/refresh';
 import {RemoveCommand} from './commands/tickers/remove';
 import {SetupCommand} from './commands/tickers/setup';
@@ -23,4 +24,5 @@ export const commands: typeof SlashCommand[] = [
 	RefreshCommand,
 	RemoveCommand,
 	SetupCommand,
+	ListCommand,
 ];
