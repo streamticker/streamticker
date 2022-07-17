@@ -9,7 +9,6 @@ export class PingCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		console.log(this.client);
 		ctx.send(':ninja:', {
 			ephemeral: true,
 		});
