@@ -7,6 +7,7 @@ import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
 import {GetStaticProps} from 'next';
 import {creator} from './api/interaction';
+import {prisma} from '../server/prisma';
 
 interface Props {
 	commands: Array<[name: string, description: string]>;
@@ -145,7 +146,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => ({
 	props: {
 		commands: creator.commands.map(cmd => [cmd.commandName, cmd.description ?? 'No description']),
 		stats: {
-			totalTickers: 120,
+			totalTickers: await prisma.ticker.count(),
 		},
 	},
 	revalidate: 60 * 60 * 24, // 1 day

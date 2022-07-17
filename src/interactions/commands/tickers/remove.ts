@@ -33,11 +33,11 @@ export class RemoveCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.defer();
+		await ctx.defer();
 
 		const found = await prisma.ticker.findFirst({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 		});
 
@@ -47,11 +47,11 @@ export class RemoveCommand extends SlashCommand {
 
 		await prisma.ticker.delete({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 		});
 
-		ctx.send(`Deleted ticker!`);
+		await ctx.send(`Deleted ticker!`);
 
 		await logsnag.publish({
 			channel: 'tickers',
@@ -59,9 +59,9 @@ export class RemoveCommand extends SlashCommand {
 			icon: '🚮',
 			description: `${ctx.user.username}#${ctx.user.discriminator} deleted a ticker`,
 			tags: {
-				ticker: ctx.options.type,
+				ticker: ctx.options.type as TickerType,
 				guild: ctx.guildID!,
-				channel: ctx.options.channel,
+				channel: ctx.options.channel as string,
 				user: ctx.user.id,
 			},
 			notify: true,
