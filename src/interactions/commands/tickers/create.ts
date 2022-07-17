@@ -57,12 +57,8 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('Invalid ticker type!');
 		}
 
-		// if (ctx.options.channel.type !== 'GUILD_VOICE' || !ctx.options.channel.isVoice()) {
-		// 	throw new Error('Channel must be a voice channel!');
-		// }
-
 		const existingOnChannel = await prisma.ticker.findFirst({
-			where: {channel_id: ctx.channelID},
+			where: {channel_id: ctx.options.channel},
 		});
 
 		if (existingOnChannel) {
