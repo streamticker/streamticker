@@ -1,6 +1,8 @@
 import {TickerType} from '@prisma/client';
 import {Harvester} from './harvester';
+
 import {DISCORD_BOOSTS} from './impl/discord/boosts';
+import {DISCORD_MEMBERS} from './impl/discord/guild-members';
 import {GITHUB_FOLLOWERS} from './impl/github/followers';
 import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
@@ -23,7 +25,7 @@ export const harvesters: Record<TickerType, Harvester> = {
 	TWITCH_FOLLOWERS: undefined,
 	YOUTUBE_SUBSCRIBERS,
 	YOUTUBE_VIEWCOUNT,
-	DISCORD_MEMBERS: undefined,
+	DISCORD_MEMBERS,
 	DISCORD_MEMBERS_ROLE: undefined,
 	DISCORD_HUMANS: undefined,
 	DISCORD_BOTS: undefined,
