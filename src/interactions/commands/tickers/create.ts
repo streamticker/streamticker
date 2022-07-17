@@ -81,7 +81,7 @@ export class CreateCommand extends SlashCommand {
 
 		const ticker = await prisma.ticker.create({
 			data: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 				guild_id: ctx.guildID,
 				type: ctx.options.type,
 				refresh_after: new Date(),
@@ -92,7 +92,7 @@ export class CreateCommand extends SlashCommand {
 
 		await harvester.harvest(ticker);
 
-		ctx.send('Ticker created (add more data here)');
+		await ctx.send('Ticker created (add more data here)');
 
 		await logsnag.publish({
 			channel: 'tickers',
@@ -100,10 +100,10 @@ export class CreateCommand extends SlashCommand {
 			icon: '🆕',
 			description: `${ctx.user.username}#${ctx.user.discriminator} created a ticker at ${
 				ctx.guildID
-			} ${ctx.options.input ? `with input ${ctx.options.input}` : ''}`,
+			} ${ctx.options.input ? `with input ${ctx.options.input as string}` : ''}`,
 			tags: {
 				ticker: ctx.options.type,
-				channel: ctx.options.channel,
+				channel: ctx.options.channel as string,
 				user: ctx.user.id,
 			},
 			notify: true,
