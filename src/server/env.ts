@@ -25,7 +25,7 @@ export const env = envsafe({
 		default: 'queue_NzEyNTc5MDk2MzUzMzQxNDc',
 	}),
 
-	TWITTER_AUTH: str({}),
+	TWITTER_SECRET: str({}),
 
 	YOUTUBE_SECRET: str({}),
 

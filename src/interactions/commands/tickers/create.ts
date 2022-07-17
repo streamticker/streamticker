@@ -56,9 +56,9 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('Invalid ticker type!');
 		}
 
-		if (ctx.options.channel.type !== 'GUILD_VOICE' || !ctx.options.channel.isVoice()) {
-			throw new Error('Channel must be a voice channel!');
-		}
+		// if (ctx.options.channel.type !== 'GUILD_VOICE' || !ctx.options.channel.isVoice()) {
+		// 	throw new Error('Channel must be a voice channel!');
+		// }
 
 		const existingOnChannel = await prisma.ticker.findFirst({
 			where: {channel_id: ctx.channelID},
@@ -68,24 +68,30 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('A ticker already exists on this channel!');
 		}
 
-		// TODO: get harvester for ticker
+		const harvester = harvesters[ctx.options.type];
 
-		// TODO: check if harvester has input, and if it does & user didn't provide input, throw error
+		if (harvester.validateInput) {
+			const result = await harvester.validateInput(ctx.options.input);
 
-		await prisma.ticker.create({
+			if (!result.success) {
+				throw new Error(result.message);
+			}
+		}
+
+		const ticker = await prisma.ticker.create({
 			data: {
-				channel_id: ctx.options.channel.id,
+				channel_id: ctx.options.channel,
 				guild_id: ctx.guildID,
 				type: ctx.options.type,
 				refresh_after: new Date(),
 				format: '%v', // TODO: get format from harvester
-				platform_id: ctx.options.platform_id ? ctx.options.platform_id : null,
+				platform_id: ctx.options.input ? ctx.options.input : null,
 			},
 		});
 
-		// TODO: run harvester on newly-created ticker
+		await harvester.harvest(ticker);
 
-		// TODO: provide user input about ticker completion
+		ctx.send('Ticker created (add more data here)');
 
 		// TODO: post analytics about ticker creation
 	}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import {env} from '../../../server/env';
 
 const headers = {
-	authorization: `Bearer ${env.TWITTER_AUTH}`,
+	authorization: `Bearer ${env.TWITTER_SECRET}`,
 };
 
 export const TwitterAPI = {
