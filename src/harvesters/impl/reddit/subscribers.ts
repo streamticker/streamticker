@@ -20,6 +20,7 @@ export const REDDIT_SUBSCRIBERS = createHarvester(TickerType.REDDIT_SUBSCRIBERS,
 
 		return {
 			success: true,
+			platform_id: subreddit,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {

@@ -28,6 +28,7 @@ export const YOUTUBE_VIEWCOUNT = createHarvester(TickerType.YOUTUBE_VIEWCOUNT, {
 
 		return {
 			success: true,
+			platform_id: channelID,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {

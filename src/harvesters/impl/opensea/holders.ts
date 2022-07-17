@@ -22,6 +22,7 @@ export const OPENSEA_COLLECTION_UNIQUE_HOLDERS = createHarvester(
 
 			return {
 				success: true,
+				platform_id: collection,
 			};
 		},
 		async harvest(ticker, utils: HarvesterUtils) {

@@ -22,6 +22,7 @@ export const GITHUB_REPO_FORKS = createHarvester(TickerType.GITHUB_REPO_FORKS, {
 
 		return {
 			success: true,
+			platform_id: value,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {

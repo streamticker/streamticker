@@ -20,12 +20,13 @@ export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {
 
 		return {
 			success: true,
+			platform_id: body.id.toString(),
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {
 		utils.ensureId(ticker);
 
-		const githubUser = await GitHubAPI.getUser(ticker.platform_id);
+		const githubUser = await GitHubAPI.getUserByID(ticker.platform_id);
 
 		return githubUser.followers;
 	},
