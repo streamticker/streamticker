@@ -27,10 +27,6 @@ export class RefreshCommand extends SlashCommand {
 					channel_types: [ChannelType.GUILD_VOICE],
 				},
 			],
-			throttling: {
-				usages: 1,
-				duration: 3600,
-			},
 			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
