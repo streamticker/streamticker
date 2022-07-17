@@ -51,7 +51,7 @@ creator.on('commandRun', async (command, _, ctx) => {
 		options += 'none';
 	}
 
-	void logsnag({
+	await logsnag({
 		channel: 'commands',
 		event: 'User ran command',
 		icon: '🏃🏻',
