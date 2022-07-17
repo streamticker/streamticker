@@ -45,8 +45,9 @@ export const handler = api({
 					stats.updated++;
 				} else {
 					if (result.code === 'TIMEOUT') {
-						await prisma.ticker.delete({
+						await prisma.ticker.update({
 							where: {channel_id: ticker.channel_id},
+							data: {refresh_after: dayjs().add(2, 'days').toDate()},
 						});
 
 						await logsnag
@@ -63,6 +64,10 @@ export const handler = api({
 							})
 							.catch(console.log);
 					} else {
+						await prisma.ticker.delete({
+							where: {channel_id: ticker.channel_id},
+						});
+
 						await logsnag
 							.publish({
 								channel: 'errors',
