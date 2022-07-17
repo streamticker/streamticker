@@ -13,6 +13,7 @@
 		"@prisma/client": "4.0.0",
 		"@tailwindcss/typography": "^0.5.4",
 		"axios": "^0.27.2",
+		"common-tags": "^1.8.2",
 		"dayjs": "^1.11.3",
 		"envsafe": "^2.0.3",
 		"logsnag": "^0.1.2",
@@ -30,6 +31,7 @@
 		"zod": "^3.17.3"
 	},
 	"devDependencies": {
+		"@types/common-tags": "^1.8.1",
 		"@types/node": "^18.0.4",
 		"@types/react": "^18.0.15",
 		"@typescript-eslint/eslint-plugin": "^5.30.6",
