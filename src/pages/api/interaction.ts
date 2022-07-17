@@ -47,20 +47,24 @@ creator.on('commandRun', async (command, _, ctx) => {
 		options += command.options
 			.map(option => `${option.name}: ${ctx.options[option.name] as string}`)
 			.join('\n');
+	} else {
+		options += 'none';
 	}
 
-	await logsnag.publish({
-		channel: 'commands',
-		event: 'User ran command',
-		icon: '🏃🏻',
-		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}\n${options}`,
-		tags: {
-			command: command.commandName,
-			guild: ctx.guildID ? ctx.guildID : 'DM',
-			user: ctx.user.id,
-		},
-		notify: false,
-	});
+	void logsnag
+		.publish({
+			channel: 'commands',
+			event: 'User ran command',
+			icon: '🏃🏻',
+			description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}\n${options}`,
+			tags: {
+				command: command.commandName,
+				guild: ctx.guildID ? ctx.guildID : 'DM',
+				user: ctx.user.id,
+			},
+			notify: false,
+		})
+		.catch(console.log);
 });
 
 export default server.vercelEndpoint;

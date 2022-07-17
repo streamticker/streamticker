@@ -36,10 +36,10 @@ export class RefreshCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.defer();
+		await ctx.defer();
 
 		const ticker = await prisma.ticker.findFirst({
-			where: {channel_id: ctx.options.channel},
+			where: {channel_id: ctx.options.channel as string},
 		});
 
 		if (!ticker || ticker.guild_id !== ctx.guildID) {
@@ -51,11 +51,13 @@ export class RefreshCommand extends SlashCommand {
 
 		const result = await harvester.harvest(ticker);
 
-		if (!result.success) ctx.send(result.code);
+		if (!result.success) {
+			await ctx.send(`Could not refresh: ${result.code}`);
+		}
 
 		await prisma.ticker.update({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 			data: {
 				refresh_after: new Date(),

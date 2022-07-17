@@ -11,7 +11,7 @@ import {stripIndent} from 'common-tags';
 export const handler = api({
 	async POST({ctx}) {
 		const tickers = await ctx.prisma.ticker.findMany({
-			take: 15,
+			take: 10,
 			where: {
 				refresh_after: {
 					lt: new Date(),
@@ -44,26 +44,42 @@ export const handler = api({
 
 					stats.updated++;
 				} else {
-					await prisma.ticker.delete({
+					await prisma.ticker.update({
 						where: {channel_id: ticker.channel_id},
+						data: {refresh_after: dayjs().add(2, 'days').toDate()},
 					});
 
-					await logsnag
-						.publish({
-							channel: 'errors',
-							event: "Couldn't refresh ticker",
-							icon: '⚠️',
-							description: `Was unable to refresh ${ticker.channel_id}`,
-							tags: {
-								code: result.code,
-								ticker: ticker.channel_id,
-								'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
-							},
-							notify: true,
-						})
-						.catch(console.log);
+					if (result.discord_error) {
+						await logsnag
+							.publish({
+								channel: 'errors',
+								event: "Couldn't resolve channel",
+								icon: '⚠️',
+								description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
+								tags: {
+									code: result.code,
+									ticker: ticker.channel_id,
+								},
+								notify: true,
+							})
+							.catch(console.log);
+					} else {
+						await logsnag
+							.publish({
+								channel: 'errors',
+								event: "Couldn't refresh ticker",
+								icon: '⚠️',
+								description: `Was unable to refresh ${ticker.channel_id} (${ticker.type})`,
+								tags: {
+									code: result.code,
+									ticker: ticker.channel_id,
+								},
+								notify: true,
+							})
+							.catch(console.log);
+					}
 
-					stats.deleted++;
+					stats.fails++;
 				}
 			} catch (e: unknown) {
 				await logsnag
@@ -74,7 +90,6 @@ export const handler = api({
 						description: JSON.stringify(e),
 						tags: {
 							ticker: ticker.channel_id,
-							'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
 						},
 						notify: true,
 					})
@@ -98,14 +113,11 @@ export const handler = api({
 					event: 'Refreshed tickers',
 					icon: '🔁',
 					description: stripIndent`
-					Refreshed ${tickers.length} tickers
-					Deleted ${stats.deleted} tickers
-					Updated ${stats.updated} tickers
-					Failed to update ${stats.fails} tickers
-				`,
-					tags: {
-						count: tickers.length,
-					},
+						Refreshed ${tickers.length} tickers
+						Deleted ${stats.deleted} tickers
+						Updated ${stats.updated} tickers
+						Failed to update ${stats.fails} tickers
+					`,
 				})
 				.catch(console.log);
 		}

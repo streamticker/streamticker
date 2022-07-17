@@ -1,6 +1,6 @@
+import {DiscordAPIError} from '@discordjs/rest';
 import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
-import {prisma} from '../server/prisma';
 import {DiscordAPI} from './impl/discord/api';
 
 export enum TickerRequirement {
@@ -33,16 +33,22 @@ export type ValidateInput = (
 >;
 
 export interface Harvester {
+	validateInput: ValidateInput | null;
 	harvest(ticker: Ticker): Promise<
 		| {
 				success: true;
 		  }
 		| {
 				success: false;
-				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH';
+				discord_error: false;
+				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH' | 'TIMEOUT';
+		  }
+		| {
+				success: false;
+				discord_error: true;
+				code: string | number;
 		  }
 	>;
-	validateInput: ValidateInput | null;
 }
 
 export interface HarvesterUtils {
@@ -74,16 +80,44 @@ export function createHarvester<T extends TickerType>(
 			if (ticker.type !== type) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'TYPE_MISMATCH',
 				};
 			}
 
-			const value = await config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
-			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(() => null);
+			const promise = config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
+
+			const value = await Promise.race([
+				promise,
+				new Promise<never>((resolve, reject) => {
+					setTimeout(reject, 10_000);
+				}),
+			]).catch(() => null);
+
+			if (!value) {
+				return {
+					success: false,
+					discord_error: false,
+					code: 'TIMEOUT',
+				};
+			}
+
+			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch((err: DiscordAPIError) =>
+				err.code.toString()
+			);
+
+			if (typeof channel === 'string') {
+				return {
+					success: false,
+					discord_error: true,
+					code: channel,
+				};
+			}
 
 			if (!channel) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'CHANNEL_DELETED',
 				};
 			}
@@ -91,6 +125,7 @@ export function createHarvester<T extends TickerType>(
 			if (channel.type !== ChannelType.GuildVoice) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'NOT_VOICE_CHANNEL',
 				};
 			}
