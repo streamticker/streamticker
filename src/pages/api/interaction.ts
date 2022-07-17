@@ -13,24 +13,31 @@ const server = new VercelServer();
 
 creator.withServer(server).registerCommands(commands);
 
-const onError = async (error: string | Error) => {
+const reportError = async (error: string | Error, notify = true, userId?: string) => {
+	const tags: Record<string, string> = {
+		'error-name': typeof error === 'string' ? 'n/a' : error.name,
+	};
+
+	if (userId) {
+		tags.user = userId;
+	}
+
 	await logsnag.publish({
 		event: 'Interaction error',
 		channel: 'errors',
 		description: typeof error === 'string' ? error : JSON.stringify(error.message),
 		icon: '🚨',
-		tags: {
-			'error-name': typeof error === 'string' ? 'n/a' : error.name,
-		},
-		notify: true,
+		tags,
+		notify,
 	});
 };
 
-creator.on('warn', onError);
-creator.on('error', onError);
+creator.on('warn', reportError);
+creator.on('error', reportError);
 
-creator.on('commandError', (command, error, ctx) => {
+creator.on('commandError', async (command, error, ctx) => {
 	ctx.send(error.message);
+	await reportError(error, false, ctx.user.id);
 });
 
 creator.on('commandRun', (command, _, ctx) => {
