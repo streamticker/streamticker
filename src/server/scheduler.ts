@@ -57,7 +57,6 @@ export const handler = api({
 							tags: {
 								code: result.code,
 								ticker: ticker.channel_id,
-								'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
 							},
 							notify: true,
 						})
@@ -74,7 +73,6 @@ export const handler = api({
 						description: JSON.stringify(e),
 						tags: {
 							ticker: ticker.channel_id,
-							'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
 						},
 						notify: true,
 					})
@@ -98,14 +96,11 @@ export const handler = api({
 					event: 'Refreshed tickers',
 					icon: '🔁',
 					description: stripIndent`
-					Refreshed ${tickers.length} tickers
-					Deleted ${stats.deleted} tickers
-					Updated ${stats.updated} tickers
-					Failed to update ${stats.fails} tickers
-				`,
-					tags: {
-						count: tickers.length,
-					},
+						Refreshed ${tickers.length} tickers
+						Deleted ${stats.deleted} tickers
+						Updated ${stats.updated} tickers
+						Failed to update ${stats.fails} tickers
+					`,
 				})
 				.catch(console.log);
 		}
