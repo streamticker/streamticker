@@ -20,6 +20,7 @@ export const OPENSEA_COLLECTION_SUPPLY = createHarvester(TickerType.OPENSEA_COLL
 
 		return {
 			success: true,
+			platform_id: collection,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {

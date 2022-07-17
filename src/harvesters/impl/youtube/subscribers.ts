@@ -22,6 +22,7 @@ export const YOUTUBE_SUBSCRIBERS = createHarvester(TickerType.YOUTUBE_SUBSCRIBER
 
 		return {
 			success: true,
+			platform_id: channelID,
 		};
 	},
 	async harvest(ticker, utils: HarvesterUtils) {
