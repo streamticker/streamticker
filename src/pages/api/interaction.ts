@@ -20,7 +20,7 @@ const onError = async (error: string | Error) => {
 		description: typeof error === 'string' ? error : JSON.stringify(error.message),
 		icon: '🚨',
 		tags: {
-			error_name: typeof error === 'string' ? 'n/a' : error.name,
+			'error-name': typeof error === 'string' ? 'n/a' : error.name,
 		},
 		notify: true,
 	};
