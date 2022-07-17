@@ -1,3 +1,4 @@
+import {DiscordAPIError} from '@discordjs/rest';
 import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
 import {DiscordAPI} from './impl/discord/api';
@@ -93,7 +94,22 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(() => null);
+			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(
+				(err: DiscordAPIError) => {
+					if (err.status === 429) {
+						return 'TIMEOUT' as const;
+					}
+
+					return null;
+				}
+			);
+
+			if (channel === 'TIMEOUT') {
+				return {
+					success: false,
+					code: 'TIMEOUT',
+				};
+			}
 
 			if (!channel) {
 				return {
