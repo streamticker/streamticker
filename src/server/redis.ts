@@ -37,7 +37,7 @@ export function createCache<T>(methods: Cache<T>) {
 export async function wrapRedis<T>(key: string, fn: () => Promise<T>, seconds = 60) {
 	return cache<T>({
 		refetch: fn,
-		get: async () => {
+		async get() {
 			const value = await redis.get<T>(key);
 
 			if (!value) {
@@ -46,7 +46,7 @@ export async function wrapRedis<T>(key: string, fn: () => Promise<T>, seconds = 
 
 			return value;
 		},
-		set: async value => {
+		async set(value) {
 			await redis.set(key, value, {ex: seconds});
 		},
 	});
