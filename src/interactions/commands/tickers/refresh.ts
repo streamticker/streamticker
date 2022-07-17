@@ -51,11 +51,13 @@ export class RefreshCommand extends SlashCommand {
 
 		const result = await harvester.harvest(ticker);
 
-		if (!result.success) return ctx.send(result.code);
+		if (!result.success) {
+			return ctx.send(`Could not refresh: ${result.code}`);
+		}
 
 		await prisma.ticker.update({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 			data: {
 				refresh_after: new Date(),
