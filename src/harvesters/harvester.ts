@@ -94,7 +94,7 @@ export function createHarvester<T extends TickerType>(
 				}),
 			]).catch(() => null);
 
-			if (!value) {
+			if (value === null) {
 				return {
 					success: false,
 					discord_error: false,
