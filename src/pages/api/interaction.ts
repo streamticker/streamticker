@@ -13,8 +13,22 @@ const server = new VercelServer();
 
 creator.withServer(server).registerCommands(commands);
 
-creator.on('warn', message => console.warn(message));
-creator.on('error', error => console.error(error));
+const onError = async (error: string | Error) => {
+	await logsnag.publish({
+		event: 'Interaction error',
+		description: typeof error === 'string' ? error : error.message,
+		channel: 'errors',
+		icon: '🚨',
+		tags: {
+			error_name: typeof error === 'string' ? 'n/a' : error.name,
+		},
+		notify: true,
+	});
+};
+
+creator.on('warn', onError);
+creator.on('error', onError);
+creator.on('commandError', (command, error) => onError(error));
 
 creator.on('commandRun', (command, _, ctx) => {
 	logsnag.publish({
@@ -24,16 +38,12 @@ creator.on('commandRun', (command, _, ctx) => {
 		description: `${ctx.user.username}#${ctx.user.discriminator} ran the command ${command.commandName}`,
 		tags: {
 			command: command.commandName,
-			guild: ctx.guildID ? ctx.guildID : 'DM',c
+			guild: ctx.guildID ? ctx.guildID : 'DM',
 			user: ctx.user.id,
 			options: command.options ? command.options.join(' ') : '',
 		},
 		notify: false,
 	});
-});
-
-creator.on('commandError', (command, error) => {
-	console.error(`Command ${command.commandName}:`, error);
 });
 
 export default server.vercelEndpoint;
