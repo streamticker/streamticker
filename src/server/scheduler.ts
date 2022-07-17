@@ -76,6 +76,13 @@ export const handler = api({
 					notify: true,
 				});
 
+				await prisma.ticker.update({
+					where: {channel_id: ticker.channel_id},
+					data: {
+						refresh_after: dayjs().add(7, 'day').toDate(),
+					},
+				});
+
 				stats.fails++;
 			}
 		}
