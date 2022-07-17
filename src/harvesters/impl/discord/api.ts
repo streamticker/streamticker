@@ -7,8 +7,9 @@ import {
 	RESTGetAPIGuildMembersResult,
 	RESTPostAPIGuildChannelJSONBody,
 	RESTPostAPIGuildChannelResult,
-	ChannelType,
+	APIRole,
 	RESTGetAPIGuildResult,
+	RESTGetAPIGuildRolesResult,
 } from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
@@ -63,5 +64,17 @@ export class DiscordAPI {
 		return client.patch(Routes.channel(id), {
 			body: data,
 		}) as Promise<RESTPatchAPIChannelResult>;
+	}
+
+	public static async getRole(guild: string, role: string) {
+		const roles = (await client.get(Routes.guildRoles(guild))) as RESTGetAPIGuildRolesResult;
+
+		const found = roles.find(r => r.id === role);
+
+		if (!found) {
+			throw new Error('Unknown role');
+		}
+
+		return found;
 	}
 }

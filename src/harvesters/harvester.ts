@@ -18,7 +18,10 @@ export function format(ticker: Ticker, value: number | string) {
 	return ticker.format.replace(FORMATTER_REPLACER, humanized);
 }
 
-export type ValidateInput = (value: string) => Promise<
+export type ValidateInput = (
+	value: string,
+	guildId: string
+) => Promise<
 	| {
 			success: true;
 			platform_id: string;

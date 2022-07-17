@@ -70,7 +70,7 @@ export class CreateCommand extends SlashCommand {
 		let platformId: string | null = null;
 
 		if (harvester.validateInput) {
-			const result = await harvester.validateInput(ctx.options.input);
+			const result = await harvester.validateInput(ctx.options.input, ctx.guildID);
 
 			if (result.success) {
 				platformId = result.platform_id;
