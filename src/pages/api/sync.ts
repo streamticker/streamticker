@@ -5,7 +5,7 @@ import {env} from '../../server/env';
 import {creator} from './interaction';
 
 const query = z.object({
-	secret: z.string(),
+	auth: z.string(),
 	guild: z
 		.enum(['true', 'false'])
 		.optional()
@@ -14,9 +14,9 @@ const query = z.object({
 
 export default api({
 	async GET({req}) {
-		const {secret, guild} = query.parse(req.query);
+		const {auth, guild} = query.parse(req.query);
 
-		if (secret !== env.ADMIN_AUTH) {
+		if (auth !== env.ADMIN_AUTH) {
 			throw new NextkitError(401, 'Invalid secret');
 		}
 
