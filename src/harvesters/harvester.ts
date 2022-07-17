@@ -45,8 +45,8 @@ export interface Harvester {
 		  }
 		| {
 				success: false;
-				code: string;
 				discord_error: true;
+				code: string | number;
 		  }
 	>;
 }
@@ -102,14 +102,8 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch(
-				(err: DiscordAPIError) => {
-					if (err.status === 429) {
-						return 'TIMEOUT' as const;
-					}
-
-					return err.code.toString();
-				}
+			const channel = await DiscordAPI.getChannel(ticker.channel_id).catch((err: DiscordAPIError) =>
+				err.code.toString()
 			);
 
 			if (typeof channel === 'string') {

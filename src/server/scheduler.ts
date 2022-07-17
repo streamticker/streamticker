@@ -44,16 +44,16 @@ export const handler = api({
 
 					stats.updated++;
 				} else {
-					if (result.discord_error) {
-						await prisma.ticker.update({
-							where: {channel_id: ticker.channel_id},
-							data: {refresh_after: dayjs().add(2, 'days').toDate()},
-						});
+					await prisma.ticker.update({
+						where: {channel_id: ticker.channel_id},
+						data: {refresh_after: dayjs().add(2, 'days').toDate()},
+					});
 
+					if (result.discord_error) {
 						await logsnag
 							.publish({
 								channel: 'errors',
-								event: 'Ticker timed out',
+								event: "Couldn't resolve channel",
 								icon: '⚠️',
 								description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
 								tags: {
@@ -64,16 +64,12 @@ export const handler = api({
 							})
 							.catch(console.log);
 					} else {
-						await prisma.ticker.delete({
-							where: {channel_id: ticker.channel_id},
-						});
-
 						await logsnag
 							.publish({
 								channel: 'errors',
 								event: "Couldn't refresh ticker",
 								icon: '⚠️',
-								description: `Was unable to refresh ${ticker.channel_id}`,
+								description: `Was unable to refresh ${ticker.channel_id} (${ticker.type})`,
 								tags: {
 									code: result.code,
 									ticker: ticker.channel_id,
