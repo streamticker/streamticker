@@ -16,6 +16,6 @@ export default api({
 			throw new NextkitError(401, 'Unauthorized');
 		}
 
-		return enqueue(`https://${req.headers.host}/api/lowcake`);
+		return enqueue(`https://${req.headers.host!}/api/lowcake`);
 	},
 });

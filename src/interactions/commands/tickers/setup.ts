@@ -16,9 +16,11 @@ export class SetupCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.defer(true);
+		await ctx.defer(true);
 
-		if (!ctx.guildID) throw new Error('This command needs to be ran in a guild!');
+		if (!ctx.guildID) {
+			throw new Error('This command needs to be ran in a guild!');
+		}
 
 		const category = await DiscordAPI.createChannel(ctx.guildID, {
 			type: ChannelType.GuildCategory,
@@ -43,7 +45,9 @@ export class SetupCommand extends SlashCommand {
 			TickerType.DISCORD_BOTS,
 			TickerType.DISCORD_BOOSTS,
 		].map(async type => {
-			if (!ctx.guildID) throw new Error('This command needs to be ran in a guild!');
+			if (!ctx.guildID) {
+				throw new Error('This command needs to be ran in a guild!');
+			}
 
 			const channel = await DiscordAPI.createChannel(ctx.guildID, {
 				type: ChannelType.GuildVoice,
@@ -63,12 +67,11 @@ export class SetupCommand extends SlashCommand {
 
 			const harvester = harvesters[type];
 			await harvester.harvest(ticker);
-			// await tickerCreate(interaction, ticker); TODO: swap log to tickerCreate
 
 			return ticker;
 		});
 
 		await Promise.all(promises);
-		ctx.send('Setup complete!');
+		await ctx.send('Setup complete!');
 	}
 }
