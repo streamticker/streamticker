@@ -6,6 +6,7 @@ export class ListCommand extends SlashCommand {
 		super(creator, {
 			name: 'list',
 			description: 'List all tickers in a guild.',
+			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
 

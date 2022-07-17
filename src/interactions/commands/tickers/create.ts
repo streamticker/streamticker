@@ -43,6 +43,7 @@ export class CreateCommand extends SlashCommand {
 					type: CommandOptionType.STRING,
 				},
 			],
+			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
 	}
 
