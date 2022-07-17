@@ -99,7 +99,7 @@ export class CreateCommand extends SlashCommand {
 		ctx.send('Ticker created (add more data here)');
 
 		logsnag.publish({
-			channel: 'ticker',
+			channel: 'tickers',
 			event: 'User created ticker',
 			icon: '🆕',
 			description: `${ctx.user.username}#${ctx.user.discriminator} created a ticker at ${
