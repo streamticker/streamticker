@@ -40,7 +40,13 @@ export interface Harvester {
 		  }
 		| {
 				success: false;
+				discord_error: false;
 				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH' | 'TIMEOUT';
+		  }
+		| {
+				success: false;
+				code: string;
+				discord_error: true;
 		  }
 	>;
 }
@@ -74,6 +80,7 @@ export function createHarvester<T extends TickerType>(
 			if (ticker.type !== type) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'TYPE_MISMATCH',
 				};
 			}
@@ -90,6 +97,7 @@ export function createHarvester<T extends TickerType>(
 			if (!value) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'TIMEOUT',
 				};
 			}
@@ -100,20 +108,22 @@ export function createHarvester<T extends TickerType>(
 						return 'TIMEOUT' as const;
 					}
 
-					return null;
+					return err.code.toString();
 				}
 			);
 
-			if (channel === 'TIMEOUT') {
+			if (typeof channel === 'string') {
 				return {
 					success: false,
-					code: 'TIMEOUT',
+					discord_error: true,
+					code: channel,
 				};
 			}
 
 			if (!channel) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'CHANNEL_DELETED',
 				};
 			}
@@ -121,6 +131,7 @@ export function createHarvester<T extends TickerType>(
 			if (channel.type !== ChannelType.GuildVoice) {
 				return {
 					success: false,
+					discord_error: false,
 					code: 'NOT_VOICE_CHANNEL',
 				};
 			}
