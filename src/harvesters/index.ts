@@ -35,5 +35,4 @@ export const harvesters: Record<TickerType, Harvester> = {
 	TWITTER_FOLLOWERS,
 	SELF_TICKERS: undefined,
 	SELF_GUILDS: undefined,
-	GUILD_TICKERS: undefined,
 };
