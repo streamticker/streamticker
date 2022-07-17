@@ -28,7 +28,7 @@ const onError = async (error: string | Error) => {
 	console.log(c);
 
 	await logsnag.publish(c).catch(e => {
-		console.log(e.response, Object.keys(e));
+		console.log(e.constructor);
 	});
 };
 
