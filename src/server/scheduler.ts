@@ -48,33 +48,37 @@ export const handler = api({
 						where: {channel_id: ticker.channel_id},
 					});
 
-					await logsnag.publish({
-						channel: 'errors',
-						event: "Couldn't refresh ticker",
-						icon: '⚠️',
-						description: `Was unable to refresh ${ticker.channel_id}`,
-						tags: {
-							code: result.code,
-							ticker: ticker.channel_id,
-							'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
-						},
-						notify: true,
-					});
+					await logsnag
+						.publish({
+							channel: 'errors',
+							event: "Couldn't refresh ticker",
+							icon: '⚠️',
+							description: `Was unable to refresh ${ticker.channel_id}`,
+							tags: {
+								code: result.code,
+								ticker: ticker.channel_id,
+								'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
+							},
+							notify: true,
+						})
+						.catch(console.log);
 
 					stats.deleted++;
 				}
 			} catch (e: unknown) {
-				await logsnag.publish({
-					channel: 'errors',
-					event: 'Ticker update failed',
-					icon: '🚨',
-					description: JSON.stringify(e),
-					tags: {
-						ticker: ticker.channel_id,
-						'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
-					},
-					notify: true,
-				});
+				await logsnag
+					.publish({
+						channel: 'errors',
+						event: 'Ticker update failed',
+						icon: '🚨',
+						description: JSON.stringify(e),
+						tags: {
+							ticker: ticker.channel_id,
+							'ticker-last-updated': ticker.last_updated?.getTime() ?? 'n/a',
+						},
+						notify: true,
+					})
+					.catch(console.log);
 
 				await prisma.ticker.update({
 					where: {channel_id: ticker.channel_id},
@@ -88,20 +92,22 @@ export const handler = api({
 		}
 
 		if (tickers.length !== 0) {
-			await logsnag.publish({
-				channel: 'refreshes',
-				event: 'Refreshed tickers',
-				icon: '🔁',
-				description: stripIndent`
+			await logsnag
+				.publish({
+					channel: 'refreshes',
+					event: 'Refreshed tickers',
+					icon: '🔁',
+					description: stripIndent`
 					Refreshed ${tickers.length} tickers
 					Deleted ${stats.deleted} tickers
 					Updated ${stats.updated} tickers
 					Failed to update ${stats.fails} tickers
 				`,
-				tags: {
-					count: tickers.length,
-				},
-			});
+					tags: {
+						count: tickers.length,
+					},
+				})
+				.catch(console.log);
 		}
 	},
 });
