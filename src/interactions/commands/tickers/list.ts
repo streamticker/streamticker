@@ -28,6 +28,7 @@ export class ListCommand extends SlashCommand {
 					},
 				],
 			});
+
 			return;
 		}
 
