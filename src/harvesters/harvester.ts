@@ -1,6 +1,7 @@
 import {DiscordAPIError} from '@discordjs/rest';
 import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
+import {prisma} from '../server/prisma';
 import {DiscordAPI} from './impl/discord/api';
 
 export enum TickerRequirement {
@@ -107,6 +108,20 @@ export function createHarvester<T extends TickerType>(
 			);
 
 			if (typeof channel === 'string') {
+				if (channel === '10003') {
+					await prisma.ticker.delete({
+						where: {
+							channel_id: ticker.channel_id,
+						},
+					});
+
+					return {
+						success: false,
+						discord_error: false,
+						code: 'CHANNEL_DELETED',
+					};
+				}
+
 				return {
 					success: false,
 					discord_error: true,
@@ -115,6 +130,12 @@ export function createHarvester<T extends TickerType>(
 			}
 
 			if (!channel) {
+				await prisma.ticker.delete({
+					where: {
+						channel_id: ticker.channel_id,
+					},
+				});
+
 				return {
 					success: false,
 					discord_error: false,
