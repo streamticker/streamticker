@@ -77,6 +77,7 @@ export function createHarvester<T extends TickerType>(
 
 	return {
 		validateInput: config.validateInput ?? null,
+
 		async harvest(ticker) {
 			if (ticker.type !== type) {
 				return {
