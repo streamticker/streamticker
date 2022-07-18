@@ -23,7 +23,7 @@ export class ListCommand extends SlashCommand {
 			await ctx.send({
 				embeds: [
 					{
-						description: `<:icons_busy:860123643219410965> No tickers found! Create some with \`/create\!`,
+						description: `<:icons_busy:860123643219410965> No tickers found! Create some with \`/create\`!`,
 						color: 0xed4245,
 					},
 				],
