@@ -1,5 +1,5 @@
 import {TickerType} from '@prisma/client';
-import {ChannelType} from 'discord-api-types/v10';
+import {ChannelType, PermissionFlagsBits} from 'discord-api-types/v10';
 import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
 import {harvesters} from '../../../harvesters';
 import {DiscordAPI} from '../../../harvesters/impl/discord/api';
@@ -23,18 +23,20 @@ export class SetupCommand extends SlashCommand {
 			throw new Error('This command needs to be ran in a guild!');
 		}
 
+		const guild = await DiscordAPI.getGuild(ctx.guildID);
+
 		const category = await DiscordAPI.createChannel(ctx.guildID, {
 			type: ChannelType.GuildCategory,
 			name: 'Server Stats',
 			permission_overwrites: [
 				{
 					id: ctx.guildID,
-					deny: `${1 << 20}`,
-					type: 1,
+					deny: PermissionFlagsBits.Connect.toString(),
+					type: 0,
 				},
 				{
 					id: env.DISCORD_APP_ID,
-					allow: `${1 << 20}`,
+					allow: PermissionFlagsBits.Connect.toString(),
 					type: 1,
 				},
 			],
