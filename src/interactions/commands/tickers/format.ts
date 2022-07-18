@@ -39,15 +39,15 @@ export class FormatCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.defer(true);
+		await ctx.defer(true);
 
-		if (!ctx.options.format.includes(FORMATTER_REPLACER)) {
+		if (!(ctx.options.format as string).includes(FORMATTER_REPLACER)) {
 			throw new Error(`Format must contain ${FORMATTER_REPLACER} to place a value into.`);
 		}
 
 		const found = await prisma.ticker.findFirst({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 		});
 
@@ -57,14 +57,26 @@ export class FormatCommand extends SlashCommand {
 
 		await prisma.ticker.update({
 			where: {
-				channel_id: ctx.options.channel,
+				channel_id: ctx.options.channel as string,
 			},
 			data: {
-				format: ctx.options.format,
+				format: ctx.options.format as string,
 				refresh_after: new Date(),
 			},
 		});
 
-		ctx.send(`Format updated to ${ctx.options.format}.`);
+		await ctx.send({
+			embeds: [
+				{
+					description: `<:icons_edit:859388129625374720> Successfully edited your ticker with format \`<#${
+						ctx.options.format as string
+					}>\`!`,
+					color: 0x85ed91,
+					footer: {
+						text: `Refresh the ticker using /refresh to see your changes!`,
+					},
+				},
+			],
+		});
 	}
 }

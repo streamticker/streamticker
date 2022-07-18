@@ -9,7 +9,7 @@ export class SupportCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.send({
+		await ctx.send({
 			embeds: [
 				{
 					description:

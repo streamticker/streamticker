@@ -15,6 +15,7 @@ import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
 import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
 import {OPENSEA_COLLECTION_VOLUME} from './impl/opensea/volume';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
+import {TIKTOK_FOLLOWERS} from './impl/tiktok/followers';
 import {TWITCH_FOLLOWERS} from './impl/twitch/followers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
@@ -39,4 +40,5 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_UNIQUE_HOLDERS,
 	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
+	TIKTOK_FOLLOWERS,
 };

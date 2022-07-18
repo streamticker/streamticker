@@ -93,7 +93,17 @@ export class CreateCommand extends SlashCommand {
 
 		await harvester.harvest(ticker);
 
-		await ctx.send('Ticker created (add more data here)');
+		await ctx.send({
+			embeds: [
+				{
+					description: `<:icons_Correct:859388130411282442> Successfully created your ticker <#${ticker.channel_id}>!`,
+					footer: {
+						text: 'Tip: You can customize the ticker by using /format!',
+					},
+					color: 0x85ed91,
+				},
+			],
+		});
 
 		await logsnag({
 			channel: 'tickers',

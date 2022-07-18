@@ -21,6 +21,7 @@ export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]:
 		'OpenSea collection unique holders (input required)',
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'OpenSea collection supply (input required)',
+	[TickerType.TIKTOK_FOLLOWERS]: 'TikTok Followers (**IN BETA**) (input required)',
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -45,6 +46,7 @@ export const tickerDescriptions: Record<TickerType, string> = {
 		'The amount of unique holders of an OpenSea collection',
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'The supply of an OpenSea collection',
 	[TickerType.TWITTER_FOLLOWERS]: 'The amount of followers on a Twitter user',
+	[TickerType.TIKTOK_FOLLOWERS]: 'The amount of followers on a TikTok user',
 };
 
 export const defaultTickerFormats: Record<
@@ -69,4 +71,5 @@ export const defaultTickerFormats: Record<
 	[TickerType.OPENSEA_COLLECTION_VOLUME]: `Volume: ${FORMATTER_REPLACER} Ξ`,
 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]: `Unique Holders: ${FORMATTER_REPLACER}`,
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: `Supply: ${FORMATTER_REPLACER}`,
+	[TickerType.TIKTOK_FOLLOWERS]: `TikTok Followers: ${FORMATTER_REPLACER}`,
 };
