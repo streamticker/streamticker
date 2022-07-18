@@ -42,7 +42,12 @@ export interface Harvester {
 		| {
 				success: false;
 				discord_error: false;
-				code: 'CHANNEL_DELETED' | 'NOT_VOICE_CHANNEL' | 'TYPE_MISMATCH' | 'TIMEOUT';
+				code:
+					| 'CHANNEL_DELETED'
+					| 'NOT_VOICE_CHANNEL'
+					| 'TYPE_MISMATCH'
+					| 'TIMEOUT_HARVESTING'
+					| 'TIMEOUT_UPDATING_CHANNEL';
 		  }
 		| {
 				success: false;
@@ -99,7 +104,7 @@ export function createHarvester<T extends TickerType>(
 				return {
 					success: false,
 					discord_error: false,
-					code: 'TIMEOUT',
+					code: 'TIMEOUT_HARVESTING',
 				};
 			}
 
@@ -151,9 +156,24 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			await DiscordAPI.editChannel(ticker.channel_id, {
+			const updateChannel = await DiscordAPI.editChannel(ticker.channel_id, {
 				name: format(ticker, value),
 			});
+
+			const updateRace = await Promise.race([
+				updateChannel,
+				new Promise<never>((resolve, reject) => {
+					setTimeout(reject, 30_000);
+				}),
+			]).catch(() => null);
+
+			if (updateRace === null) {
+				return {
+					success: false,
+					discord_error: true,
+					code: 'TIMEOUT_UPDATING_CHANNEL',
+				};
+			}
 
 			return {
 				success: true,
