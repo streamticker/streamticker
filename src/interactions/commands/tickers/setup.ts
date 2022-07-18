@@ -23,8 +23,6 @@ export class SetupCommand extends SlashCommand {
 			throw new Error('This command needs to be ran in a guild!');
 		}
 
-		const guild = await DiscordAPI.getGuild(ctx.guildID);
-
 		const category = await DiscordAPI.createChannel(ctx.guildID, {
 			type: ChannelType.GuildCategory,
 			name: 'Server Stats',
