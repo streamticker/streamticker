@@ -12,7 +12,7 @@ export interface Cache<T> {
 	refetch(): Promise<T>;
 }
 
-export const CACHE_ERROR = Symbol('errored');
+export const CACHE_ERROR: unique symbol = Symbol('errored');
 
 export async function cache<T>(methods: Cache<T>) {
 	const cached = await methods.get().catch(() => CACHE_ERROR);
