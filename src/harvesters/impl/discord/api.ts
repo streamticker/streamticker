@@ -88,16 +88,4 @@ export class DiscordAPI {
 	public static async getRoles(guild: string) {
 		return client.get(Routes.guildRoles(guild)) as Promise<RESTGetAPIGuildRolesResult>;
 	}
-
-	public static async getRole(guild: string, role: string) {
-		const roles = await DiscordAPI.getRoles(guild);
-
-		const found = roles.find(r => r.id === role);
-
-		if (!found) {
-			throw new Error('Unknown role');
-		}
-
-		return found;
-	}
 }
