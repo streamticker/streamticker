@@ -28,20 +28,9 @@ export class ListCommand extends SlashCommand {
 					},
 				],
 			});
+
 			return;
 		}
-
-		const tickerList = tickers
-			.map(ticker => {
-				const template = `<#${ticker.channel_id}>: \`${ticker.channel_id}\``;
-
-				if (ticker.platform_id) {
-					return `${template} (${ticker.platform_id})`;
-				}
-
-				return template;
-			})
-			.join('\n');
 
 		await ctx.send({
 			embeds: [

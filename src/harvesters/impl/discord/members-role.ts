@@ -6,7 +6,16 @@ export const DISCORD_MEMBERS_ROLE = createHarvester(TickerType.DISCORD_MEMBERS_R
 	requirement: TickerRequirement.NONE,
 
 	async validateInput(roleId, guildId) {
-		const role = await DiscordAPI.getRole(guildId, roleId);
+		const roles = await DiscordAPI.getRoles(guildId);
+
+		const role = roles.find(role => role.name === roleId || role.id === roleId);
+
+		if (!role) {
+			return {
+				success: false,
+				message: 'Unable to find a role with that name or id!',
+			};
+		}
 
 		return {
 			success: true,
