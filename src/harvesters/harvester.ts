@@ -115,11 +115,13 @@ export function createHarvester<T extends TickerType>(
 
 			if (typeof channel === 'string') {
 				if (channel === '10003') {
-					await prisma.ticker.delete({
-						where: {
-							channel_id: ticker.channel_id,
-						},
-					});
+					await prisma.ticker
+						.delete({
+							where: {
+								channel_id: ticker.channel_id,
+							},
+						})
+						.catch(() => null);
 
 					return {
 						success: false,
@@ -136,11 +138,13 @@ export function createHarvester<T extends TickerType>(
 			}
 
 			if (!channel) {
-				await prisma.ticker.delete({
-					where: {
-						channel_id: ticker.channel_id,
-					},
-				});
+				await prisma.ticker
+					.delete({
+						where: {
+							channel_id: ticker.channel_id,
+						},
+					})
+					.catch(() => null);
 
 				return {
 					success: false,
