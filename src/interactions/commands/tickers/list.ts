@@ -43,14 +43,6 @@ export class ListCommand extends SlashCommand {
 			})
 			.join('\n');
 
-		// await ctx.send({
-		// 	embeds: [
-		// 		{
-		// 			description: tickerList,
-		// 			title: 'Ticker List',
-		// 		},
-		// 	],
-		// });
 		await ctx.send({
 			embeds: [
 				{
