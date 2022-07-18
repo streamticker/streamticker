@@ -91,7 +91,7 @@ export function createHarvester<T extends TickerType>(
 			const value = await Promise.race([
 				promise,
 				new Promise<never>((resolve, reject) => {
-					setTimeout(reject, 10_000);
+					setTimeout(reject, 30_000);
 				}),
 			]).catch(() => null);
 
