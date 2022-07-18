@@ -51,7 +51,14 @@ export class RemoveCommand extends SlashCommand {
 			},
 		});
 
-		await ctx.send(`Deleted ticker!`);
+		await ctx.send({
+			embeds: [
+				{
+					description: `<:icons_busy:860123643219410965> Successfully deleted your ticker from being updated.`,
+					color: 0xed4245,
+				},
+			],
+		});
 
 		await logsnag({
 			channel: 'tickers',

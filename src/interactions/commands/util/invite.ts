@@ -9,7 +9,7 @@ export class InviteCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.send({
+		await ctx.send({
 			embeds: [
 				{
 					title: 'Vote for StreamTicker on top.gg',

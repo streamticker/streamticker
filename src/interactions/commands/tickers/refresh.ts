@@ -55,7 +55,16 @@ export class RefreshCommand extends SlashCommand {
 				refresh_after: new Date(),
 			},
 		});
-
-		await ctx.send('Ticker refreshed.');
+		await ctx.send({
+			embeds: [
+				{
+					description: `<:icons_update:860123644297871382> Successfully refreshed your ticker with the latest information!`,
+					color: 0x85ed91,
+					footer: {
+						text: `If your ticker didn't update, either we didn't find new data, or the bot can't update the channel!`,
+					},
+				},
+			],
+		});
 	}
 }

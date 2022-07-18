@@ -73,6 +73,13 @@ export class SetupCommand extends SlashCommand {
 		});
 
 		await Promise.all(promises);
-		await ctx.send('Setup complete!');
+		await ctx.send({
+			embeds: [
+				{
+					description: `<:icons_update:860123644297871382> Successfully created 4 tickers! Check under the category \`Server Stats\` to see them.`,
+					color: 0x85ed91,
+				},
+			],
+		});
 	}
 }

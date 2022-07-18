@@ -9,7 +9,7 @@ export class PingCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
-		ctx.send(':ninja:', {
+		await ctx.send(':ninja:', {
 			ephemeral: true,
 		});
 	}
