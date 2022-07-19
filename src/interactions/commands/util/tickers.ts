@@ -17,13 +17,16 @@ export class TickersListCommand extends SlashCommand {
 		await ctx.send({
 			embeds: [
 				{
-					title: `${Object.keys(tickerTypeNames).length} Tickers on StreamTicker`,
+					title: `${Object.keys(tickerTypeNames).length} ticker types available on StreamTicker`,
 					description: Object.entries(tickerDescriptions)
 						.map(entry => {
 							const [name, desc] = entry as [TickerType, string];
 							return `• ${tickerTypeNames[name].replace(' (input required)', '')}`;
 						})
 						.join('\n'),
+					footer: {
+						text: 'You can create all of these using /create!',
+					},
 					color: 0x85ed91,
 				},
 			],
