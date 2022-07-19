@@ -21,7 +21,7 @@ export class TickersListCommand extends SlashCommand {
 					description: Object.entries(tickerDescriptions)
 						.map(entry => {
 							const [name, desc] = entry as [TickerType, string];
-							return `:icons_online: ${tickerTypeNames[name].replace(' (input required)', '')}`;
+							return `• ${tickerTypeNames[name].replace(' (input required)', '')}`;
 						})
 						.join('\n'),
 					color: 0x85ed91,
