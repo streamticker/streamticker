@@ -36,4 +36,5 @@ export const env = envsafe({
 	UPSTASH_REDIS_REST_TOKEN: str({}),
 	TWITCH_CLIENT_SECRET: str({}),
 	TWITCH_CLIENT_ID: str({}),
+	WADOKEI_KEY: str({}),
 });

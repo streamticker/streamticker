@@ -10,6 +10,7 @@ import {GITHUB_FOLLOWERS} from './impl/github/followers';
 import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
+import {INSTAGRAM_FOLLOWERS} from './impl/instagram/followers';
 import {OPENSEA_COLLECTION_FLOOR} from './impl/opensea/floor';
 import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
 import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
@@ -41,4 +42,5 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
 	TIKTOK_FOLLOWERS,
+	INSTAGRAM_FOLLOWERS,
 };
