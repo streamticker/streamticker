@@ -17,12 +17,14 @@ export class TickersListCommand extends SlashCommand {
 		await ctx.send({
 			embeds: [
 				{
+					title: `${Object.keys(tickerTypeNames).length} Tickers on StreamTicker`,
 					description: Object.entries(tickerDescriptions)
 						.map(entry => {
 							const [name, desc] = entry as [TickerType, string];
-							return `**\`${tickerTypeNames[name].replace(' (input required)', '')}\`**:\n${desc}`;
+							return `:icons_online: ${tickerTypeNames[name].replace(' (input required)', '')}`;
 						})
-						.join('\n\n'),
+						.join('\n'),
+					color: 0x85ed91,
 				},
 			],
 		});
