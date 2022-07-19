@@ -24,6 +24,10 @@ export class RefreshCommand extends SlashCommand {
 				},
 			],
 			requiredPermissions: ['MANAGE_CHANNELS'],
+			throttling: {
+				usages: 2,
+				duration: 10 * 60,
+			},
 		});
 	}
 
