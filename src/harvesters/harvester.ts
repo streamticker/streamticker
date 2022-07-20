@@ -35,31 +35,29 @@ export type ValidateInput = (
 	  }
 >;
 
+export type HarvesterResult =
+	| {
+			success: true;
+	  }
+	| {
+			success: false;
+			code:
+				| 'CHANNEL_DELETED'
+				| 'NOT_VOICE_CHANNEL'
+				| 'TYPE_MISMATCH'
+				| 'TIMEOUT_HARVESTING'
+				| 'TIMEOUT_UPDATING_CHANNEL'
+				| 'HARVESTER_FAILED'
+				| 'API_ERROR'
+				| 'MISSING_PERMISSIONS';
+
+			message: string;
+	  };
+
 export interface Harvester {
 	validateInput: ValidateInput | null;
 	requirement: TickerRequirement;
-	harvest(ticker: Ticker): Promise<
-		| {
-				success: true;
-		  }
-		| {
-				success: false;
-				discord_error: false;
-				code:
-					| 'CHANNEL_DELETED'
-					| 'NOT_VOICE_CHANNEL'
-					| 'TYPE_MISMATCH'
-					| 'TIMEOUT_HARVESTING'
-					| 'TIMEOUT_UPDATING_CHANNEL'
-					| 'HARVESTER_FAILED';
-				message: string;
-		  }
-		| {
-				success: false;
-				discord_error: true;
-				code: string | number;
-		  }
-	>;
+	harvest(ticker: Ticker): Promise<HarvesterResult>;
 }
 
 export interface HarvesterUtils {
@@ -89,11 +87,10 @@ export function createHarvester<T extends TickerType>(
 		validateInput: config.validateInput ?? null,
 		requirement: config.requirement,
 
-		async harvest(ticker) {
+		async harvest(ticker): Promise<HarvesterResult> {
 			if (ticker.type !== type) {
 				return {
 					success: false,
-					discord_error: false,
 					code: 'TYPE_MISMATCH',
 					message: 'The ticker types do not match',
 				};
@@ -128,14 +125,13 @@ export function createHarvester<T extends TickerType>(
 				if ('timeout' in harvestResult) {
 					return {
 						success: false,
-						discord_error: true,
 						code: 'TIMEOUT_HARVESTING',
+						message: 'The ticker timed out while harvesting.',
 					};
 				}
 
 				return {
 					success: false,
-					discord_error: false,
 					code: 'HARVESTER_FAILED',
 					message: harvestResult.error.message,
 				};
@@ -149,16 +145,23 @@ export function createHarvester<T extends TickerType>(
 				if (channel === '10003') {
 					return {
 						success: false,
-						discord_error: false,
 						code: 'CHANNEL_DELETED',
 						message: 'That channel was deleted',
 					};
 				}
 
+				if (channel === '50001') {
+					return {
+						success: false,
+						code: 'MISSING_PERMISSIONS',
+						message: 'Missing permissions to edit this channel',
+					};
+				}
+
 				return {
 					success: false,
-					discord_error: true,
-					code: channel,
+					code: 'API_ERROR',
+					message: channel,
 				};
 			}
 
@@ -173,7 +176,6 @@ export function createHarvester<T extends TickerType>(
 
 				return {
 					success: false,
-					discord_error: false,
 					code: 'CHANNEL_DELETED',
 					message: 'That channel has been deleted',
 				};
@@ -182,7 +184,6 @@ export function createHarvester<T extends TickerType>(
 			if (channel.type !== ChannelType.GuildVoice) {
 				return {
 					success: false,
-					discord_error: false,
 					code: 'NOT_VOICE_CHANNEL',
 					message: 'That channel is not a voice channel',
 				};
@@ -202,8 +203,8 @@ export function createHarvester<T extends TickerType>(
 			if (updateRace === null) {
 				return {
 					success: false,
-					discord_error: true,
 					code: 'TIMEOUT_UPDATING_CHANNEL',
+					message: "Discord's API timed out while updating the channel",
 				};
 			}
 

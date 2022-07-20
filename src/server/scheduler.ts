@@ -43,7 +43,7 @@ export const handler = api({
 
 					stats.updated++;
 				} else {
-					if (!result.discord_error && result.code === 'CHANNEL_DELETED') {
+					if (result.code === 'CHANNEL_DELETED' || result.code === 'MISSING_PERMISSIONS') {
 						await prisma.ticker.delete({
 							where: {channel_id: ticker.channel_id},
 						});
@@ -52,21 +52,7 @@ export const handler = api({
 							where: {channel_id: ticker.channel_id},
 							data: {refresh_after: dayjs().add(2, 'days').toDate()},
 						});
-					}
 
-					if (result.discord_error) {
-						await logsnag({
-							channel: 'errors',
-							event: "Couldn't resolve channel",
-							icon: '⚠️',
-							description: `Ticker ${ticker.channel_id} (${ticker.type}) timed out`,
-							tags: {
-								code: result.code,
-								ticker: ticker.channel_id,
-							},
-							notify: true,
-						});
-					} else {
 						await logsnag({
 							channel: 'errors',
 							event: "Couldn't refresh ticker",
