@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  name: 'Deploy'
+  name: Deploy
   runs-on: ubuntu-latest
   steps:
     - name: Set up QEMU
