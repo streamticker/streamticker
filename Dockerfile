@@ -1,7 +1,7 @@
-FROM node:16-slim
+FROM node:alpine
 
-RUN apt-get update
-RUN apt-get install -y openssl
+# RUN apt-get update
+RUN apk add openssl
 
 WORKDIR /app
 
