@@ -6,10 +6,15 @@ import {
 	CommandOptionType,
 	ChannelType,
 	ApplicationCommandOptionChoice,
+	ComponentType,
+	ButtonStyle,
 } from 'slash-create';
 import {harvesters} from '../../../harvesters';
+import {TickerRequirement} from '../../../harvesters/harvester';
 import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
+import {redis} from '../../../server/redis';
+import {InternalTopggAPI} from '../../../server/topgg';
 import {defaultTickerFormats, tickerTypeNames} from '../../types/type-names';
 import {is, enumerate} from '../../util';
 
@@ -67,6 +72,42 @@ export class CreateCommand extends SlashCommand {
 		}
 
 		const harvester = harvesters[ctx.options.type];
+
+		if (harvester.requirement === TickerRequirement.VOTE) {
+			const hasUserVoted = await new InternalTopggAPI('822117936251928586').hasVoted(ctx.user.id);
+			if (!hasUserVoted) {
+				await ctx.send({
+					embeds: [
+						{
+							description: `<:icons_Wrong:859388130636988436> Hi there! To create a ${tickerTypeNames[
+								ctx.options.type as TickerType
+							].replace(
+								' (input required)',
+								''
+							)} ticker, you'll need to vote for the bot on Top.gg. It's a super easy process and takes about 30 seconds - it supports us directly & allows you to make super cool tickers! Please click the button below to vote for the bot!`,
+							color: 0xed4245,
+						},
+					],
+					components: [
+						{
+							type: ComponentType.ACTION_ROW,
+							components: [
+								{
+									type: ComponentType.BUTTON,
+									label: 'Click to vote!',
+									style: ButtonStyle.LINK,
+									url: 'https://top.gg/bot/822117936251928586/vote',
+									emoji: {
+										name: '🎉',
+									},
+								},
+							],
+						},
+					],
+				});
+				return;
+			}
+		}
 
 		let platformId: string | null = null;
 

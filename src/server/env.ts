@@ -37,4 +37,5 @@ export const env = envsafe({
 	TWITCH_CLIENT_SECRET: str({}),
 	TWITCH_CLIENT_ID: str({}),
 	WADOKEI_KEY: str({}),
+	TOPGG_AUTH: str({}),
 });

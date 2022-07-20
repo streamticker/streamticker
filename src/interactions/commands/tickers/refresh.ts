@@ -39,7 +39,14 @@ export class RefreshCommand extends SlashCommand {
 		});
 
 		if (!ticker || ticker.guild_id !== ctx.guildID) {
-			await ctx.send('Ticker not found.');
+			await ctx.send({
+				embeds: [
+					{
+						description: `<:icons_Wrong:859388130636988436> Ticker not found!`,
+						color: 0xed4245,
+					},
+				],
+			});
 			return;
 		}
 
@@ -47,7 +54,14 @@ export class RefreshCommand extends SlashCommand {
 		const result = await harvester.harvest(ticker);
 
 		if (!result.success) {
-			await ctx.send(`Could not refresh: ${result.code}`);
+			await ctx.send({
+				embeds: [
+					{
+						description: `<:icons_Wrong:859388130636988436> There was an error! Please do \`/support\` and tell the developers this code: \`${result.code}\``,
+						color: 0xed4245,
+					},
+				],
+			});
 			return;
 		}
 

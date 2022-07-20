@@ -4,7 +4,7 @@ import {RedditAPI} from './api';
 
 export const REDDIT_SUBSCRIBERS = createHarvester(TickerType.REDDIT_SUBSCRIBERS, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async subreddit => {
+	async validateInput(subreddit) {
 		if (!subreddit) {
 			return {
 				success: false,
