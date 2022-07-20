@@ -11,12 +11,14 @@ export enum TickerRequirement {
 
 export const FORMATTER_REPLACER = '%v';
 
-export function format(ticker: Ticker, value: number | string) {
-	const humanized = Number(value)
+export function humanize(value: number | string) {
+	return Number(value)
 		.toString()
 		.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
-	return ticker.format.replace(FORMATTER_REPLACER, humanized);
+export function format(ticker: Ticker, value: number | string) {
+	return ticker.format.replace(FORMATTER_REPLACER, humanize(value));
 }
 
 export type ValidateInput = (
@@ -35,6 +37,7 @@ export type ValidateInput = (
 
 export interface Harvester {
 	validateInput: ValidateInput | null;
+	requirement: TickerRequirement;
 	harvest(ticker: Ticker): Promise<
 		| {
 				success: true;
@@ -82,6 +85,7 @@ export function createHarvester<T extends TickerType>(
 
 	return {
 		validateInput: config.validateInput ?? null,
+		requirement: config.requirement,
 
 		async harvest(ticker) {
 			if (ticker.type !== type) {
