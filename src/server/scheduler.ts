@@ -34,29 +34,25 @@ export const handler = api({
 				const result = await harvester.harvest(ticker);
 
 				if (result.success) {
-					await prisma.ticker
-						.update({
-							where: {channel_id: ticker.channel_id},
-							data: {
-								refresh_after: dayjs().add(1, 'hour').toDate(),
-							},
-						})
-						.catch(async err => {
-							// TODO: I should probably differentiate at this point but if it fails to update here, I don't care
-							// Copilot said that. But seriously, if it doesn't update then the record doesn't exist, so I delete.
-							await prisma.ticker.delete({
-								where: {
-									channel_id: ticker.channel_id,
-								},
-							});
-						});
+					await prisma.ticker.update({
+						where: {channel_id: ticker.channel_id},
+						data: {
+							refresh_after: dayjs().add(1, 'hour').toDate(),
+						},
+					});
 
 					stats.updated++;
 				} else {
-					await prisma.ticker.update({
-						where: {channel_id: ticker.channel_id},
-						data: {refresh_after: dayjs().add(2, 'days').toDate()},
-					});
+					if (!result.discord_error && result.code === 'CHANNEL_DELETED') {
+						await prisma.ticker.delete({
+							where: {channel_id: ticker.channel_id},
+						});
+					} else {
+						await prisma.ticker.update({
+							where: {channel_id: ticker.channel_id},
+							data: {refresh_after: dayjs().add(2, 'days').toDate()},
+						});
+					}
 
 					if (result.discord_error) {
 						await logsnag({

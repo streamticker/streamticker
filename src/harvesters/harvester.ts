@@ -50,7 +50,9 @@ export interface Harvester {
 					| 'NOT_VOICE_CHANNEL'
 					| 'TYPE_MISMATCH'
 					| 'TIMEOUT_HARVESTING'
-					| 'TIMEOUT_UPDATING_CHANNEL';
+					| 'TIMEOUT_UPDATING_CHANNEL'
+					| 'HARVESTER_FAILED';
+				message: string;
 		  }
 		| {
 				success: false;
@@ -93,6 +95,7 @@ export function createHarvester<T extends TickerType>(
 					success: false,
 					discord_error: false,
 					code: 'TYPE_MISMATCH',
+					message: 'The ticker types do not match',
 				};
 			}
 
@@ -122,10 +125,19 @@ export function createHarvester<T extends TickerType>(
 			const harvestResult = await Promise.race([promise, timeout]);
 
 			if (!harvestResult.success) {
+				if ('timeout' in harvestResult) {
+					return {
+						success: false,
+						discord_error: true,
+						code: 'TIMEOUT_HARVESTING',
+					};
+				}
+
 				return {
 					success: false,
-					discord_error: 'timeout' in harvestResult,
-					code: 'timeout' in harvestResult ? 'TIMEOUT_HARVESTING' : harvestResult.error.message,
+					discord_error: false,
+					code: 'HARVESTER_FAILED',
+					message: harvestResult.error.message,
 				};
 			}
 
@@ -135,18 +147,11 @@ export function createHarvester<T extends TickerType>(
 
 			if (typeof channel === 'string') {
 				if (channel === '10003') {
-					await prisma.ticker
-						.delete({
-							where: {
-								channel_id: ticker.channel_id,
-							},
-						})
-						.catch(() => null);
-
 					return {
 						success: false,
 						discord_error: false,
 						code: 'CHANNEL_DELETED',
+						message: 'That channel was deleted',
 					};
 				}
 
@@ -170,6 +175,7 @@ export function createHarvester<T extends TickerType>(
 					success: false,
 					discord_error: false,
 					code: 'CHANNEL_DELETED',
+					message: 'That channel has been deleted',
 				};
 			}
 
@@ -178,6 +184,7 @@ export function createHarvester<T extends TickerType>(
 					success: false,
 					discord_error: false,
 					code: 'NOT_VOICE_CHANNEL',
+					message: 'That channel is not a voice channel',
 				};
 			}
 
