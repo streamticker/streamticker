@@ -13,7 +13,9 @@ import {
 } from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
-const client = new REST({version: '10'}).setToken(env.DISCORD_BOT_TOKEN);
+const client = new REST({
+	version: '10',
+}).setToken(env.DISCORD_BOT_TOKEN);
 
 export class DiscordAPI {
 	public static async getBotGuilds(lastId?: string): Promise<RESTGetAPICurrentUserGuildsResult> {
@@ -32,7 +34,10 @@ export class DiscordAPI {
 		})) as RESTGetAPICurrentUserGuildsResult;
 
 		if (guilds.length === limit) {
-			guilds.push(...(await DiscordAPI.getBotGuilds(guilds[guilds.length - 1].id)));
+			const lastId = guilds[guilds.length - 1].id;
+			const newGuilds = await DiscordAPI.getBotGuilds(lastId);
+
+			guilds.push(...newGuilds);
 		}
 
 		return guilds;
@@ -57,9 +62,10 @@ export class DiscordAPI {
 		})) as RESTGetAPIGuildMembersResult;
 
 		if (members.length === limit) {
-			members.push(
-				...(await DiscordAPI.getGuildMembers(guild, members[members.length - 1].user?.id))
-			);
+			const lastId = members[members.length - 1].user?.id;
+			const newMembers = await DiscordAPI.getGuildMembers(guild, lastId);
+
+			members.push(...newMembers);
 		}
 
 		return members;
