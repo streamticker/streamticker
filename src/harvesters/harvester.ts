@@ -96,20 +96,36 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			const promise = config.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils);
+			const promise = config
+				.harvest(ticker as Omit<Ticker, 'type'> & {type: T}, utils)
+				.then(value => ({
+					success: true as const,
+					value,
+				}))
+				.catch((error: Error) => ({
+					success: false as const,
+					error,
+				}));
 
-			const value = await Promise.race([
-				promise,
-				new Promise<never>((resolve, reject) => {
-					setTimeout(reject, 30_000);
-				}),
-			]).catch(() => null);
+			const timeout = new Promise<{
+				success: false;
+				timeout: true;
+			}>(resolve => {
+				setTimeout(() => {
+					resolve({
+						success: false,
+						timeout: true,
+					});
+				}, 30_000);
+			});
 
-			if (value === null) {
+			const harvestResult = await Promise.race([promise, timeout]);
+
+			if (!harvestResult.success) {
 				return {
 					success: false,
-					discord_error: false,
-					code: 'TIMEOUT_HARVESTING',
+					discord_error: 'timeout' in harvestResult,
+					code: 'timeout' in harvestResult ? 'TIMEOUT_HARVESTING' : harvestResult.error.message,
 				};
 			}
 
@@ -166,7 +182,7 @@ export function createHarvester<T extends TickerType>(
 			}
 
 			const updateChannel = await DiscordAPI.editChannel(ticker.channel_id, {
-				name: format(ticker, value),
+				name: format(ticker, harvestResult.value),
 			});
 
 			const updateRace = await Promise.race([
