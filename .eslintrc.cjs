@@ -31,6 +31,7 @@ module.exports = {
 		'no-bitwise': 'off',
 		'@typescript-eslint/quotes': 'off',
 		'@typescript-eslint/prefer-literal-enum-member': 'off',
+		'@typescript-eslint/no-extraneous-class': 'off',
 	},
 
 	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
