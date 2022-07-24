@@ -16,6 +16,10 @@ export const TikTokAPI = {
 			headers: {Authorization: env.WADOKEI_KEY},
 		});
 
+		if (!data.userInfo.stats) {
+			throw new Error('User has no stats');
+		}
+
 		return data.userInfo.stats.followerCount;
 	},
 };

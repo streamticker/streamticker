@@ -15,7 +15,10 @@ export const TWITCH_FOLLOWERS = createHarvester(TickerType.TWITCH_FOLLOWERS, {
 		const body = await TwitchAPI.getUser(username, 'login').catch(() => null);
 
 		if (!body) {
-			throw new Error('Twitch user does not exist');
+			return {
+				success: false,
+				message: 'Twitch user does not exist',
+			};
 		}
 
 		return {

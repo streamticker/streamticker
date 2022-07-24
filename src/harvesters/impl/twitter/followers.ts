@@ -4,7 +4,7 @@ import {TwitterAPI} from './api';
 
 export const TWITTER_FOLLOWERS = createHarvester(TickerType.TWITTER_FOLLOWERS, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async username => {
+	async validateInput(username) {
 		if (!username) {
 			return {
 				success: false,

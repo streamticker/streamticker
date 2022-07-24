@@ -6,7 +6,7 @@ export const OPENSEA_COLLECTION_UNIQUE_HOLDERS = createHarvester(
 	TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS,
 	{
 		requirement: TickerRequirement.VOTE,
-		validateInput: async collection => {
+		async validateInput(collection) {
 			if (!collection) {
 				return {
 					success: false,
@@ -17,7 +17,10 @@ export const OPENSEA_COLLECTION_UNIQUE_HOLDERS = createHarvester(
 			const body = await OpenSeaAPI.getCollectionStats(collection).catch(() => null);
 
 			if (!body) {
-				throw new Error('Collection not found.');
+				return {
+					success: false,
+					message: 'Collection not found',
+				};
 			}
 
 			return {

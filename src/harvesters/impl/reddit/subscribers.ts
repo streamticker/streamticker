@@ -15,7 +15,10 @@ export const REDDIT_SUBSCRIBERS = createHarvester(TickerType.REDDIT_SUBSCRIBERS,
 		const body = await RedditAPI.getSubreddit(subreddit).catch(() => null);
 
 		if (!body) {
-			throw new Error('Subreddit does not exist');
+			return {
+				success: false,
+				message: 'Subreddit does not exist',
+			};
 		}
 
 		return {

@@ -4,7 +4,7 @@ import {YouTubeAPI} from './api';
 
 export const YOUTUBE_SUBSCRIBERS = createHarvester(TickerType.YOUTUBE_SUBSCRIBERS, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async channelID => {
+	async validateInput(channelID) {
 		if (!channelID) {
 			return {
 				success: false,
@@ -15,9 +15,11 @@ export const YOUTUBE_SUBSCRIBERS = createHarvester(TickerType.YOUTUBE_SUBSCRIBER
 		const body = await YouTubeAPI.getUser(channelID).catch(() => null);
 
 		if (!body) {
-			throw new Error(
-				"Please make sure you're entering a valid YouTube channel ID! Usernames cannot be used, and IDs usually look like this: `UCReCeQgvWPmR8aivad-CzKQ`"
-			);
+			return {
+				success: false,
+				message:
+					"Please make sure you're entering a valid YouTube channel ID! Usernames cannot be used, and IDs usually look like this: `UCReCeQgvWPmR8aivad-CzKQ`",
+			};
 		}
 
 		return {

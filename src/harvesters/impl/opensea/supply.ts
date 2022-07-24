@@ -4,7 +4,7 @@ import {OpenSeaAPI} from './api';
 
 export const OPENSEA_COLLECTION_SUPPLY = createHarvester(TickerType.OPENSEA_COLLECTION_SUPPLY, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async collection => {
+	async validateInput(collection) {
 		if (!collection) {
 			return {
 				success: false,
@@ -15,7 +15,10 @@ export const OPENSEA_COLLECTION_SUPPLY = createHarvester(TickerType.OPENSEA_COLL
 		const body = await OpenSeaAPI.getCollectionStats(collection).catch(() => null);
 
 		if (!body) {
-			throw new Error('Collection not found.');
+			return {
+				success: false,
+				message: 'Collection not found',
+			};
 		}
 
 		return {

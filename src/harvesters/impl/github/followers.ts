@@ -4,7 +4,7 @@ import {GitHubAPI} from './api';
 
 export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async (username: string) => {
+	async validateInput(username: string) {
 		if (!username) {
 			return {
 				success: false,
@@ -15,7 +15,10 @@ export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {
 		const body = await GitHubAPI.getUser(username).catch(() => null);
 
 		if (!body) {
-			throw new Error('User does not exist');
+			return {
+				success: false,
+				message: 'GitHub user not found',
+			};
 		}
 
 		return {

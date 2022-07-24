@@ -15,7 +15,10 @@ export const INSTAGRAM_FOLLOWERS = createHarvester(TickerType.INSTAGRAM_FOLLOWER
 		const body = await InstagramAPI.getUser(username).catch(() => null);
 
 		if (!body) {
-			throw new Error('TikTok user does not exist');
+			return {
+				success: false,
+				message: 'Instagram user not found',
+			};
 		}
 
 		return {

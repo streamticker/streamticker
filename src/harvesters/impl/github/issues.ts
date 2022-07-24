@@ -4,7 +4,7 @@ import {GitHubAPI} from './api';
 
 export const GITHUB_REPO_ISSUES = createHarvester(TickerType.GITHUB_REPO_ISSUES, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async (value: string) => {
+	async validateInput(value: string) {
 		const [owner, repo] = value.split('/');
 
 		if (!owner || !repo) {
@@ -17,7 +17,10 @@ export const GITHUB_REPO_ISSUES = createHarvester(TickerType.GITHUB_REPO_ISSUES,
 		const body = await GitHubAPI.getRepo(owner, repo).catch(() => null);
 
 		if (!body) {
-			throw new Error('Repo does not exist');
+			return {
+				success: false,
+				message: 'GitHub repository not found',
+			};
 		}
 
 		return {

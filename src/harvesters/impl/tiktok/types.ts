@@ -30,7 +30,7 @@ export interface UserInfo {
 	uniqueIdModifyTime: number;
 	ttSeller: boolean;
 	extraInfo: ExtraInfo;
-	stats: Stats;
+	stats?: Stats;
 	itemList: ItemList[];
 }
 
