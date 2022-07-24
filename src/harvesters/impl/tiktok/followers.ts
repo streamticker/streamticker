@@ -18,6 +18,12 @@ export const TIKTOK_FOLLOWERS = createHarvester(TickerType.TIKTOK_FOLLOWERS, {
 			throw new Error('TikTok user does not exist');
 		}
 
+		if (!body.stats.followerCount) {
+			throw new Error(
+				'Your TikTok profile was found, however StreamTicker could not find your follower count. Please reach out to the developers with `/support` and let them know.'
+			);
+		}
+
 		return {
 			success: true,
 			platform_id: body.uniqueId,
