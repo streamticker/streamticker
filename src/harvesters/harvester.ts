@@ -150,7 +150,7 @@ export function createHarvester<T extends TickerType>(
 					};
 				}
 
-				if (channel === '50001') {
+				if (channel === '50001' || channel === '50013') {
 					return {
 						success: false,
 						code: 'MISSING_PERMISSIONS',
