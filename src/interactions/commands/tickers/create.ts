@@ -156,6 +156,7 @@ export class CreateCommand extends SlashCommand {
 			tags: {
 				type: ctx.options.type,
 				ticker: ctx.options.channel as string,
+				channel: ctx.options.channel as string,
 				user: ctx.user.id,
 			},
 			notify: true,
