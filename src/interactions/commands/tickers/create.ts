@@ -154,8 +154,8 @@ export class CreateCommand extends SlashCommand {
 				ctx.guildID
 			} ${ctx.options.input ? `with input ${ctx.options.input as string}` : ''}`,
 			tags: {
-				type: ctx.options.type,
-				ticker: ctx.options.channel as string,
+				ticker: ctx.options.type as TickerType,
+				guild: ctx.guildID,
 				channel: ctx.options.channel as string,
 				user: ctx.user.id,
 			},
