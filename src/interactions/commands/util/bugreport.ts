@@ -72,15 +72,18 @@ export class BugReportCommand extends SlashCommand {
 					})
 					.then(async issue => {
 						if (issue.success) {
-							// eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-unsafe-assignment
 							const issueIdentifier = (await issue.issue)?.identifier;
+
+							if (!issueIdentifier) {
+								throw new Error('The issue was created but no identifier was found.');
+							}
+
 							await ctx.send({
 								embeds: [
 									{
 										description:
 											'<:icons_Bugs:859388130803974174> Thank you so much for your report! Your bug has been submitted to the developers. We will look into it as soon as possible!',
 										footer: {
-											// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 											text: `For more information, reach out to the developers using /support and mention issue ID ${issueIdentifier}.`,
 										},
 										color: 0x85ed91,
