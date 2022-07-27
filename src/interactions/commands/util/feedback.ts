@@ -36,7 +36,9 @@ export class FeedbackCommand extends SlashCommand {
 			ctx.send({
 				embeds: [
 					{
-						description: "Feedback sent directly to the developer's phones!",
+						description:
+							"<:icons_bulb:882595243579559958> Feedback sent directly to the developer's phones!",
+						color: 0x85ed91,
 					},
 				],
 			})
