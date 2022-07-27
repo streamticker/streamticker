@@ -72,8 +72,12 @@ export class BugReportCommand extends SlashCommand {
 					})
 					.then(async issue => {
 						if (issue.success) {
-							// eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-unsafe-assignment
 							const issueIdentifier = (await issue.issue)?.identifier;
+
+							if (!issueIdentifier) {
+								throw new Error('The issue was created but no identifier was found.');
+							}
+
 							await ctx.send({
 								embeds: [
 									{
