@@ -8,9 +8,11 @@ import {
 	ApplicationCommandOptionChoice,
 	ComponentType,
 	ButtonStyle,
+	Permissions,
 } from 'slash-create';
 import {harvesters} from '../../../harvesters';
 import {TickerRequirement} from '../../../harvesters/harvester';
+import {DiscordAPI} from '../../../harvesters/impl/discord/api';
 import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
 import {redis} from '../../../server/redis';
@@ -54,6 +56,15 @@ export class CreateCommand extends SlashCommand {
 
 	async run(ctx: CommandContext) {
 		await ctx.defer();
+
+		const permissions = new Permissions(ctx.appPermissions);
+		const hasAdmin = permissions.any(0x0000000000000008);
+
+		if (!hasAdmin) {
+			throw new Error(
+				'StreamTicker does not have permission to manage tickers. Please [reinvite the bot](https://streamticker.bot/invite) with the correct permissions to create tickers.'
+			);
+		}
 
 		if (!ctx.guildID) {
 			throw new Error('This command can only be ran inside of a guild!');
