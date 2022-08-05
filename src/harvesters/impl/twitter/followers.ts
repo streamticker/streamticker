@@ -15,7 +15,7 @@ export const TWITTER_FOLLOWERS = createHarvester(TickerType.TWITTER_FOLLOWERS, {
 		const body = await TwitterAPI.screenNameToId(username).catch(() => null);
 
 		if (!body) {
-			throw new Error('Subreddit does not exist');
+			throw new Error('Twitter user could not be found');
 		}
 
 		return {
