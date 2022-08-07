@@ -39,4 +39,6 @@ export const env = envsafe({
 	WADOKEI_KEY: str({}),
 	TOPGG_AUTH: str({}),
 	LINEAR_API_KEY: str({}),
+	HOP_PROJECT_ID: str({}),
+	HOP_API_KEY: str({}),
 });

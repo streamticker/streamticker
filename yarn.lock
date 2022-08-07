@@ -270,6 +270,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@onehop/js@npm:^1.1.8":
+  version: 1.1.8
+  resolution: "@onehop/js@npm:1.1.8"
+  dependencies:
+    cross-fetch: ^3.1.5
+    qs: ^6.11.0
+    zod: ^3.17.10
+  checksum: 0beb81c714ad4c62080a4acf98e30fae35610a769e46e44e4b038936864ef8c05da3faf915afecd4a718e2d00b6dba0097bbfb6f08eb48e6363118e0b6999aa8
+  languageName: node
+  linkType: hard
+
 "@prisma/client@npm:4.0.0":
   version: 4.0.0
   resolution: "@prisma/client@npm:4.0.0"
@@ -1167,6 +1178,15 @@ __metadata:
   version: 3.16.2
   resolution: "core-js-pure@npm:3.16.2"
   checksum: e44acd945b78f6faf96f38059a5347eb236eaae9b2fa897e58f52b12b64e5233c2b1243e953b828ddec62c215c5f911ac2d3c9276974ded1c04331961d877869
+  languageName: node
+  linkType: hard
+
+"cross-fetch@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "cross-fetch@npm:3.1.5"
+  dependencies:
+    node-fetch: 2.6.7
+  checksum: f6b8c6ee3ef993ace6277fd789c71b6acf1b504fd5f5c7128df4ef2f125a429e29cd62dc8c127523f04a5f2fa4771ed80e3f3d9695617f441425045f505cf3bb
   languageName: node
   linkType: hard
 
@@ -3266,7 +3286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
@@ -3750,6 +3770,15 @@ __metadata:
   version: 2.1.1
   resolution: "punycode@npm:2.1.1"
   checksum: 823bf443c6dd14f669984dea25757b37993f67e8d94698996064035edd43bed8a5a17a9f12e439c2b35df1078c6bec05a6c86e336209eb1061e8025c481168e8
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.11.0":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
   languageName: node
   linkType: hard
 
@@ -4253,6 +4282,7 @@ __metadata:
   dependencies:
     "@discordjs/rest": ^0.5.0
     "@linear/sdk": ^1.22.0
+    "@onehop/js": ^1.1.8
     "@prisma/client": 4.0.0
     "@tailwindcss/typography": ^0.5.4
     "@types/common-tags": ^1.8.1
@@ -4828,6 +4858,13 @@ __metadata:
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: ce4ada136e8a78a0b08dc10b4b900936912d15de59905b2bf415b4d33c63df1d555d23acb2a41b23cf9fb5da41c256441afca3d6509de7247daa062fd2c5ea5f
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.17.10":
+  version: 3.17.10
+  resolution: "zod@npm:3.17.10"
+  checksum: 5de630b8eceda3de211cce0a734b629f8c4ca4bc887127b0ebd57e9c9be23204725e60adf2faf1c5ccb9b660c7588a8b04f60dfda1ed8e67a789e93c15f838f1
   languageName: node
   linkType: hard
 
