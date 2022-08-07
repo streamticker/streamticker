@@ -23,6 +23,8 @@ export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'OpenSea collection supply (input required)',
 	[TickerType.TIKTOK_FOLLOWERS]: 'TikTok Followers (**IN BETA**) (input required)',
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'Instagram Followers (**IN BETA**) (input required)',
+	[TickerType.ROBLOX_FOLLOWERS]: 'Roblox Followers (input required)',
+	[TickerType.ROBLOX_GROUP_MEMBERS]: 'Roblox Group Members (input required)',
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -49,6 +51,8 @@ export const tickerDescriptions: Record<TickerType, string> = {
 	[TickerType.TWITTER_FOLLOWERS]: 'The amount of followers on a Twitter user',
 	[TickerType.TIKTOK_FOLLOWERS]: 'The amount of followers on a TikTok user',
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'The amount of followers on a Instagram user',
+	[TickerType.ROBLOX_FOLLOWERS]: 'The amount of followers on a Roblox user',
+	[TickerType.ROBLOX_GROUP_MEMBERS]: 'The amount of members in a Roblox group',
 };
 
 export const defaultTickerFormats: Record<
@@ -75,4 +79,6 @@ export const defaultTickerFormats: Record<
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: `Supply: ${FORMATTER_REPLACER}`,
 	[TickerType.TIKTOK_FOLLOWERS]: `TikTok Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.INSTAGRAM_FOLLOWERS]: `Instagram Followers: ${FORMATTER_REPLACER}`,
+	[TickerType.ROBLOX_FOLLOWERS]: `RBLX Followers: ${FORMATTER_REPLACER}`,
+	[TickerType.ROBLOX_GROUP_MEMBERS]: `RGBX Group Members: ${FORMATTER_REPLACER}`,
 };
