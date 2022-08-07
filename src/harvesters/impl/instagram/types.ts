@@ -1,9 +1,9 @@
 export interface InstagramUser {
-	data: Data;
+	graphql: GraphQL;
 	status: string;
 }
 
-export interface Data {
+export interface GraphQL {
 	user: User;
 }
 

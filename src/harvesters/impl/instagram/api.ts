@@ -16,6 +16,6 @@ export const InstagramAPI = {
 			headers: {Authorization: env.WADOKEI_KEY},
 		});
 
-		return data.data.user.edge_followed_by.count;
+		return data.graphql.user.edge_followed_by.count;
 	},
 };
