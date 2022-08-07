@@ -36,8 +36,26 @@ creator.on('warn', reportError);
 creator.on('error', reportError);
 
 creator.on('commandError', async (command, error, ctx) => {
-	await ctx.send(error.message);
+	await ctx.send({
+		embeds: [
+			{
+				description: `<:icons_Wrong:859388130636988436> ${error.message}`,
+				color: 0xed4245,
+			},
+		],
+	});
 	await reportError(error, false, ctx.user.id);
+});
+
+creator.on('commandBlock', async (command, ctx, reason, data) => {
+	await ctx.send({
+		embeds: [
+			{
+				description: `<:icons_warning:908958943466893323> ${reason}`,
+				color: 0xfba71b,
+			},
+		],
+	});
 });
 
 creator.on('commandRun', async (command, _, ctx) => {
