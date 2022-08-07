@@ -3,7 +3,13 @@
 
 import {TickerType} from '@prisma/client';
 import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
-import {tickerDescriptions, tickerTypeNames} from '../../types/type-names';
+import {getStats} from '../../../server/stats';
+import {
+	tickerCategoryTitles,
+	tickerDescriptions,
+	tickerSort,
+	tickerTypeNames,
+} from '../../types/type-names';
 
 export class TickersListCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {
@@ -14,20 +20,27 @@ export class TickersListCommand extends SlashCommand {
 	}
 
 	async run(ctx: CommandContext) {
+		const tickerStats = await getStats();
 		await ctx.send({
 			embeds: [
 				{
 					title: `${Object.keys(tickerTypeNames).length} ticker types available on StreamTicker`,
-					description: Object.entries(tickerDescriptions)
-						.map(entry => {
-							const [name, desc] = entry as [TickerType, string];
-							return `• ${tickerTypeNames[name].replace(' (input required)', '')}`;
-						})
-						.join('\n'),
-					footer: {
-						text: 'You can create all of these using /create!',
-					},
-					color: 0x85ed91,
+					fields: Object.entries(tickerSort).map(entry => {
+						const [titleIndex, tickers] = entry as [string, TickerType[]];
+						const title = tickerCategoryTitles[titleIndex as keyof typeof tickerCategoryTitles];
+						return {
+							name: title,
+							value: tickers
+								.map(
+									ticker =>
+										`- ${tickerStats.tickers[ticker] || 0} ${tickerTypeNames[ticker].replace(
+											' (input required)',
+											''
+										)}`
+								)
+								.join('\n'),
+						};
+					}),
 				},
 			],
 		});

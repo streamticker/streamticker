@@ -82,3 +82,50 @@ export const defaultTickerFormats: Record<
 	[TickerType.ROBLOX_FOLLOWERS]: `Roblox Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_GROUP_MEMBERS]: `Group Members: ${FORMATTER_REPLACER}`,
 };
+
+enum TickerCategory {
+	SOCIAL = 'SOCIAL',
+	DISCORD = 'DISCORD',
+	UTIL = 'UTIL',
+	OPENSEA = 'OPENSEA',
+}
+
+export const tickerSort: Record<TickerCategory, TickerType[]> = {
+	[TickerCategory.SOCIAL]: [
+		TickerType.TWITCH_FOLLOWERS,
+		TickerType.TWITTER_FOLLOWERS,
+		TickerType.YOUTUBE_SUBSCRIBERS,
+		TickerType.YOUTUBE_VIEWCOUNT,
+		TickerType.TIKTOK_FOLLOWERS,
+		TickerType.INSTAGRAM_FOLLOWERS,
+		TickerType.ROBLOX_FOLLOWERS,
+		TickerType.ROBLOX_GROUP_MEMBERS,
+		TickerType.REDDIT_SUBSCRIBERS,
+	],
+	[TickerCategory.DISCORD]: [
+		TickerType.DISCORD_BOOSTS,
+		TickerType.DISCORD_HUMANS,
+		TickerType.DISCORD_BOTS,
+		TickerType.DISCORD_MEMBERS,
+		TickerType.DISCORD_MEMBERS_ROLE,
+	],
+	[TickerCategory.UTIL]: [
+		TickerType.GITHUB_FOLLOWERS,
+		TickerType.GITHUB_REPO_STARS,
+		TickerType.GITHUB_REPO_FORKS,
+		TickerType.GITHUB_REPO_ISSUES,
+	],
+	[TickerCategory.OPENSEA]: [
+		TickerType.OPENSEA_COLLECTION_FLOOR,
+		TickerType.OPENSEA_COLLECTION_VOLUME,
+		TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS,
+		TickerType.OPENSEA_COLLECTION_SUPPLY,
+	],
+};
+
+export const tickerCategoryTitles: Record<TickerCategory, string> = {
+	[TickerCategory.SOCIAL]: 'Social Tickers',
+	[TickerCategory.DISCORD]: 'Discord Tickers',
+	[TickerCategory.UTIL]: 'Utility Tickers',
+	[TickerCategory.OPENSEA]: 'OpenSea Tickers',
+};
