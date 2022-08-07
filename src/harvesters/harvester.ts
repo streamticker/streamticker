@@ -54,9 +54,15 @@ export type HarvesterResult =
 			message: string;
 	  };
 
+export type HarvesterDisabled = {
+	disabled: boolean;
+	reason: string;
+};
+
 export interface Harvester {
 	validateInput: ValidateInput | null;
 	requirement: TickerRequirement;
+	disabled?: HarvesterDisabled;
 	harvest(ticker: Ticker): Promise<HarvesterResult>;
 }
 
@@ -69,6 +75,7 @@ export function createHarvester<T extends TickerType>(
 	config: {
 		requirement: TickerRequirement;
 		validateInput?: null | ValidateInput;
+		disabled?: HarvesterDisabled;
 		harvest(
 			ticker: Omit<Ticker, 'type'> & {type: T},
 			utils: HarvesterUtils
@@ -86,7 +93,7 @@ export function createHarvester<T extends TickerType>(
 	return {
 		validateInput: config.validateInput ?? null,
 		requirement: config.requirement,
-
+		disabled: config.disabled,
 		async harvest(ticker): Promise<HarvesterResult> {
 			if (ticker.type !== type) {
 				return {

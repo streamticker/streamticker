@@ -84,6 +84,20 @@ export class CreateCommand extends SlashCommand {
 
 		const harvester = harvesters[ctx.options.type];
 
+		console.log(harvester);
+
+		if (harvester.disabled?.disabled) {
+			await ctx.send({
+				embeds: [
+					{
+						description: `<:icons_Wrong:859388130636988436> ${harvester.disabled.reason}`,
+						color: 0xed4245,
+					},
+				],
+			});
+			return;
+		}
+
 		if (harvester.requirement === TickerRequirement.VOTE) {
 			const hasUserVoted = await new InternalTopggAPI('822117936251928586').hasVoted(ctx.user.id);
 			if (!hasUserVoted) {

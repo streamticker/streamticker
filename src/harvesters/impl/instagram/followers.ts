@@ -3,6 +3,11 @@ import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harveste
 import {InstagramAPI} from './api';
 
 export const INSTAGRAM_FOLLOWERS = createHarvester(TickerType.INSTAGRAM_FOLLOWERS, {
+	disabled: {
+		disabled: true,
+		reason:
+			"StreamTicker's Instagram data source is currently unavailable. For more information, [join StreamTicker's support server](https://streamticker.bot/support).",
+	},
 	requirement: TickerRequirement.VOTE,
 	async validateInput(username) {
 		if (!username) {
