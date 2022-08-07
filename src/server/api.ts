@@ -18,8 +18,6 @@ export const api = create({
 	},
 
 	async onError(req, res, err) {
-		console.log(err);
-
 		return {
 			status: 500,
 			message: err.message,

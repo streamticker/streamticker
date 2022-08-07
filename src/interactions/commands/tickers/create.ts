@@ -84,8 +84,6 @@ export class CreateCommand extends SlashCommand {
 
 		const harvester = harvesters[ctx.options.type];
 
-		console.log(harvester);
-
 		if (harvester.disabled?.disabled) {
 			await ctx.send({
 				embeds: [

@@ -54,7 +54,6 @@ export class BugReportCommand extends SlashCommand {
 				],
 			},
 			async ctx => {
-				console.log(ctx.member?.user.username);
 				await linear
 					.issueCreate({
 						title: ctx.values.bug,
