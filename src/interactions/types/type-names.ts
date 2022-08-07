@@ -79,6 +79,6 @@ export const defaultTickerFormats: Record<
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: `Supply: ${FORMATTER_REPLACER}`,
 	[TickerType.TIKTOK_FOLLOWERS]: `TikTok Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.INSTAGRAM_FOLLOWERS]: `Instagram Followers: ${FORMATTER_REPLACER}`,
-	[TickerType.ROBLOX_FOLLOWERS]: `RBLX Followers: ${FORMATTER_REPLACER}`,
-	[TickerType.ROBLOX_GROUP_MEMBERS]: `RGBX Group Members: ${FORMATTER_REPLACER}`,
+	[TickerType.ROBLOX_FOLLOWERS]: `Roblox Followers: ${FORMATTER_REPLACER}`,
+	[TickerType.ROBLOX_GROUP_MEMBERS]: `Group Members: ${FORMATTER_REPLACER}`,
 };
