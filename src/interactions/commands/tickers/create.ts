@@ -49,6 +49,13 @@ export class CreateCommand extends SlashCommand {
 					required: false,
 					type: CommandOptionType.STRING,
 				},
+				{
+					name: 'shorten',
+					description:
+						'Shorten the ticker value from the full number to a shorter version (e.g. 1,000,000 to 1M)',
+					required: false,
+					type: CommandOptionType.BOOLEAN,
+				},
 			],
 			requiredPermissions: ['MANAGE_CHANNELS'],
 		});
@@ -144,6 +151,7 @@ export class CreateCommand extends SlashCommand {
 				refresh_after: new Date(),
 				format: defaultTickerFormats[ctx.options.type],
 				platform_id: platformId,
+				truncate: ctx.options.shorten as boolean,
 			},
 		});
 

@@ -18,6 +18,7 @@
 		"common-tags": "^1.8.2",
 		"dayjs": "^1.11.3",
 		"envsafe": "^2.0.3",
+		"humanize-plus": "^1.8.2",
 		"logsnag": "^0.1.2",
 		"next": "^12.2.2",
 		"next-seo": "^5.4.0",
@@ -35,6 +36,7 @@
 	},
 	"devDependencies": {
 		"@types/common-tags": "^1.8.1",
+		"@types/humanize-plus": "^1.8.0",
 		"@types/node": "^18.0.5",
 		"@types/react": "^18.0.15",
 		"@typescript-eslint/eslint-plugin": "^5.30.6",

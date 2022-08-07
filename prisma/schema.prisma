@@ -16,6 +16,7 @@ model Ticker {
   refresh_after DateTime   @default(now())
   format        String
   platform_id   String?
+  truncate      Boolean    @default(false)
 }
 
 model Preset {

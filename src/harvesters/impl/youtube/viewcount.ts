@@ -4,7 +4,7 @@ import {YouTubeAPI} from './api';
 
 export const YOUTUBE_VIEWCOUNT = createHarvester(TickerType.YOUTUBE_VIEWCOUNT, {
 	requirement: TickerRequirement.VOTE,
-	validateInput: async channelID => {
+	async validateInput(channelID) {
 		if (!channelID) {
 			return {
 				success: false,

@@ -3,6 +3,7 @@ import {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
 import {prisma} from '../server/prisma';
 import {DiscordAPI} from './impl/discord/api';
+import {compactInteger} from 'humanize-plus';
 
 export enum TickerRequirement {
 	NONE = 1 << 0,
@@ -18,7 +19,15 @@ export function humanize(value: number | string) {
 }
 
 export function format(ticker: Ticker, value: number | string) {
-	return ticker.format.replace(FORMATTER_REPLACER, humanize(value));
+	switch (ticker.truncate) {
+		case false:
+			return ticker.format.replace(FORMATTER_REPLACER, humanize(value));
+		case true:
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+			return ticker.format.replace(FORMATTER_REPLACER, compactInteger(Number(value), 1) as string);
+		default:
+			return ticker.format.replace(FORMATTER_REPLACER, humanize(value));
+	}
 }
 
 export type ValidateInput = (
