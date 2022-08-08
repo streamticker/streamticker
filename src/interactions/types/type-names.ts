@@ -25,6 +25,7 @@ export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'Instagram Followers (**IN BETA**) (input required)',
 	[TickerType.ROBLOX_FOLLOWERS]: 'Roblox Followers (input required)',
 	[TickerType.ROBLOX_GROUP_MEMBERS]: 'Roblox Group Members (input required)',
+	[TickerType.ROBLOX_FRIENDS]: 'Roblox Friends (input required)',
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -53,6 +54,7 @@ export const tickerDescriptions: Record<TickerType, string> = {
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'The amount of followers on a Instagram user',
 	[TickerType.ROBLOX_FOLLOWERS]: 'The amount of followers on a Roblox user',
 	[TickerType.ROBLOX_GROUP_MEMBERS]: 'The amount of members in a Roblox group',
+	[TickerType.ROBLOX_FRIENDS]: 'The amount of friends a Roblox user has',
 };
 
 export const defaultTickerFormats: Record<
@@ -81,6 +83,7 @@ export const defaultTickerFormats: Record<
 	[TickerType.INSTAGRAM_FOLLOWERS]: `Instagram Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_FOLLOWERS]: `Roblox Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_GROUP_MEMBERS]: `Group Members: ${FORMATTER_REPLACER}`,
+	[TickerType.ROBLOX_FRIENDS]: `Roblox Friends: ${FORMATTER_REPLACER}`,
 };
 
 enum TickerCategory {
@@ -100,6 +103,7 @@ export const tickerSort: Record<TickerCategory, TickerType[]> = {
 		TickerType.INSTAGRAM_FOLLOWERS,
 		TickerType.ROBLOX_FOLLOWERS,
 		TickerType.ROBLOX_GROUP_MEMBERS,
+		TickerType.ROBLOX_FRIENDS,
 		TickerType.REDDIT_SUBSCRIBERS,
 	],
 	[TickerCategory.DISCORD]: [

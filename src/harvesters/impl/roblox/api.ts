@@ -19,6 +19,14 @@ export const RobloxAPI = {
 		return data.count;
 	},
 
+	async getUserFriends(id: string) {
+		const {data} = await axios.get<{count: number}>(
+			`https://friends.roblox.com/v1/users/${id}/friends/count`
+		);
+
+		return data.count;
+	},
+
 	async getGroup(id: string) {
 		const {data} = await axios.get<RobloxGroup>(`https://groups.roblox.com/v1/groups/${id}`);
 
