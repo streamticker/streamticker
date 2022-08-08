@@ -17,6 +17,7 @@ import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
 import {OPENSEA_COLLECTION_VOLUME} from './impl/opensea/volume';
 import {REDDIT_SUBSCRIBERS} from './impl/reddit/subscribers';
 import {ROBLOX_FOLLOWERS} from './impl/roblox/followers';
+import {ROBLOX_FRIENDS} from './impl/roblox/friends';
 import {ROBLOX_GROUP_MEMBERS} from './impl/roblox/members';
 import {TIKTOK_FOLLOWERS} from './impl/tiktok/followers';
 import {TWITCH_FOLLOWERS} from './impl/twitch/followers';
@@ -47,4 +48,5 @@ export const harvesters: Record<TickerType, Harvester> = {
 	INSTAGRAM_FOLLOWERS,
 	ROBLOX_FOLLOWERS,
 	ROBLOX_GROUP_MEMBERS,
+	ROBLOX_FRIENDS,
 };

@@ -6,6 +6,7 @@ import {RefreshCommand} from './commands/tickers/refresh';
 import {RemoveCommand} from './commands/tickers/remove';
 import {SetupCommand} from './commands/tickers/setup';
 import {BugReportCommand} from './commands/util/bugreport';
+import {FeatureCommand} from './commands/util/feature';
 import {FeedbackCommand} from './commands/util/feedback';
 import {InviteCommand} from './commands/util/invite';
 import {PingCommand} from './commands/util/ping';
@@ -29,4 +30,5 @@ export const commands: Array<typeof SlashCommand> = [
 	ListCommand,
 	StatsCommand,
 	BugReportCommand,
+	FeatureCommand,
 ];

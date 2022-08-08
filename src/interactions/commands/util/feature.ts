@@ -3,11 +3,11 @@ import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
 import {linear} from '../../../server/linear';
 import {logsnag} from '../../../server/logsnag';
 
-export class BugReportCommand extends SlashCommand {
+export class FeatureCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {
 		super(creator, {
-			name: 'bugreport',
-			description: 'Report a bug directly to the developers.',
+			name: 'feature',
+			description: 'Request a StreamTicker feature!',
 			throttling: {
 				usages: 1,
 				duration: 86_400, // 24 hours
@@ -18,35 +18,20 @@ export class BugReportCommand extends SlashCommand {
 	async run(ctx: CommandContext) {
 		await ctx.sendModal(
 			{
-				title: 'StreamTicker Bug Report',
-				custom_id: 'cool_modal',
+				title: 'StreamTicker Feature Request',
+				custom_id: 'feature_modal',
 				components: [
 					{
 						type: 1,
 						components: [
 							{
 								type: 4,
-								custom_id: 'bug',
-								label: 'What happened?',
-								style: 1,
-								min_length: 20,
-								max_length: 1000,
-								placeholder: 'Give us a short description of the bug.',
-								required: true,
-							},
-						],
-					},
-					{
-						type: 1,
-						components: [
-							{
-								type: 4,
-								custom_id: 'description',
-								label: 'What were you doing?',
+								custom_id: 'feature',
+								label: 'What would you like to see on StreamTicker?',
 								style: 2,
-								min_length: 50,
+								min_length: 10,
 								max_length: 4000,
-								placeholder: 'Tell us what happened in as much detail as possible.',
+								placeholder: 'Describe to us what you would like to see in StreamTicker.',
 								required: true,
 							},
 						],
@@ -56,7 +41,7 @@ export class BugReportCommand extends SlashCommand {
 			async ctx => {
 				await linear
 					.issueCreate({
-						title: ctx.values.bug,
+						title: ctx.values.feature,
 						description: stripIndents`__**User Information**__
                         - User: ${ctx.member?.user.username}#${ctx.member?.user.discriminator}
                         - ID: ${ctx.member?.user.id}
@@ -64,10 +49,10 @@ export class BugReportCommand extends SlashCommand {
                         __**Guild Information**__
                         - Guild ID: ${ctx.guildID}
 
-                        __**Bug Description**__
-                        ${ctx.values.description}`,
+                        __**Feature Description**__
+                        ${ctx.values.feature}`,
 						teamId: 'a83f5bde-ac6f-4886-bd40-dd3c7d3069e7',
-						labelIds: ['dad96daf-46c1-4c49-ba7c-4b6bd00ad40f'],
+						labelIds: ['008becda-8c85-42de-b738-de01c97252ca'],
 					})
 					.then(async issue => {
 						if (issue.success) {
@@ -81,9 +66,9 @@ export class BugReportCommand extends SlashCommand {
 								embeds: [
 									{
 										description:
-											'<:icons_Bugs:859388130803974174> Thank you so much for your report! Your bug has been submitted to the developers. We will look into it as soon as possible!',
+											'<:icons_bookmark:860123644037824512> Thank you so much for your feature request. We will look into it as soon as possible!',
 										footer: {
-											text: `For more information, reach out to the developers using /support and mention issue ID ${issueIdentifier}.`,
+											text: `For more information, reach out to the developers using /support and mention request ID ${issueIdentifier}.`,
 										},
 										color: 0x85ed91,
 									},
