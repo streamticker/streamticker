@@ -20,12 +20,6 @@ export const YOUTUBE_VIEWCOUNT = createHarvester(TickerType.YOUTUBE_VIEWCOUNT, {
 			);
 		}
 
-		if (!body.viewCount) {
-			throw new Error(
-				"The YouTube channel was found, however the view count for this channel could not be found. Unfortunately this issue cannnot be resolved by us. Please do `/support` and let StreamTicker's developers know."
-			);
-		}
-
 		return {
 			success: true,
 			platform_id: channelID,
