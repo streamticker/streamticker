@@ -5,29 +5,21 @@ on:
     branches:
       - master
 
-env:
+  env:
   DEPLOYMENT_ID: deployment_MzMyMzc0ODA5MDAyNTU3NzQ
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Install Hop CLI
+        run: curl https://raw.githubusercontent.com/hopinc/hop_cli/main/scripts/install.sh | bash
 
-      - name: Setup node 18
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-
-      - name: Install deps for CI
-        run: yarn add @onehop/js
+      - name: Login to Hop CLI
+        run: hop auth login --token ${{ secrets.HOP_API_KEY }}
 
       - name: Pull environment variables
-        run: node ./ci/pull-env.mjs
-        env:
-          HOP_API_KEY: ${{ secrets.HOP_API_KEY }}
-          HOP_DEPLOYMENT_ID: ${{ env.DEPLOYMENT_ID }}
+        run: hop ignite pull-env ${{ env.DEPLOYMENT_ID }} > .env.ci
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -47,12 +39,6 @@ jobs:
 
       - name: Push docker image
         run: docker push registry.hop.io/streamticker/streamticker:latest
-
-      - name: Install Hop CLI
-        run: curl https://raw.githubusercontent.com/hopinc/hop_cli/main/scripts/install.sh | bash
-
-      - name: Login to Hop CLI
-        run: hop auth login --token ${{ secrets.HOP_API_KEY }}
 
       - name: Rollout new container
         run: hop ignite rollout ${{ env.DEPLOYMENT_ID }}
