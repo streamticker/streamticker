@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.HOP_REGISTRY_PASSWORD }}
 
       - name: Build docker image
-        run: docker build $(cat .env | while read line; do out+="--build-arg $line"; done; echo $out; out="") . -t registry.hop.io/streamticker/streamticker:latest
+        run: docker build$(cat .env | while read line; do out+=" --build-arg $line"; done; echo $out; out="") . -t registry.hop.io/streamticker/streamticker:latest
 
       - name: Push docker image
         run: docker push registry.hop.io/streamticker/streamticker:latest
