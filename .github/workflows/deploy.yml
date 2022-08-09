@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  DEPLOYMENT_ID: deployment_MzMyMzc0ODA5MDAyNTU3NzQ
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,7 +27,7 @@ jobs:
         run: node ./ci/pull-env.mjs
         env:
           HOP_API_KEY: ${{ secrets.HOP_API_KEY }}
-          HOP_DEPLOYMENT_ID: deployment_MzMyMzc0ODA5MDAyNTU3NzQ
+          HOP_DEPLOYMENT_ID: ${{ env.DEPLOYMENT_ID }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -44,3 +47,12 @@ jobs:
 
       - name: Push docker image
         run: docker push registry.hop.io/streamticker/streamticker:latest
+
+      - name: Install Hop CLI
+        run: curl https://raw.githubusercontent.com/hopinc/hop_cli/main/scripts/install.sh | sh
+
+      - name: Login to Hop CLI
+        run: hop auth login --token ${{ secrets.HOP_API_KEY }}
+
+      - name: Rollout new container
+        run: hop ignite rollout ${{ env.DEPLOYMENT_ID }}
