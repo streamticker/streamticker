@@ -36,7 +36,7 @@ jobs:
       - name: Pull environment variables
         run: node ./ci/pull-env.mjs
         env:
-          HOP_PROJECT_TOKEN: ${{ secrets.HOP_PROJECT_TOKEN }}
+          HOP_API_KEY: ${{ secrets.HOP_API_KEY }}
 
       - name: Build docker image
         run: docker build $(cat .env | while read line; do out+="--build-arg $line"; done; echo $out; out="") . -t registry.hop.io/streamticker/streamticker:latest
