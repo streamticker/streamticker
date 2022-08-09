@@ -15,6 +15,9 @@ jobs:
       - name: Install Hop CLI
         run: curl https://raw.githubusercontent.com/hopinc/hop_cli/main/scripts/install.sh | bash
 
+      - name: chmod hop
+        run: chmod +x /usr/local/bin/hop
+
       - name: Login to Hop CLI
         run: hop auth login --token ${{ secrets.HOP_API_KEY }}
 
