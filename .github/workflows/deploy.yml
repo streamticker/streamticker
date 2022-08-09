@@ -34,6 +34,9 @@ jobs:
           username: ${{ secrets.HOP_REGISTRY_USERNAME }}
           password: ${{ secrets.HOP_REGISTRY_PASSWORD }}
 
+      - name: Checkout
+        uses: actions/checkout-action@v3
+
       - name: Build docker image
         run: docker build . -t registry.hop.io/streamticker/streamticker:latest
 
