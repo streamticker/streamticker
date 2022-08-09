@@ -1,7 +1,9 @@
 import {Hop} from '@onehop/js';
 import {writeFile} from 'fs/promises';
 
-console.log('Token exists:', typeof process.env.HOP_PROJECT_TOKEN !== 'undefined');
+// Securely-ish print out the token because i cant tell if
+// darn github actions is setting it or not...
+console.log(process.env.HOP_PROJECT_TOKEN?.substring(0, 10));
 
 const hop = new Hop(process.env.HOP_PROJECT_TOKEN);
 
