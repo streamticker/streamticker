@@ -12,4 +12,4 @@ const stringifiedEnv = Object.entries(deployment.config.env)
 	})
 	.join('\n');
 
-await writeFile('./.env', stringifiedEnv);
+await writeFile('../.env', stringifiedEnv);
