@@ -20,6 +20,12 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Pull environment variables
+        run: node ./ci/pull-env.mjs
+        env:
+          HOP_API_KEY: ${{ secrets.HOP_API_KEY }}
+          HOP_DEPLOYMENT_ID: deployment_MzMyMzc0ODA5MDAyNTU3NzQ
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -32,11 +38,6 @@ jobs:
           registry: registry.hop.io
           username: ${{ secrets.HOP_REGISTRY_USERNAME }}
           password: ${{ secrets.HOP_REGISTRY_PASSWORD }}
-
-      - name: Pull environment variables
-        run: node ./ci/pull-env.mjs
-        env:
-          HOP_API_KEY: ${{ secrets.HOP_API_KEY }}
 
       - name: Build docker image
         run: docker build $(cat .env | while read line; do out+="--build-arg $line"; done; echo $out; out="") . -t registry.hop.io/streamticker/streamticker:latest
