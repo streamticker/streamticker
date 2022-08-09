@@ -19,7 +19,7 @@ jobs:
         run: hop auth login --token ${{ secrets.HOP_API_KEY }}
 
       - name: Pull environment variables
-        run: hop ignite pull-env ${{ env.DEPLOYMENT_ID }} > .env.ci
+        run: hop ignite get-env ${{ env.DEPLOYMENT_ID }} > .env.ci
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
