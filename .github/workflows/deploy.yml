@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-  env:
+env:
   DEPLOYMENT_ID: deployment_MzMyMzc0ODA5MDAyNTU3NzQ
 
 jobs:
