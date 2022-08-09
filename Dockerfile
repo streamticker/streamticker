@@ -9,6 +9,8 @@ ADD package.json .
 ADD yarn.lock .
 RUN yarn
 ADD . .
+ADD .env .
 RUN yarn build
+RUN rm .env
 RUN yarn cache clean
 CMD ["yarn", "start"]
