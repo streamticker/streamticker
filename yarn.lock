@@ -2892,12 +2892,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"logsnag@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "logsnag@npm:0.1.2"
+"logsnag@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "logsnag@npm:0.1.3"
   dependencies:
     node-fetch: ^2.6.7
-  checksum: 43b581711aa1a75cf6c4cbb35a0f96400a0a745752fe39f61e90f57c7ebb204225a462af942ad6bb5c2f8820313c1e546007585a90ce42b9999ff28d2f476acf
+  checksum: 66a603bf12b4d410fb4a48ba3c2e6c03a3f494dd94be0ec7c595a110268c91bfab8c064374d7bf9f74b0522a2b29dba2b4fcd5329cd23f63a583c7c0d4f543ca
   languageName: node
   linkType: hard
 
@@ -4305,7 +4305,7 @@ __metadata:
     eslint-config-xo-typescript: ^0.51.1
     eslint-plugin-react: ^7.30.1
     humanize-plus: ^1.8.2
-    logsnag: ^0.1.2
+    logsnag: ^0.1.3
     next: ^12.2.2
     next-seo: ^5.4.0
     nextkit: ^3.4.2

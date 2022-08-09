@@ -1,4 +1,5 @@
 import {TickerType} from '@prisma/client';
+import {insight} from './logsnag';
 import {prisma} from './prisma';
 import {wrapRedis} from './redis';
 
@@ -14,8 +15,16 @@ export async function getStats() {
 				ticker => [ticker.type, ticker.count] as [type: TickerType, count: number]
 			);
 
+			const total_tickers = await prisma.ticker.count();
+
+			await insight({
+				icon: '#️⃣',
+				title: 'Total Tickers',
+				value: total_tickers,
+			});
+
 			return {
-				total_tickers: await prisma.ticker.count(),
+				total_tickers,
 				tickers: Object.fromEntries(entries) as Record<TickerType, number>,
 			};
 		},
