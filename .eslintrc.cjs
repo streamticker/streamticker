@@ -34,5 +34,5 @@ module.exports = {
 		'@typescript-eslint/no-extraneous-class': 'off',
 	},
 
-	ignorePatterns: ['dist', '**/*.cjs', '**/*.js'],
+	ignorePatterns: ['dist', '**/*.cjs', '**/*.js', '**/*.mjs'],
 };
