@@ -6,6 +6,7 @@ import {env} from '../../../server/env';
 import {HopAPI} from '../../../server/hop';
 import {redis} from '../../../server/redis';
 import {getStats} from '../../../server/stats';
+import {InternalTopggAPI} from '../../../server/topgg';
 import {tickerTypeNames} from '../../types/type-names';
 
 const codeblock = (text: string) => `\`\`\`${text}\`\`\``;
@@ -24,9 +25,9 @@ export class StatsCommand extends SlashCommand {
 			users: number;
 			guilds: number;
 			shards: number;
-			totalVotes: number;
-			monthlyVotes: number;
 		}>('stats:client');
+
+		const voteStats = await new InternalTopggAPI('822117936251928586').getVotes();
 
 		const containers = await HopAPI.getDeployments();
 		await ctx.send({
@@ -43,9 +44,9 @@ export class StatsCommand extends SlashCommand {
 						{
 							name: 'Other Stats',
 							value: stripIndent`- Total Votes: ${
-								clientStats?.totalVotes.toLocaleString() ?? 0
+								voteStats.points.toLocaleString() ?? 0
 							}\n- Monthly Votes: ${
-								clientStats?.monthlyVotes.toLocaleString() ?? 0
+								voteStats.monthlyPoints.toLocaleString() ?? 0
 							}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
 							inline: true,
 						},
