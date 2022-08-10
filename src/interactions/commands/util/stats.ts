@@ -35,14 +35,18 @@ export class StatsCommand extends SlashCommand {
 					fields: [
 						{
 							name: 'Bot Stats',
-							value: stripIndent`- Users: ${clientStats?.users.toLocaleString()}\n- Guilds: ${clientStats?.guilds.toLocaleString()}\n- Shards: ${
-								clientStats?.shards
-							}`,
+							value: stripIndent`- Users: ${clientStats?.users.toLocaleString() ?? 0}\n- Guilds: ${
+								clientStats?.guilds.toLocaleString() ?? 0
+							}\n- Shards: ${clientStats?.shards}`,
 							inline: true,
 						},
 						{
 							name: 'Other Stats',
-							value: stripIndent`- Total Votes: ${clientStats?.totalVotes.toLocaleString()}\n- Monthly Votes: ${clientStats?.monthlyVotes.toLocaleString()}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
+							value: stripIndent`- Total Votes: ${
+								clientStats?.totalVotes.toLocaleString() ?? 0
+							}\n- Monthly Votes: ${
+								clientStats?.monthlyVotes.toLocaleString() ?? 0
+							}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
 							inline: true,
 						},
 						{
