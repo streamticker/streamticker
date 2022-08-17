@@ -97,10 +97,10 @@ export const handler = api({
  * Enqueue a job to lowcake asking for an empty POST back
  *
  * @param url The URL to receive a request at for cron intervals
- * @param cron The cron to use for the interval. Defaults to "At every fifth minute"
+ * @param interval Milliseconds to repeat at
  * @param queue The queue ID to use. Defaults to the one configured from environment
  */
-export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
+export async function enqueue(url: string, interval = 5 * 60 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
 	const {data} = await axios.post<unknown>(
 		`https://lowcake-api.otters.app/v1/queues/${queue}`,
 		{
