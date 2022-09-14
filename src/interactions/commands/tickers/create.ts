@@ -31,7 +31,7 @@ export class CreateCommand extends SlashCommand {
 					description: 'The voice channel to bind to',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
 				},
 				{
 					name: 'type',
