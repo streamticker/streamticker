@@ -197,7 +197,7 @@ export function createHarvester<T extends TickerType>(
 				};
 			}
 
-			if (channel.type !== ChannelType.GuildVoice || ChannelType.GuildStageVoice) {
+			if (channel.type !== ChannelType.GuildVoice) {
 				return {
 					success: false,
 					code: 'NOT_VOICE_CHANNEL',

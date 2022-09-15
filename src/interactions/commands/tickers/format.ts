@@ -25,7 +25,7 @@ export class FormatCommand extends SlashCommand {
 					description: 'The ticker to format.',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE],
 				},
 				{
 					name: 'format',

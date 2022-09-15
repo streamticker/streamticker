@@ -21,7 +21,7 @@ export class RefreshCommand extends SlashCommand {
 					description: 'The ticker to refresh.',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE],
 				},
 			],
 			requiredPermissions: ['MANAGE_CHANNELS'],
