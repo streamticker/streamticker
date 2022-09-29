@@ -1,4 +1,5 @@
 import {TickerType} from '@prisma/client';
+import dayjs from 'dayjs';
 import {
 	SlashCommand,
 	SlashCreator,
@@ -20,7 +21,7 @@ export class RefreshCommand extends SlashCommand {
 					description: 'The ticker to refresh.',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
 				},
 			],
 			requiredPermissions: ['MANAGE_CHANNELS'],
@@ -70,7 +71,7 @@ export class RefreshCommand extends SlashCommand {
 				channel_id: ctx.options.channel as string,
 			},
 			data: {
-				refresh_after: new Date(),
+				refresh_after: dayjs().add(1, 'hour').toDate(),
 			},
 		});
 		await ctx.send({

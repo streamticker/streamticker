@@ -4,7 +4,7 @@ import {InstagramAPI} from './api';
 
 export const INSTAGRAM_FOLLOWERS = createHarvester(TickerType.INSTAGRAM_FOLLOWERS, {
 	disabled: {
-		disabled: false,
+		disabled: true,
 		reason:
 			"StreamTicker's Instagram data source is currently unavailable. For more information, [join StreamTicker's support server](https://streamticker.bot/support).",
 	},

@@ -25,7 +25,7 @@ export class RemoveCommand extends SlashCommand {
 					description: 'The ticker to remove.',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
 				},
 			],
 			requiredPermissions: ['MANAGE_CHANNELS'],
