@@ -2,7 +2,7 @@ FROM node:alpine as builder
 WORKDIR /app
 
 COPY . .
-RUN yarn
+RUN yarn install
 RUN yarn build
 
 FROM node:alpine
