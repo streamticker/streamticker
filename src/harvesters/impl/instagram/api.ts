@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {env} from '../../../server/env';
-import {InstagramUser} from './types';
+import type {InstagramUser} from './types';
 
 export const InstagramAPI = {
 	async getUser(username: string) {

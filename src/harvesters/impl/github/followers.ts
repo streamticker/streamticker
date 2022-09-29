@@ -1,5 +1,6 @@
 import {Ticker, TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {GitHubAPI} from './api';
 
 export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {

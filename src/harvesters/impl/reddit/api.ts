@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Subreddit} from '../../types/reddit';
+import type {Subreddit} from '../../types/reddit';
 
 export const RedditAPI = {
 	async getSubreddit(subreddit: string) {

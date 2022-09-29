@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {DiscordAPI} from './api';
 
 export const DISCORD_MEMBERS_ROLE = createHarvester(TickerType.DISCORD_MEMBERS_ROLE, {

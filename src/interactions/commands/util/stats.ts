@@ -1,6 +1,7 @@
 import {TickerType} from '@prisma/client';
 import {stripIndent} from 'common-tags';
-import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand} from 'slash-create';
 import {humanize} from '../../../harvesters/harvester';
 import {env} from '../../../server/env';
 import {HopAPI} from '../../../server/hop';

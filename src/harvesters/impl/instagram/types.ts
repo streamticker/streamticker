@@ -1,13 +1,13 @@
-export interface InstagramUser {
+export type InstagramUser = {
 	data: Data;
 	status: string;
-}
+};
 
-interface Data {
+type Data = {
 	user: User3;
-}
+};
 
-interface User3 {
+type User3 = {
 	biography: string;
 	bio_links: any[];
 	biography_with_entities: Biographywithentities;
@@ -69,19 +69,19 @@ interface User3 {
 	edge_owner_to_timeline_media: Edgeownertotimelinemedia;
 	edge_saved_media: Edgefelixvideotimeline;
 	edge_media_collections: Edgefelixvideotimeline;
-}
+};
 
-interface Edgeownertotimelinemedia {
+type Edgeownertotimelinemedia = {
 	count: number;
 	page_info: Pageinfo2;
 	edges: Edge4[];
-}
+};
 
-interface Edge4 {
+type Edge4 = {
 	node: Node4;
-}
+};
 
-interface Node4 {
+type Node4 = {
 	__typename: string;
 	id: string;
 	shortcode: string;
@@ -111,17 +111,17 @@ interface Node4 {
 	coauthor_producers: any[];
 	pinned_for_users: Pinnedforuser[];
 	edge_sidecar_to_children: Edgesidecartochildren;
-}
+};
 
-interface Edgesidecartochildren {
+type Edgesidecartochildren = {
 	edges: Edge3[];
-}
+};
 
-interface Edge3 {
+type Edge3 = {
 	node: Node3;
-}
+};
 
-interface Node3 {
+type Node3 = {
 	__typename: string;
 	id: string;
 	shortcode: string;
@@ -143,123 +143,123 @@ interface Node3 {
 	tracking_token?: string;
 	video_url?: string;
 	video_view_count?: number;
-}
+};
 
-interface Dashinfo {
+type Dashinfo = {
 	is_dash_eligible: boolean;
 	video_dash_manifest?: any;
 	number_of_qualities: number;
-}
+};
 
-interface Edgemediatotaggeduser2 {
+type Edgemediatotaggeduser2 = {
 	edges: Edge[];
-}
+};
 
-interface Pinnedforuser {
+type Pinnedforuser = {
 	id: string;
 	is_verified: boolean;
 	profile_pic_url: string;
 	username: string;
-}
+};
 
-interface Thumbnailresource {
+type Thumbnailresource = {
 	src: string;
 	config_width: number;
 	config_height: number;
-}
+};
 
-interface Location {
+type Location = {
 	id: string;
 	has_public_page: boolean;
 	name: string;
 	slug: string;
-}
+};
 
-interface Edgemediatocaption {
+type Edgemediatocaption = {
 	edges: Edge2[];
-}
+};
 
-interface Edge2 {
+type Edge2 = {
 	node: Node2;
-}
+};
 
-interface Node2 {
+type Node2 = {
 	text: string;
-}
+};
 
-interface Owner {
+type Owner = {
 	id: string;
 	username: string;
-}
+};
 
-interface Sharingfrictioninfo {
+type Sharingfrictioninfo = {
 	should_have_sharing_friction: boolean;
 	bloks_app_url?: any;
-}
+};
 
-interface Edgemediatotaggeduser {
+type Edgemediatotaggeduser = {
 	edges: Edge[];
-}
+};
 
-interface Edge {
+type Edge = {
 	node: Node;
-}
+};
 
-interface Node {
+type Node = {
 	user: User2;
 	x: number;
 	y: number;
-}
+};
 
-interface User2 {
+type User2 = {
 	full_name: string;
 	followed_by_viewer: boolean;
 	id: string;
 	is_verified: boolean;
 	profile_pic_url: string;
 	username: string;
-}
+};
 
-interface Dimensions {
+type Dimensions = {
 	height: number;
 	width: number;
-}
+};
 
-interface Pageinfo2 {
+type Pageinfo2 = {
 	has_next_page: boolean;
 	end_cursor: string;
-}
+};
 
-interface Edgefelixvideotimeline {
+type Edgefelixvideotimeline = {
 	count: number;
 	page_info: Pageinfo;
 	edges: any[];
-}
+};
 
-interface Pageinfo {
+type Pageinfo = {
 	has_next_page: boolean;
 	end_cursor?: any;
-}
+};
 
-interface Edgemutualfollowedby {
+type Edgemutualfollowedby = {
 	count: number;
 	edges: any[];
-}
+};
 
-interface Edgefollowedby {
+type Edgefollowedby = {
 	count: number;
-}
+};
 
-interface Biographywithentities {
+type Biographywithentities = {
 	raw_text: string;
 	entities: Entity[];
-}
+};
 
-interface Entity {
+type Entity = {
 	user: User;
 	hashtag?: any;
-}
+};
 
-interface User {
+type User = {
 	username: string;
-}
+};

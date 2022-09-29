@@ -1,8 +1,9 @@
 // Dsdsd todo: Eventually rewrite this command
 // I don't like the look of it and it should use a dropdown or something. just having a huge list is ugly as fuck
 
-import {TickerType} from '@prisma/client';
-import {CommandContext, SlashCommand, SlashCreator} from 'slash-create';
+import type {TickerType} from '@prisma/client';
+import type {CommandContext, SlashCreator} from 'slash-create';
+import {SlashCommand} from 'slash-create';
 import {getStats} from '../../../server/stats';
 import {tickerCategoryTitles, tickerSort, tickerTypeNames} from '../../types/type-names';
 

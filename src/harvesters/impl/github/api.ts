@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Repo, User} from '../../types/github';
+import type {Repo, User} from '../../types/github';
 
 export const GitHubAPI = {
 	async getRepo(owner: string, repo: string) {

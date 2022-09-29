@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {APIUser} from 'discord-api-types/v10';
+import type {APIUser} from 'discord-api-types/v10';
 import {env} from './env';
 
-export interface TopGGVotes {
+export type TopGGVotes = {
 	monthlyPoints: number;
 	points: number;
-}
+};
 
 export class InternalTopggAPI {
 	private static readonly headers = {

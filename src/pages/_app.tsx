@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {AppProps} from 'next/app';
+import type {AppProps} from 'next/app';
 import {SWRConfig} from 'swr';
 import {fetcher} from '../client/fetcher';
 

@@ -1,5 +1,6 @@
 import {stripIndents} from 'common-tags';
-import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand} from 'slash-create';
 import {linear} from '../../../server/linear';
 import {logsnag} from '../../../server/logsnag';
 

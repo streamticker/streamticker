@@ -1,5 +1,6 @@
-import {LogSnag, PublishOptions} from 'logsnag';
-import {InsightOptions} from 'logsnag/dist/types/insight';
+import type {PublishOptions} from 'logsnag';
+import {LogSnag} from 'logsnag';
+import type {InsightOptions} from 'logsnag/dist/types/insight';
 
 const logsnag = new LogSnag({
 	token: '3d935f8885ac94aaf8a955b6659dc2ec',

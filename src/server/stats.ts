@@ -1,4 +1,4 @@
-import {TickerType} from '@prisma/client';
+import type {TickerType} from '@prisma/client';
 import {insight} from './logsnag';
 import {prisma} from './prisma';
 import {wrapRedis} from './redis';

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {env} from '../../../server/env';
-import {TikTokUser} from './types';
+import type {TikTokUser} from './types';
 
 export const TikTokAPI = {
 	async getUser(username: string) {

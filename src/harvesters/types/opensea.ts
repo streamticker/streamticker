@@ -1,4 +1,4 @@
-export interface OpenSeaCollectionStats {
+export type OpenSeaCollectionStats = {
 	one_day_volume: number;
 	one_day_change: number;
 	one_day_sales: number;
@@ -20,4 +20,4 @@ export interface OpenSeaCollectionStats {
 	num_reports: number;
 	market_cap: number;
 	floor_price: number;
-}
+};

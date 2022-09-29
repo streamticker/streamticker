@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {YouTubeAPI} from './api';
 
 export const YOUTUBE_SUBSCRIBERS = createHarvester(TickerType.YOUTUBE_SUBSCRIBERS, {

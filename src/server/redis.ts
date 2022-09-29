@@ -6,11 +6,11 @@ export const redis = new Redis({
 	token: env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-export interface Cache<T> {
+export type Cache<T> = {
 	get(): Promise<T>;
 	set(value: T): Promise<void>;
 	refetch(): Promise<T>;
-}
+};
 
 export const CACHE_ERROR: unique symbol = Symbol('errored');
 

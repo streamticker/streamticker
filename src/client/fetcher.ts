@@ -1,4 +1,5 @@
-import {APIResponse, NextkitError} from 'nextkit';
+import type {APIResponse} from 'nextkit';
+import {NextkitError} from 'nextkit';
 
 export async function fetcher<T>(url: string) {
 	const request = await fetch(url);

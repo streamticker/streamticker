@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {RobloxAPI} from './api';
 
 export const ROBLOX_FRIENDS = createHarvester(TickerType.ROBLOX_FRIENDS, {

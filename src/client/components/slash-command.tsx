@@ -1,7 +1,7 @@
-export interface Props {
+export type Props = {
 	command: string;
 	description: string;
-}
+};
 
 export function SlashCommand(props: Props) {
 	return (

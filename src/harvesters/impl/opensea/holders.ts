@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {OpenSeaAPI} from './api';
 
 export const OPENSEA_COLLECTION_UNIQUE_HOLDERS = createHarvester(

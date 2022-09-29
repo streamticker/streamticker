@@ -1,5 +1,5 @@
-import {DiscordAPIError} from '@discordjs/rest';
-import {Ticker, TickerType} from '@prisma/client';
+import type {DiscordAPIError} from '@discordjs/rest';
+import type {Ticker, TickerType} from '@prisma/client';
 import {APIChannel, ChannelType} from 'discord-api-types/v10';
 import {prisma} from '../server/prisma';
 import {DiscordAPI} from './impl/discord/api';
@@ -67,16 +67,16 @@ export type HarvesterDisabled = {
 	reason: string;
 };
 
-export interface Harvester {
+export type Harvester = {
 	validateInput: ValidateInput | null;
 	requirement: TickerRequirement;
 	disabled?: HarvesterDisabled;
 	harvest(ticker: Ticker): Promise<HarvesterResult>;
-}
+};
 
-export interface HarvesterUtils {
+export type HarvesterUtils = {
 	ensureId(ticker: Ticker): asserts ticker is Ticker & {platform_id: string};
-}
+};
 
 export function createHarvester<T extends TickerType>(
 	type: T,

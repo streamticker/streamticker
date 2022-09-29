@@ -1,4 +1,5 @@
-import {SlashCommand, SlashCreator, CommandContext, ComponentType, ButtonStyle} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand, ComponentType, ButtonStyle} from 'slash-create';
 
 export class InviteCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {

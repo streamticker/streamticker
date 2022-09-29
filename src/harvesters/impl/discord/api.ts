@@ -1,7 +1,6 @@
 import {REST} from '@discordjs/rest';
-import {
+import type {
 	APIChannel,
-	Routes,
 	RESTPatchAPIChannelJSONBody,
 	RESTPatchAPIChannelResult,
 	RESTGetAPIGuildMembersResult,
@@ -11,6 +10,7 @@ import {
 	RESTGetAPIGuildRolesResult,
 	RESTGetAPICurrentUserGuildsResult,
 } from 'discord-api-types/v10';
+import {Routes} from 'discord-api-types/v10';
 import {env} from '../../../server/env';
 
 const client = new REST({

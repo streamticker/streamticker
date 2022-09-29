@@ -1,6 +1,7 @@
 import {TickerType} from '@prisma/client';
 import {ChannelType, PermissionFlagsBits} from 'discord-api-types/v10';
-import {SlashCommand, SlashCreator, CommandContext} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand} from 'slash-create';
 import {harvesters} from '../../../harvesters';
 import {DiscordAPI} from '../../../harvesters/impl/discord/api';
 import {env} from '../../../server/env';

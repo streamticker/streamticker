@@ -5,14 +5,14 @@ import discord from '../client/images/discord.png';
 import footerAsset from '../client/images/footer-asset.png';
 import {FiArrowUpRight} from 'react-icons/fi';
 import {SlashCommandStack} from '../client/components/slash-command';
-import {GetStaticProps} from 'next';
+import type {GetStaticProps} from 'next';
 import {creator} from './api/interaction';
 import {prisma} from '../server/prisma';
 
-interface Props {
+type Props = {
 	commands: Array<[name: string, description: string]>;
 	stats: {totalTickers: number};
-}
+};
 
 const cta = (
 	<div className="space-y-2 md:space-y-0 md:space-x-4 flex flex-col md:flex-row text-center md:items-center md:text-left">

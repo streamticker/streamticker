@@ -1,4 +1,4 @@
-export interface Subreddit {
+export type Subreddit = {
 	children: any;
 	approved_at_utc: any;
 	subreddit: string;
@@ -108,28 +108,28 @@ export interface Subreddit {
 	post_hint?: string;
 	preview?: Preview;
 	url_overridden_by_dest?: string;
-}
+};
 
-export interface LinkFlairRichtext {
+export type LinkFlairRichtext = {
 	e: string;
 	t: string;
-}
+};
 export type MediaEmbed = {};
 
 export type SecureMediaEmbed = {};
 
-export interface AuthorFlairRichtext {
+export type AuthorFlairRichtext = {
 	e: string;
 	t?: string;
 	a?: string;
 	u?: string;
-}
+};
 
-export interface Gildings {
+export type Gildings = {
 	gid_1?: number;
-}
+};
 
-export interface AllAwarding {
+export type AllAwarding = {
 	giver_coin_reward?: number;
 	subreddit_id: any;
 	is_new: boolean;
@@ -160,42 +160,42 @@ export interface AllAwarding {
 	penny_price?: number;
 	award_type: string;
 	static_icon_url: string;
-}
+};
 
-export interface ResizedIcon {
+export type ResizedIcon = {
 	url: string;
 	width: number;
 	height: number;
-}
+};
 
-export interface ResizedStaticIcon {
+export type ResizedStaticIcon = {
 	url: string;
 	width: number;
 	height: number;
-}
+};
 
-export interface Preview {
+export type Preview = {
 	images: Image[];
 	enabled: boolean;
-}
+};
 
-export interface Image {
+export type Image = {
 	source: Source;
 	resolutions: Resolution[];
 	variants: Variants;
 	id: string;
-}
+};
 
-export interface Source {
+export type Source = {
 	url: string;
 	width: number;
 	height: number;
-}
+};
 
-export interface Resolution {
+export type Resolution = {
 	url: string;
 	width: number;
 	height: number;
-}
+};
 
 export type Variants = Record<string, unknown>;

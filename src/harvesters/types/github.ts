@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
 	login: string;
 	id: number;
 	node_id: string;
@@ -31,9 +31,9 @@ export interface User {
 	following: number;
 	created_at: string;
 	updated_at: string;
-}
+};
 
-export interface Repo {
+export type Repo = {
 	id: number;
 	node_id: string;
 	name: string;
@@ -114,9 +114,9 @@ export interface Repo {
 	temp_clone_token: string | null;
 	network_count: number;
 	subscribers_count: number;
-}
+};
 
-export interface Owner {
+export type Owner = {
 	login: string;
 	id: number;
 	node_id: string;
@@ -135,12 +135,12 @@ export interface Owner {
 	received_events_url: string;
 	type: string;
 	site_admin: boolean;
-}
+};
 
-export interface License {
+export type License = {
 	key: string;
 	name: string;
 	spdx_id: string;
 	url: string;
 	node_id: string;
-}
+};

@@ -1,9 +1,9 @@
-export interface TikTokUser {
+export type TikTokUser = {
 	userInfo: UserInfo;
 	seoProps: SeoProps;
-}
+};
 
-export interface UserInfo {
+export type UserInfo = {
 	id: string;
 	shortId: string;
 	uniqueId: string;
@@ -32,18 +32,18 @@ export interface UserInfo {
 	extraInfo: ExtraInfo;
 	stats?: Stats;
 	itemList: ItemList[];
-}
+};
 
-export interface BioLink {
+export type BioLink = {
 	link: string;
 	risk: number;
-}
+};
 
-export interface ExtraInfo {
+export type ExtraInfo = {
 	statusCode: number;
-}
+};
 
-export interface Stats {
+export type Stats = {
 	followerCount: number;
 	followingCount: number;
 	heart: number;
@@ -51,9 +51,9 @@ export interface Stats {
 	videoCount: number;
 	diggCount: number;
 	needFix: boolean;
-}
+};
 
-export interface ItemList {
+export type ItemList = {
 	id: string;
 	desc: string;
 	createTime: string;
@@ -97,9 +97,9 @@ export interface ItemList {
 	avatarThumb: string;
 	creatorCaptionsURLs?: string[];
 	diversificationLabels?: string[];
-}
+};
 
-export interface Video {
+export type Video = {
 	id: string;
 	height: number;
 	width: number;
@@ -120,9 +120,9 @@ export interface Video {
 	codecType: string;
 	definition: string;
 	subtitleInfos: SubtitleInfo[];
-}
+};
 
-export interface SubtitleInfo {
+export type SubtitleInfo = {
 	LanguageID: string;
 	LanguageCodeName: string;
 	Url: string;
@@ -132,9 +132,9 @@ export interface SubtitleInfo {
 	Source: string;
 	VideoSubtitleID: number;
 	Size: string;
-}
+};
 
-export interface Music {
+export type Music = {
 	id: string;
 	title: string;
 	playUrl: string;
@@ -146,9 +146,9 @@ export interface Music {
 	duration: number;
 	album: string;
 	scheduleSearchTime: number;
-}
+};
 
-export interface Challenge {
+export type Challenge = {
 	id: string;
 	title: string;
 	desc: string;
@@ -160,25 +160,25 @@ export interface Challenge {
 	coverThumb: string;
 	isCommerce: boolean;
 	stats: Stats2;
-}
+};
 
-export interface Stats2 {
+export type Stats2 = {
 	videoCount: number;
 	viewCount: number;
-}
+};
 
-export interface Stats3 {
+export type Stats3 = {
 	diggCount: number;
 	shareCount: number;
 	commentCount: number;
 	playCount: number;
-}
+};
 
-export interface DuetInfo {
+export type DuetInfo = {
 	duetFromId: string;
-}
+};
 
-export interface TextExtra {
+export type TextExtra = {
 	awemeId: string;
 	start: number;
 	end: number;
@@ -192,36 +192,36 @@ export interface TextExtra {
 	secUid: string;
 	questionId?: string;
 	questionContent?: string;
-}
+};
 
-export interface EffectSticker {
+export type EffectSticker = {
 	name: string;
 	ID: string;
-}
+};
 
-export interface AuthorStats {
+export type AuthorStats = {
 	followerCount: number;
 	followingCount: number;
 	heart: number;
 	heartCount: number;
 	videoCount: number;
 	diggCount: number;
-}
+};
 
-export interface StickersOnItem {
+export type StickersOnItem = {
 	stickerText: string[];
 	stickerType: number;
-}
+};
 
-export interface SeoProps {
+export type SeoProps = {
 	metaParams: MetaParams;
-}
+};
 
-export interface MetaParams {
+export type MetaParams = {
 	title: string;
 	keywords: string;
 	description: string;
 	canonicalHref: string;
 	robotsContent: string;
 	applicableDevice: string;
-}
+};

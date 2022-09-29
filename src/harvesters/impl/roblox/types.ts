@@ -1,12 +1,12 @@
-export interface RobloxUser {
+export type RobloxUser = {
 	Id: number;
 	Username: string;
 	AvatarUri: any;
 	AvatarFinal: boolean;
 	IsOnline: boolean;
-}
+};
 
-export interface RobloxGroup {
+export type RobloxGroup = {
 	id: number;
 	name: string;
 	description: string;
@@ -16,27 +16,27 @@ export interface RobloxGroup {
 	isBuildersClubOnly: boolean;
 	publicEntryAllowed: boolean;
 	hasVerifiedBadge: boolean;
-}
+};
 
-export interface RobloxOwner {
+export type RobloxOwner = {
 	buildersClubMembershipType: string;
 	hasVerifiedBadge: boolean;
 	userId: number;
 	username: string;
 	displayName: string;
-}
+};
 
-export interface RobloxShout {
+export type RobloxShout = {
 	body: string;
 	poster: RobloxPoster;
 	created: string;
 	updated: string;
-}
+};
 
-export interface RobloxPoster {
+export type RobloxPoster = {
 	buildersClubMembershipType: string;
 	hasVerifiedBadge: boolean;
 	userId: number;
 	username: string;
 	displayName: string;
-}
+};

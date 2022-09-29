@@ -1,11 +1,9 @@
 import {TickerType} from '@prisma/client';
+import type {SlashCreator, CommandContext, ApplicationCommandOptionChoice} from 'slash-create';
 import {
 	SlashCommand,
-	SlashCreator,
-	CommandContext,
 	CommandOptionType,
 	ChannelType,
-	ApplicationCommandOptionChoice,
 	ComponentType,
 	ButtonStyle,
 	Permissions,

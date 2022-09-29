@@ -1,5 +1,6 @@
 import {env} from './env';
-import {APIAuthentication, Hop} from '@onehop/js';
+import type {APIAuthentication} from '@onehop/js';
+import {Hop} from '@onehop/js';
 
 const hop = new Hop(env.HOP_API_KEY as APIAuthentication);
 

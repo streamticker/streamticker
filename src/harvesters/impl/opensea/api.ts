@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {env} from '../../../server/env';
-import {OpenSeaCollectionStats} from '../../types/opensea';
+import type {OpenSeaCollectionStats} from '../../types/opensea';
 
 export const OpenSeaAPI = {
 	async getCollectionStats(collection: string) {

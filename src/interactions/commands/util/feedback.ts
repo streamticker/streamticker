@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {SlashCommand, SlashCreator, CommandContext, CommandOptionType} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand, CommandOptionType} from 'slash-create';
 import {logsnag} from '../../../server/logsnag';
 
 export class FeedbackCommand extends SlashCommand {

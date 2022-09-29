@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {env} from '../../../server/env';
-import {RobloxGroup, RobloxUser} from './types';
+import type {RobloxGroup, RobloxUser} from './types';
 
 export const RobloxAPI = {
 	async getUserIdByUsername(username: string) {

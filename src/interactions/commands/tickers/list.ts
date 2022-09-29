@@ -1,4 +1,5 @@
-import {SlashCommand, SlashCreator, CommandContext, ComponentType} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand, ComponentType} from 'slash-create';
 import {prisma} from '../../../server/prisma';
 import {tickerTypeNames} from '../../types/type-names';
 

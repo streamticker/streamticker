@@ -1,12 +1,7 @@
 import {TickerType} from '@prisma/client';
 import dayjs from 'dayjs';
-import {
-	SlashCommand,
-	SlashCreator,
-	CommandContext,
-	CommandOptionType,
-	ChannelType,
-} from 'slash-create';
+import type {SlashCreator, CommandContext} from 'slash-create';
+import {SlashCommand, CommandOptionType, ChannelType} from 'slash-create';
 import {harvesters} from '../../../harvesters';
 import {prisma} from '../../../server/prisma';
 

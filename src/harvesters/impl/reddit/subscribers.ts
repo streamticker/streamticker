@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {RedditAPI} from './api';
 
 export const REDDIT_SUBSCRIBERS = createHarvester(TickerType.REDDIT_SUBSCRIBERS, {

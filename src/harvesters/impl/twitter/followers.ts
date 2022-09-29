@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
-import {createHarvester, HarvesterUtils, TickerRequirement} from '../../harvester';
+import type {HarvesterUtils} from '../../harvester';
+import {createHarvester, TickerRequirement} from '../../harvester';
 import {TwitterAPI} from './api';
 
 export const TWITTER_FOLLOWERS = createHarvester(TickerType.TWITTER_FOLLOWERS, {

@@ -1,5 +1,5 @@
-import {TickerType} from '@prisma/client';
-import {Harvester} from './harvester';
+import type {TickerType} from '@prisma/client';
+import type {Harvester} from './harvester';
 
 import {DISCORD_BOOSTS} from './impl/discord/boosts';
 import {DISCORD_BOTS} from './impl/discord/bots';
