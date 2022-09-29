@@ -1,17 +1,16 @@
-FROM node:alpine as builder
-WORKDIR /app
-
-COPY . .
-RUN yarn install
-RUN yarn build
-#
 FROM node:alpine
+RUN apk add openssl
 WORKDIR /app
-
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/yarn.lock .
-COPY --from=builder /app/.next .next
-COPY --from=builder /app/prisma prisma
+# ADD .env.ci .env hehe
+ADD .yarnrc.yml .
+ADD .yarn .yarn
+ADD package.json .
+ADD yarn.lock .
+RUN yarn
+ADD . .
+RUN yarn build
+RUN rm .env
+RUN yarn cache clean
+RUN rm -rf node_modules
 RUN yarn install --production
-
 CMD ["yarn", "start"]
