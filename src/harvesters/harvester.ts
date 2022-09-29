@@ -23,7 +23,6 @@ export function format(ticker: Ticker, value: number | string) {
 		case false:
 			return ticker.format.replace(FORMATTER_REPLACER, humanize(value));
 		case true:
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			return ticker.format.replace(FORMATTER_REPLACER, compactInteger(Number(value), 1));
 		default:
 			return ticker.format.replace(FORMATTER_REPLACER, humanize(value));

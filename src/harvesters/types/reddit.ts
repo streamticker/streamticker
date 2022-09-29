@@ -114,10 +114,8 @@ export interface LinkFlairRichtext {
 	e: string;
 	t: string;
 }
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type MediaEmbed = {};
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type SecureMediaEmbed = {};
 
 export interface AuthorFlairRichtext {

@@ -6,6 +6,6 @@ export const DISCORD_BOTS = createHarvester(TickerType.DISCORD_BOTS, {
 	requirement: TickerRequirement.NONE,
 	async harvest(ticker) {
 		const members = await DiscordAPI.getGuildMembers(ticker.guild_id);
-		return members.filter(m => !!m.user?.bot).length;
+		return members.filter(m => Boolean(m.user?.bot)).length;
 	},
 });

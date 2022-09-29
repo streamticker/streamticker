@@ -293,24 +293,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@prisma/client@npm:4.0.0"
+"@prisma/client@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@prisma/client@npm:4.4.0"
   dependencies:
-    "@prisma/engines-version": 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
+    "@prisma/engines-version": 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 93cd563881e15092303697e1c8177bcfaea6ec8f4ce48950f57bc9b74dd7ffd3929a8c5ad8130457fb8c1b889cad0799cbb928e39e2ebf37310daf41e9cb8312
+  checksum: 7ecd1dbfd7158baef5365beaead3d863841812cd939b7b1f5287f163281119de311ffdeb422d1105b15c939b50ca3760bb459ede63a34d5f7acda510d7c30b03
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11":
-  version: 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
-  resolution: "@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
-  checksum: edea5a5189bad83e4cfa4d98543d9d437ab0d505826d202415d5ed9ac893d1cd3e6b89b01ddfd059f61799945cc69c9b2b8e4bc7a93e1be0ac458ab1bc04ba93
+"@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6":
+  version: 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
+  resolution: "@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
+  checksum: 91ca927a69f53ffd05ee02b25666531997202642dbe92ae2c6df6a28a38726894e3728377c49d2327a323461d92f5b7eedae0795ab6ca50ed59ae28c2775b38a
   languageName: node
   linkType: hard
 
@@ -3936,7 +3936,7 @@ __metadata:
     "@discordjs/rest": ^0.5.0
     "@linear/sdk": ^1.22.0
     "@onehop/js": ^1.1.8
-    "@prisma/client": 4.0.0
+    "@prisma/client": ^4.4.0
     "@tailwindcss/typography": ^0.5.4
     "@types/common-tags": ^1.8.1
     "@types/humanize-plus": ^1.8.0
