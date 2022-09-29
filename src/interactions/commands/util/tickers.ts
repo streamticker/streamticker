@@ -1,4 +1,4 @@
-// dsdsd todo: Eventually rewrite this command
+// Dsdsd todo: Eventually rewrite this command
 // I don't like the look of it and it should use a dropdown or something. just having a huge list is ugly as fuck
 
 import {TickerType} from '@prisma/client';
