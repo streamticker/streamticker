@@ -18,4 +18,5 @@ yarn-error.log*
 .vscode
 .env
 .env.prod
+.env.ci
 hop.yml
