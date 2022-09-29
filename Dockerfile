@@ -1,8 +1,8 @@
 FROM node:alpine
 RUN apk add openssl
 WORKDIR /app
-# ADD .env.ci .env
-ADD .yarnrc.yml .
+# ADD .env.ci .env hehe
+ADD .yarnrc.yml . 
 ADD .yarn .yarn
 ADD package.json .
 ADD yarn.lock .
