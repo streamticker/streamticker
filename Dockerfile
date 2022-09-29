@@ -10,8 +10,8 @@ WORKDIR /app
 
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/yarn.lock .
-COPY --from=builder /app/.next .
-COPY --from=builder /app/prisma .
+COPY --from=builder /app/.next .next
+COPY --from=builder /app/prisma prisma
 RUN yarn install --production
 
 CMD ["yarn", "start"]
