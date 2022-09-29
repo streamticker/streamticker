@@ -31,7 +31,7 @@ export class CreateCommand extends SlashCommand {
 					description: 'The voice channel to bind to',
 					required: true,
 					type: CommandOptionType.CHANNEL,
-					channel_types: [ChannelType.GUILD_VOICE],
+					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
 				},
 				{
 					name: 'type',
@@ -95,7 +95,10 @@ export class CreateCommand extends SlashCommand {
 			throw new Error(harvester.disabled.reason);
 		}
 
-		if (harvester.requirement === TickerRequirement.VOTE) {
+		if (
+			harvester.requirement === TickerRequirement.VOTE &&
+			ctx.data.application_id === '822117936251928586'
+		) {
 			const hasUserVoted = await new InternalTopggAPI('822117936251928586').hasVoted(ctx.user.id);
 			if (!hasUserVoted) {
 				await ctx.send({
