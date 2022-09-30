@@ -408,7 +408,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.7.23":
+"@types/node@npm:18.7.23":
   version: 18.7.23
   resolution: "@types/node@npm:18.7.23"
   checksum: 2c8df0830d8345e5cd1ca17feb9cf43fa667aae749888e0a068c5c1b35eaedd2f9b24ed987a0758078395edf7a03681e5e0b7790a518ff7afe1ff6d8459f7b4a
@@ -422,7 +422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.21":
+"@types/react@npm:18.0.21":
   version: 18.0.21
   resolution: "@types/react@npm:18.0.21"
   dependencies:
@@ -3969,8 +3969,8 @@ __metadata:
     "@tailwindcss/typography": ^0.5.7
     "@types/common-tags": ^1.8.1
     "@types/humanize-plus": ^1.8.0
-    "@types/node": ^18.7.23
-    "@types/react": ^18.0.21
+    "@types/node": 18.7.23
+    "@types/react": 18.0.21
     "@typescript-eslint/eslint-plugin": ^5.38.1
     "@typescript-eslint/parser": ^5.38.1
     "@upstash/redis": ^1.13.1
@@ -4003,7 +4003,7 @@ __metadata:
     swr: ^1.3.0
     tailwindcss: ^3.1.8
     tweetnacl: ^1.0.3
-    typescript: ^4.8.4
+    typescript: 4.8.4
     urlcat: ^2.0.4
     zod: ^3.19.1
   languageName: unknown
@@ -4329,7 +4329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.4":
+"typescript@npm:4.8.4":
   version: 4.8.4
   resolution: "typescript@npm:4.8.4"
   bin:
@@ -4339,7 +4339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
   resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=a1c5e5"
   bin:
