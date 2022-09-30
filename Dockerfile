@@ -7,7 +7,6 @@ COPY yarn.lock .
 COPY package.json .
 RUN yarn workspaces focus --production
 RUN mv node_modules .modules_production
-
 RUN yarn
 COPY . .
 
