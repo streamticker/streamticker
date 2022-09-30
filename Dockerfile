@@ -9,9 +9,7 @@ RUN yarn workspaces focus --production
 RUN mv node_modules .modules_production
 RUN yarn
 COPY . .
-COPY .env.ci .env
 RUN yarn build
-RUN rm .env
 RUN rm -rf node_modules
 RUN mv .modules_production node_modules
 RUN yarn cache clean
