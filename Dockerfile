@@ -9,13 +9,6 @@ RUN yarn workspaces focus --production
 RUN mv node_modules .modules_production
 RUN yarn
 COPY . .
-RUN yarn build
-RUN rm -rf node_modules
-RUN mv .modules_production node_modules
-RUN yarn cache clean
-
-FROM node:16-alpine
-WORKDIR /app
 
 ARG ADMIN_AUTH
 ARG DATABASE_URL
@@ -36,6 +29,14 @@ ARG UPSTASH_REDIS_REST_TOKEN
 ARG UPSTASH_REDIS_REST_URL
 ARG WADOKEI_KEY
 ARG YOUTUBE_SECRET
+
+RUN yarn build
+RUN rm -rf node_modules
+RUN mv .modules_production node_modules
+RUN yarn cache clean
+
+FROM node:16-alpine
+WORKDIR /app
 
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules ./node_modules
