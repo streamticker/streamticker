@@ -1,16 +1,12 @@
-import {TickerType} from '@prisma/client';
+import {type API, ContainerState} from '@onehop/js';
 import {stripIndent} from 'common-tags';
-import type {SlashCreator, CommandContext} from 'slash-create';
+import type {CommandContext, SlashCreator} from 'slash-create';
 import {SlashCommand} from 'slash-create';
-import {humanize} from '../../../harvesters/harvester';
-import {env} from '../../../server/env';
 import {HopAPI} from '../../../server/hop';
 import {redis} from '../../../server/redis';
 import {getStats} from '../../../server/stats';
 import {InternalTopggAPI} from '../../../server/topgg';
-import {tickerTypeNames} from '../../types/type-names';
 
-const codeblock = (text: string) => `\`\`\`${text}\`\`\``;
 export class StatsCommand extends SlashCommand {
 	constructor(creator: SlashCreator) {
 		super(creator, {
@@ -22,6 +18,7 @@ export class StatsCommand extends SlashCommand {
 	async run(ctx: CommandContext) {
 		await ctx.defer();
 		const tickerStats = await getStats();
+
 		const clientStats = await redis.get<{
 			users: number;
 			guilds: number;
@@ -30,7 +27,37 @@ export class StatsCommand extends SlashCommand {
 
 		const voteStats = await new InternalTopggAPI('822117936251928586').getVotes();
 
-		const containers = await HopAPI.getDeployments();
+		const deployments = await HopAPI.getAllProjectDeployments();
+
+		const serviceStatus = deployments
+			.map(deployment => {
+				const running = deployment.containers.filter(
+					container => container.state === ContainerState.RUNNING
+				);
+
+				const status =
+					running.length === deployment.containers.length
+						? '<:icons_dgreen:875710296147255347>'
+						: '<:icons_dred:875710295866216509>';
+
+				const oldestContainer = running.reduce<API.Ignite.Container | null>(
+					(oldest, container) =>
+						oldest === null || container.uptime.last_start < oldest.uptime.last_start
+							? container
+							: oldest,
+					null
+				);
+
+				const oldestContainerText = oldestContainer
+					? `started <t:${Math.floor(
+							new Date(oldestContainer.uptime.last_start).getTime() / 1000
+					  )}:R>`
+					: 'offline';
+
+				return `${status} **${servicesMapping[deployment.name]}** (${oldestContainerText})`;
+			})
+			.join('\n');
+
 		await ctx.send({
 			embeds: [
 				{
@@ -53,20 +80,7 @@ export class StatsCommand extends SlashCommand {
 						},
 						{
 							name: 'Services Status',
-							value: containers
-								.map(
-									container =>
-										`${
-											container.state === 'running'
-												? '<:icons_dgreen:875710296147255347>'
-												: '<:icons_dred:875710295866216509>'
-										} ${servicesMapping[container.name]} ${
-											container.state === 'running'
-												? `started <t:${Math.floor(new Date(container.uptime).getTime() / 1000)}:R>`
-												: 'offline'
-										}`
-								)
-								.join('\n'),
+							value: serviceStatus,
 						},
 					],
 					footer: {
