@@ -1,4 +1,4 @@
-import {type API, ContainerState} from '@onehop/js';
+import {type API, ContainerState, parseSize} from '@onehop/js';
 import {stripIndent} from 'common-tags';
 import type {CommandContext, SlashCreator} from 'slash-create';
 import {SlashCommand} from 'slash-create';
@@ -48,13 +48,18 @@ export class StatsCommand extends SlashCommand {
 					null
 				);
 
-				const oldestContainerText = oldestContainer
+				const memUsagePercent = running.reduce(
+					(total, container) => total + (container.metrics?.memory_usage_percent ?? 0),
+					0
+				);
+
+				const text = oldestContainer
 					? `started <t:${Math.floor(
 							new Date(oldestContainer.uptime.last_start).getTime() / 1000
-					  )}:R>`
+					  )}:R> mem@${Math.floor(memUsagePercent / running.length)}%`
 					: 'offline';
 
-				return `${status} **${servicesMapping[deployment.name]}** (${oldestContainerText})`;
+				return `${status} **${servicesMapping[deployment.name]}** (${text})`;
 			})
 			.join('\n');
 
