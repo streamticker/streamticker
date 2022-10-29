@@ -276,14 +276,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@onehop/js@npm:^1.8.3":
-  version: 1.8.3
-  resolution: "@onehop/js@npm:1.8.3"
+"@onehop/js@npm:^1.9.11":
+  version: 1.9.11
+  resolution: "@onehop/js@npm:1.9.11"
   dependencies:
-    "@onehop/json-methods": "npm:^1.2.0"
-    cross-fetch: "npm:^3.1.5"
-    zod: "npm:^3.19.1"
-  checksum: e1685963966cdccd74d9fbed486ce1dba729d72893f8a7050dac83b6699be209345d1fcada4a5a2b44ac5580a43faec1fba9d9238f4cdcd9005e74a18d35c98f
+    "@onehop/json-methods": ^1.2.0
+    cross-fetch: ^3.1.5
+    zod: ^3.19.1
+  checksum: 2e87dd5ab4a6ab3d39943c226c44a2134ea4b5b187102d69e299e5b45922f4d583c06deae716a1ebe1f8cdc89ab2cbf45e575013ed74945b7ae6148578ba78ee
   languageName: node
   linkType: hard
 
@@ -3975,7 +3975,7 @@ __metadata:
   dependencies:
     "@discordjs/rest": ^1.2.0
     "@linear/sdk": ^1.22.0
-    "@onehop/js": ^1.8.3
+    "@onehop/js": ^1.9.11
     "@prisma/client": ^4.4.0
     "@tailwindcss/typography": ^0.5.7
     "@types/common-tags": ^1.8.1
