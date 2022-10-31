@@ -117,10 +117,18 @@ export default function Home(props: Props) {
 
 					<div className="relative z-10 space-y-4">
 						<h1 className="text-4xl font-bold tracking-tight">Do I have to pay?</h1>
+
 						<p className="opacity-75 leading-relaxed">
 							Nope! StreamTicker&apos;s core functionality will stay free forever, as promised. We
 							hide some features behind voting on top.gg and have extensive plans to build paid-for
 							features in the future.
+						</p>
+
+						<p>
+							<q className="opacity-75 leading-relaxed">
+								The way you run this bot is f*****g hysterical
+							</q>
+							<span> — Ian Mitchell, Discord</span>
 						</p>
 					</div>
 
