@@ -105,7 +105,7 @@ export const handler = api({
  */
 export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
 	const {data} = await axios.post<unknown>(
-		`https://lowcake-api.otters.app/v1/queues/${queue}`,
+		`http://138.68.183.11/v1/queues/${queue}`,
 		{
 			url,
 			payload: null,
@@ -127,7 +127,7 @@ export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOW
 
 export async function dequeue(queue: string, job: string) {
 	const {data} = await axios.delete<unknown>(
-		`https://lowcake-api.otters.app/v1/queues/${queue}/jobs/${job}`,
+		`http://http://138.68.183.11/v1/queues/${queue}/jobs/${job}`,
 		{headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`}}
 	);
 
