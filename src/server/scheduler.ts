@@ -9,7 +9,6 @@ import {logsnag} from './logsnag';
 
 export const handler = api({
 	async POST({ctx}) {
-		console.log('[Lowcake] Scheduler started');
 		const tickers = await ctx.prisma.ticker.findMany({
 			take: 10,
 			where: {
@@ -18,11 +17,9 @@ export const handler = api({
 				},
 			},
 			orderBy: {
-				refresh_after: 'desc',
+				refresh_after: 'asc',
 			},
 		});
-
-		console.log(tickers.map(ticker => ticker.refresh_after));
 
 		const stats = {
 			deleted: 0,
