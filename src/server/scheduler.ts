@@ -124,7 +124,7 @@ export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOW
 
 export async function dequeue(queue: string, job: string) {
 	const {data} = await axios.delete<unknown>(
-		`http://http://138.68.183.11/v1/queues/${queue}/jobs/${job}`,
+		`http://138.68.183.11/v1/queues/${queue}/jobs/${job}`,
 		{headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`}}
 	);
 
