@@ -6,6 +6,7 @@ import {harvesters} from '../harvesters';
 import {prisma} from './prisma';
 import dayjs from 'dayjs';
 import {logsnag} from './logsnag';
+import urlcat from 'urlcat';
 
 export const handler = api({
 	async POST({ctx}) {
@@ -102,7 +103,7 @@ export const handler = api({
  */
 export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
 	const {data} = await axios.post<unknown>(
-		`http://138.68.183.11/v1/queues/${queue}`,
+		urlcat('http://138.68.183.11/v1/queues/:queue', {queue}),
 		{
 			url,
 			payload: null,
@@ -114,9 +115,7 @@ export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOW
 				meta: interval.toString(),
 			},
 		},
-		{
-			headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`},
-		}
+		{headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`}}
 	);
 
 	return data;
