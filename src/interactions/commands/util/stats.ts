@@ -56,31 +56,62 @@ export class StatsCommand extends SlashCommand {
 				const text = oldestContainer
 					? `started <t:${Math.floor(
 							new Date(oldestContainer.uptime.last_start).getTime() / 1000
-					  )}:R> mem@${Math.floor(memUsagePercent / running.length)}%`
+					  )}:R>, CPU: ${Math.floor(memUsagePercent / running.length)}%`
 					: 'offline';
 
 				return `${status} **${servicesMapping[deployment.name]}** (${text})`;
 			})
 			.join('\n');
 
+		// await ctx.send({
+		// 	embeds: [
+		// 		{
+		// 			fields: [
+		// 				{
+		// 					name: 'Bot Stats',
+		// 					value: stripIndent`- Users: ${clientStats?.users.toLocaleString() ?? 0}\n- Guilds: ${
+		// 						clientStats?.guilds.toLocaleString() ?? 0
+		// 					}\n- Shards: ${clientStats?.shards}`,
+		// 					inline: true,
+		// 				},
+		// 				{
+		// 					name: 'Other Stats',
+		// 					value: stripIndent`- Total Votes: ${
+		// 						voteStats.points.toLocaleString() ?? 0
+		// 					}\n- Monthly Votes: ${
+		// 						voteStats.monthlyPoints.toLocaleString() ?? 0
+		// 					}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
+		// 					inline: true,
+		// 				},
+		// 				{
+		// 					name: 'Services Status',
+		// 					value: serviceStatus,
+		// 				},
+		// 			],
+		// 			footer: {
+		// 				text: 'made with love in 🇺🇸 & 🇬🇧 - powered by hop.io',
+		// 			},
+		// 		},
+		// 	],
+		// });
+
 		await ctx.send({
 			embeds: [
 				{
 					fields: [
 						{
-							name: 'Bot Stats',
-							value: stripIndent`- Users: ${clientStats?.users.toLocaleString() ?? 0}\n- Guilds: ${
-								clientStats?.guilds.toLocaleString() ?? 0
-							}\n- Shards: ${clientStats?.shards}`,
+							name: 'Guilds',
+							value: `${clientStats?.guilds.toLocaleString() ?? 0}`,
 							inline: true,
 						},
 						{
-							name: 'Other Stats',
-							value: stripIndent`- Total Votes: ${
-								voteStats.points.toLocaleString() ?? 0
-							}\n- Monthly Votes: ${
-								voteStats.monthlyPoints.toLocaleString() ?? 0
-							}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
+							name: 'Tickers',
+							value: `${tickerStats.total_tickers.toLocaleString()}`,
+							inline: true,
+						},
+						{
+							name: 'Votes',
+							value: `${voteStats.monthlyPoints.toLocaleString()}`,
 							inline: true,
 						},
 						{
@@ -89,7 +120,11 @@ export class StatsCommand extends SlashCommand {
 						},
 					],
 					footer: {
-						text: 'made with love in 🇺🇸 & 🇬🇧 - powered by hop.io',
+						text: `${clientStats?.users.toLocaleString() ?? 0} users | ${
+							clientStats?.shards ?? 0
+						} shards | ${
+							voteStats?.points.toLocaleString() ?? 0
+						} total votes | 🇺🇸 & 🇬🇧 | Powered by hop.io`,
 					},
 				},
 			],
