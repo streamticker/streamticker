@@ -63,38 +63,6 @@ export class StatsCommand extends SlashCommand {
 			})
 			.join('\n');
 
-		// await ctx.send({
-		// 	embeds: [
-		// 		{
-		// 			fields: [
-		// 				{
-		// 					name: 'Bot Stats',
-		// 					value: stripIndent`- Users: ${clientStats?.users.toLocaleString() ?? 0}\n- Guilds: ${
-		// 						clientStats?.guilds.toLocaleString() ?? 0
-		// 					}\n- Shards: ${clientStats?.shards}`,
-		// 					inline: true,
-		// 				},
-		// 				{
-		// 					name: 'Other Stats',
-		// 					value: stripIndent`- Total Votes: ${
-		// 						voteStats.points.toLocaleString() ?? 0
-		// 					}\n- Monthly Votes: ${
-		// 						voteStats.monthlyPoints.toLocaleString() ?? 0
-		// 					}\n- Total Tickers: ${tickerStats.total_tickers.toLocaleString()}`,
-		// 					inline: true,
-		// 				},
-		// 				{
-		// 					name: 'Services Status',
-		// 					value: serviceStatus,
-		// 				},
-		// 			],
-		// 			footer: {
-		// 				text: 'made with love in 🇺🇸 & 🇬🇧 - powered by hop.io',
-		// 			},
-		// 		},
-		// 	],
-		// });
-
 		await ctx.send({
 			embeds: [
 				{
