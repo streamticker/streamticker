@@ -11,7 +11,6 @@ import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
 import {INSTAGRAM_FOLLOWERS} from './impl/instagram/followers';
-import {MINECRAFT_SERVER_PLAYERS_ONLINE} from './impl/minecraft/players';
 import {OPENSEA_COLLECTION_FLOOR} from './impl/opensea/floor';
 import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
 import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
@@ -50,5 +49,4 @@ export const harvesters: Record<TickerType, Harvester> = {
 	ROBLOX_FOLLOWERS,
 	ROBLOX_GROUP_MEMBERS,
 	ROBLOX_FRIENDS,
-	MINECRAFT_SERVER_PLAYERS_ONLINE,
 };
