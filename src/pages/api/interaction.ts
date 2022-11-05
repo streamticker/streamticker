@@ -1,5 +1,7 @@
+import type {TickerType} from '@prisma/client';
 import {SlashCreator, VercelServer} from 'slash-create';
 import {commands} from '../../interactions';
+import {tickerServiceTitles, tickerTypeNames} from '../../interactions/types/type-names';
 import {env} from '../../server/env';
 import {logsnag} from '../../server/logsnag';
 
@@ -57,6 +59,53 @@ creator.on('commandBlock', async (command, ctx, reason, data) => {
 			},
 		],
 	});
+});
+
+creator.on('autocompleteInteraction', async (interaction, ctx) => {
+	const platform = interaction.options?.platform as string;
+
+	if (!platform && interaction.focused) {
+		await interaction.sendResults([
+			{
+				name: 'Make sure to select a service first!',
+				value: '',
+			},
+			{
+				name: "Join the support server if you think this is a mistake and we'll help you out!",
+				value: '',
+			},
+			{
+				name: 'https://streamticker.bot/support',
+				value: '',
+			},
+		]);
+	}
+
+	const platformTickers = tickerServiceTitles[platform];
+
+	if (platformTickers) {
+		await interaction.sendResults(
+			platformTickers.map(ticker => ({
+				name: tickerTypeNames[ticker],
+				value: ticker,
+			}))
+		);
+	} else {
+		await interaction.sendResults([
+			{
+				name: 'It seems like you have found an invalid service!',
+				value: '',
+			},
+			{
+				name: "Join the support server if you think this is a mistake and we'll help you out!",
+				value: '',
+			},
+			{
+				name: 'https://streamticker.bot/support',
+				value: '',
+			},
+		]);
+	}
 });
 
 creator.on('commandRun', async (command, _, ctx) => {

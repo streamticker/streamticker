@@ -138,3 +138,46 @@ export const tickerCategoryTitles: Record<TickerCategory, string> = {
 	[TickerCategory.UTIL]: 'Utility Tickers',
 	[TickerCategory.OPENSEA]: 'OpenSea Tickers',
 };
+
+export const serviceTitles: Record<string, string> = {
+	opensea: 'OpenSea',
+	twitch: 'Twitch',
+	twitter: 'Twitter',
+	youtube: 'YouTube',
+	discord: 'Discord',
+	github: 'GitHub',
+	reddit: 'Reddit',
+	tiktok: 'TikTok',
+	instagram: 'Instagram',
+	roblox: 'Roblox',
+	minecraft: 'Minecraft',
+};
+
+export const tickerServiceTitles: Record<string, TickerType[]> = {
+	youtube: [TickerType.YOUTUBE_SUBSCRIBERS, TickerType.YOUTUBE_VIEWCOUNT],
+	twitch: [TickerType.TWITCH_FOLLOWERS],
+	twitter: [TickerType.TWITTER_FOLLOWERS],
+	github: [
+		TickerType.GITHUB_FOLLOWERS,
+		TickerType.GITHUB_REPO_STARS,
+		TickerType.GITHUB_REPO_FORKS,
+		TickerType.GITHUB_REPO_ISSUES,
+	],
+	reddit: [TickerType.REDDIT_SUBSCRIBERS],
+	tiktok: [TickerType.TIKTOK_FOLLOWERS],
+	instagram: [TickerType.INSTAGRAM_FOLLOWERS],
+	roblox: [TickerType.ROBLOX_FOLLOWERS, TickerType.ROBLOX_GROUP_MEMBERS, TickerType.ROBLOX_FRIENDS],
+	opensea: [
+		TickerType.OPENSEA_COLLECTION_FLOOR,
+		TickerType.OPENSEA_COLLECTION_VOLUME,
+		TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS,
+		TickerType.OPENSEA_COLLECTION_SUPPLY,
+	],
+	discord: [
+		TickerType.DISCORD_BOOSTS,
+		TickerType.DISCORD_HUMANS,
+		TickerType.DISCORD_BOTS,
+		TickerType.DISCORD_MEMBERS,
+		TickerType.DISCORD_MEMBERS_ROLE,
+	],
+};

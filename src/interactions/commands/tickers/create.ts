@@ -15,7 +15,7 @@ import {logsnag} from '../../../server/logsnag';
 import {prisma} from '../../../server/prisma';
 import {redis} from '../../../server/redis';
 import {InternalTopggAPI} from '../../../server/topgg';
-import {defaultTickerFormats, tickerTypeNames} from '../../types/type-names';
+import {defaultTickerFormats, serviceTitles, tickerTypeNames} from '../../types/type-names';
 import {is, enumerate} from '../../util';
 
 export class CreateCommand extends SlashCommand {
@@ -31,15 +31,32 @@ export class CreateCommand extends SlashCommand {
 					type: CommandOptionType.CHANNEL,
 					channel_types: [ChannelType.GUILD_VOICE, ChannelType.GUILD_STAGE_VOICE],
 				},
+				// {
+				// 	name: 'type',
+				// 	description: 'The type of ticker to create',
+				// 	required: true,
+				// 	type: CommandOptionType.STRING,
+				// 	choices: Object.entries(tickerTypeNames).map<ApplicationCommandOptionChoice>(entry => {
+				// 		const [value, name] = entry;
+				// 		return {name, value};
+				// 	}),
+				// },
 				{
-					name: 'type',
-					description: 'The type of ticker to create',
+					name: 'platform',
+					description: 'What platform you want data from',
 					required: true,
 					type: CommandOptionType.STRING,
-					choices: Object.entries(tickerTypeNames).map<ApplicationCommandOptionChoice>(entry => {
+					choices: Object.entries(serviceTitles).map<ApplicationCommandOptionChoice>(entry => {
 						const [value, name] = entry;
 						return {name, value};
 					}),
+				},
+				{
+					name: 'ticker',
+					description: 'The ticker to create',
+					required: true,
+					type: CommandOptionType.STRING,
+					autocomplete: true,
 				},
 				{
 					name: 'input',
@@ -75,7 +92,7 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('This command can only be ran inside of a guild!');
 		}
 
-		if (!is(ctx.options.type, enumerate(TickerType))) {
+		if (!is(ctx.options.ticker, enumerate(TickerType))) {
 			throw new Error('Invalid ticker type!');
 		}
 
@@ -87,7 +104,7 @@ export class CreateCommand extends SlashCommand {
 			throw new Error('A ticker already exists on this channel!');
 		}
 
-		const harvester = harvesters[ctx.options.type];
+		const harvester = harvesters[ctx.options.ticker];
 
 		if (harvester.disabled?.disabled) {
 			throw new Error(harvester.disabled.reason);
@@ -148,9 +165,9 @@ export class CreateCommand extends SlashCommand {
 			data: {
 				channel_id: ctx.options.channel as string,
 				guild_id: ctx.guildID,
-				type: ctx.options.type,
+				type: ctx.options.ticker,
 				refresh_after: new Date(),
-				format: defaultTickerFormats[ctx.options.type],
+				format: defaultTickerFormats[ctx.options.ticker],
 				platform_id: platformId,
 				truncate: ctx.options.shorten as boolean,
 			},
