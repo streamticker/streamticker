@@ -36,6 +36,7 @@ creator.on('warn', reportError);
 creator.on('error', reportError);
 
 creator.on('commandError', async (command, error, ctx) => {
+	console.log(error);
 	await ctx.send({
 		embeds: [
 			{

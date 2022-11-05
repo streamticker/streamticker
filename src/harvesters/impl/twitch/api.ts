@@ -63,4 +63,13 @@ export const TwitchAPI = {
 
 		return data;
 	},
+
+	async getStreams(id: string) {
+		const {data} = await axios.get<{data: Array<{viewer_count: number} | null>}>(
+			`https://api.twitch.tv/helix/streams?user_id=${id}`,
+			{headers: await TwitchAPI.getHeaders()}
+		);
+
+		return data.data[0];
+	},
 };
