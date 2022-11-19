@@ -9,7 +9,7 @@ export const REDDIT_SUBSCRIBERS = createHarvester(TickerType.REDDIT_SUBSCRIBERS,
 		if (!subreddit) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `subreddit`',
+				message: 'Input missing! Expected `subreddit`',
 			};
 		}
 

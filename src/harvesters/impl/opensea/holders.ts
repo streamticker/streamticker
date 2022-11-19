@@ -11,7 +11,7 @@ export const OPENSEA_COLLECTION_UNIQUE_HOLDERS = createHarvester(
 			if (!collection) {
 				return {
 					success: false,
-					message: 'Invalid format! Expected `collection-name`',
+					message: 'Input missing! Expected `collection-name`',
 				};
 			}
 

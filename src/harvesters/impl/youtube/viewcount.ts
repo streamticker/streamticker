@@ -9,7 +9,7 @@ export const YOUTUBE_VIEWCOUNT = createHarvester(TickerType.YOUTUBE_VIEWCOUNT, {
 		if (!channelID) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `channel ID` (looks like `UCReCeQgvWPmR8aivad-CzKQ`)',
+				message: 'Input missing! Expected `channel ID` (looks like `UCReCeQgvWPmR8aivad-CzKQ`)',
 			};
 		}
 

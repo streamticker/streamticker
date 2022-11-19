@@ -9,7 +9,7 @@ export const GITHUB_FOLLOWERS = createHarvester(TickerType.GITHUB_FOLLOWERS, {
 		if (!username) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `username`',
+				message: 'Input missing! Expected `username`',
 			};
 		}
 

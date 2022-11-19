@@ -9,7 +9,7 @@ export const TWITTER_FOLLOWERS = createHarvester(TickerType.TWITTER_FOLLOWERS, {
 		if (!username) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `username`',
+				message: 'Input missing! Expected `username`',
 			};
 		}
 

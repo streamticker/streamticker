@@ -9,7 +9,7 @@ export const TIKTOK_LIKE_COUNT = createHarvester(TickerType.TIKTOK_LIKE_COUNT, {
 		if (!username) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `username`',
+				message: 'Input missing! Expected `username`',
 			};
 		}
 

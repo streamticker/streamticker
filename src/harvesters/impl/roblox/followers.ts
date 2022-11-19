@@ -9,7 +9,7 @@ export const ROBLOX_FOLLOWERS = createHarvester(TickerType.ROBLOX_FOLLOWERS, {
 		if (!username) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `username`',
+				message: 'Input missing! Expected `username`',
 			};
 		}
 

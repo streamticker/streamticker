@@ -9,7 +9,7 @@ export const OPENSEA_COLLECTION_FLOOR = createHarvester(TickerType.OPENSEA_COLLE
 		if (!collection) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `collection-name`',
+				message: 'Input missing! Expected `collection-name`',
 			};
 		}
 

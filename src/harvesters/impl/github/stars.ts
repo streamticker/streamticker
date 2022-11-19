@@ -11,7 +11,7 @@ export const GITHUB_REPO_STARS = createHarvester(TickerType.GITHUB_REPO_STARS, {
 		if (!owner || !repo) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `owner/repo`',
+				message: 'Input missing! Expected `owner/repo`',
 			};
 		}
 

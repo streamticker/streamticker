@@ -1,5 +1,6 @@
 import {TickerType} from '@prisma/client';
 import {FORMATTER_REPLACER} from '../../harvesters/harvester';
+import {TIKTOK_LIKE_COUNT} from '../../harvesters/impl/tiktok/likes';
 
 export const tickerTypeNames: Record<TickerType, string> = {
 	[TickerType.GITHUB_REPO_STARS]: 'GitHub repository stars (input required)',
@@ -163,7 +164,7 @@ export const tickerServiceTitles: Record<string, TickerType[]> = {
 		TickerType.GITHUB_REPO_ISSUES,
 	],
 	reddit: [TickerType.REDDIT_SUBSCRIBERS],
-	tiktok: [TickerType.TIKTOK_FOLLOWERS],
+	tiktok: [TickerType.TIKTOK_FOLLOWERS, TickerType.TIKTOK_LIKE_COUNT],
 	instagram: [TickerType.INSTAGRAM_FOLLOWERS],
 	roblox: [TickerType.ROBLOX_FOLLOWERS, TickerType.ROBLOX_GROUP_MEMBERS, TickerType.ROBLOX_FRIENDS],
 	opensea: [

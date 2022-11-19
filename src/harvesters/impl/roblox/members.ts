@@ -9,7 +9,7 @@ export const ROBLOX_GROUP_MEMBERS = createHarvester(TickerType.ROBLOX_GROUP_MEMB
 		if (!id) {
 			return {
 				success: false,
-				message: 'Invalid format! Expected `id`',
+				message: 'Input missing! Expected `id`',
 			};
 		}
 
