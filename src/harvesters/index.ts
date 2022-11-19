@@ -20,6 +20,7 @@ import {ROBLOX_FOLLOWERS} from './impl/roblox/followers';
 import {ROBLOX_FRIENDS} from './impl/roblox/friends';
 import {ROBLOX_GROUP_MEMBERS} from './impl/roblox/members';
 import {TIKTOK_FOLLOWERS} from './impl/tiktok/followers';
+import {TIKTOK_LIKE_COUNT} from './impl/tiktok/likes';
 import {TWITCH_FOLLOWERS} from './impl/twitch/followers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
@@ -45,6 +46,7 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
 	TIKTOK_FOLLOWERS,
+	TIKTOK_LIKE_COUNT,
 	INSTAGRAM_FOLLOWERS,
 	ROBLOX_FOLLOWERS,
 	ROBLOX_GROUP_MEMBERS,
