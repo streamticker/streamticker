@@ -39,7 +39,7 @@ export const TIKTOK_LIKE_COUNT = createHarvester(TickerType.TIKTOK_LIKE_COUNT, {
 	async harvest(ticker, utils: HarvesterUtils) {
 		utils.ensureId(ticker);
 
-		const total = await TikTokAPI.getUserFollows(ticker.platform_id);
+		const total = await TikTokAPI.getUserLikes(ticker.platform_id);
 
 		return total;
 	},

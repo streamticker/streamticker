@@ -22,4 +22,16 @@ export const TikTokAPI = {
 
 		return data.userInfo.stats.followerCount;
 	},
+
+	async getUserLikes(username: string) {
+		const {data} = await axios.get<TikTokUser>(`https://wadokei.hop.sh/tiktok/${username}`, {
+			headers: {Authorization: env.WADOKEI_KEY},
+		});
+
+		if (!data.userInfo.stats) {
+			throw new Error('User has no stats');
+		}
+
+		return data.userInfo.stats.heartCount;
+	},
 };
