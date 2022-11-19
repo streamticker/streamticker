@@ -165,7 +165,6 @@ export const tickerServiceTitles: Record<string, TickerType[]> = {
 	],
 	reddit: [TickerType.REDDIT_SUBSCRIBERS],
 	tiktok: [TickerType.TIKTOK_FOLLOWERS, TickerType.TIKTOK_LIKE_COUNT],
-	instagram: [TickerType.INSTAGRAM_FOLLOWERS],
 	roblox: [TickerType.ROBLOX_FOLLOWERS, TickerType.ROBLOX_GROUP_MEMBERS, TickerType.ROBLOX_FRIENDS],
 	opensea: [
 		TickerType.OPENSEA_COLLECTION_FLOOR,
