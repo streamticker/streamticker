@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import {logsnag} from './logsnag';
 import urlcat from 'urlcat';
 
+const LOWCAKE_HOST = 'http://138.68.183.11';
+
 export const handler = api({
 	async POST({ctx}) {
 		const tickers = await ctx.prisma.ticker.findMany({
@@ -103,7 +105,7 @@ export const handler = api({
  */
 export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOWCAKE_QUEUE_ID) {
 	const {data} = await axios.post<unknown>(
-		urlcat('http://138.68.183.11/v1/queues/:queue', {queue}),
+		urlcat(LOWCAKE_HOST, '/v1/queues/:queue', {queue}),
 		{
 			url,
 			payload: null,
@@ -122,7 +124,7 @@ export async function enqueue(url: string, interval = 10 * 1000, queue = env.LOW
 }
 
 export async function dequeue(queue: string, job: string) {
-	const url = urlcat('http://138.68.183.11/v1/queues/:queue/jobs/:job', {queue, job});
+	const url = urlcat(LOWCAKE_HOST, '/v1/queues/:queue/jobs/:job', {queue, job});
 
 	const {data} = await axios.delete<unknown>(url, {
 		headers: {Authorization: `Bearer ${env.LOWCAKE_API_KEY}`},
