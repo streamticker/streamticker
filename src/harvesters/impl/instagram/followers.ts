@@ -7,7 +7,7 @@ export const INSTAGRAM_FOLLOWERS = createHarvester(TickerType.INSTAGRAM_FOLLOWER
 	disabled: {
 		disabled: true,
 		reason:
-			"StreamTicker's Instagram data source is currently unavailable. For more information, [join StreamTicker's support server](https://streamticker.bot/support).",
+			"StreamTicker's Instagram integration is permanently disabled because of lack of a reliable data source. For more information, [join StreamTicker's support server](https://streamticker.bot/support).",
 	},
 	requirement: TickerRequirement.VOTE,
 	async validateInput(username) {

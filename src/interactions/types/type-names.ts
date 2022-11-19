@@ -22,12 +22,11 @@ export const tickerTypeNames: Record<TickerType, string> = {
 		'OpenSea collection unique holders (input required)',
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'OpenSea collection supply (input required)',
 	[TickerType.TIKTOK_FOLLOWERS]: 'TikTok Followers (**IN BETA**) (input required)',
+	[TickerType.TIKTOK_LIKE_COUNT]: 'TikTok Like Count (**IN BETA**) (input required)',
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'Instagram Followers (**IN BETA**) (input required)',
 	[TickerType.ROBLOX_FOLLOWERS]: 'Roblox Followers (input required)',
 	[TickerType.ROBLOX_GROUP_MEMBERS]: 'Roblox Group Members (input required)',
 	[TickerType.ROBLOX_FRIENDS]: 'Roblox Friends (input required)',
-	[TickerType.MINECRAFT_SERVER_PLAYERS_ONLINE]:
-		"Minecraft server's players online (input required)",
 };
 
 export const tickerDescriptions: Record<TickerType, string> = {
@@ -53,12 +52,11 @@ export const tickerDescriptions: Record<TickerType, string> = {
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: 'The supply of an OpenSea collection',
 	[TickerType.TWITTER_FOLLOWERS]: 'The amount of followers on a Twitter user',
 	[TickerType.TIKTOK_FOLLOWERS]: 'The amount of followers on a TikTok user',
+	[TickerType.TIKTOK_LIKE_COUNT]: 'The amount of likes on a TikTok user',
 	[TickerType.INSTAGRAM_FOLLOWERS]: 'The amount of followers on a Instagram user',
 	[TickerType.ROBLOX_FOLLOWERS]: 'The amount of followers on a Roblox user',
 	[TickerType.ROBLOX_GROUP_MEMBERS]: 'The amount of members in a Roblox group',
 	[TickerType.ROBLOX_FRIENDS]: 'The amount of friends a Roblox user has',
-	[TickerType.MINECRAFT_SERVER_PLAYERS_ONLINE]:
-		"The amount of players online on a Minecraft server's server list",
 };
 
 export const defaultTickerFormats: Record<
@@ -84,11 +82,11 @@ export const defaultTickerFormats: Record<
 	[TickerType.OPENSEA_COLLECTION_UNIQUE_HOLDERS]: `Unique Holders: ${FORMATTER_REPLACER}`,
 	[TickerType.OPENSEA_COLLECTION_SUPPLY]: `Supply: ${FORMATTER_REPLACER}`,
 	[TickerType.TIKTOK_FOLLOWERS]: `TikTok Followers: ${FORMATTER_REPLACER}`,
+	[TickerType.TIKTOK_LIKE_COUNT]: `TikTok Like Count: ${FORMATTER_REPLACER}`,
 	[TickerType.INSTAGRAM_FOLLOWERS]: `Instagram Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_FOLLOWERS]: `Roblox Followers: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_GROUP_MEMBERS]: `Group Members: ${FORMATTER_REPLACER}`,
 	[TickerType.ROBLOX_FRIENDS]: `Roblox Friends: ${FORMATTER_REPLACER}`,
-	[TickerType.MINECRAFT_SERVER_PLAYERS_ONLINE]: `Players Online: ${FORMATTER_REPLACER}`,
 };
 
 enum TickerCategory {
@@ -110,6 +108,7 @@ export const tickerSort: Record<TickerCategory, TickerType[]> = {
 		TickerType.ROBLOX_GROUP_MEMBERS,
 		TickerType.ROBLOX_FRIENDS,
 		TickerType.REDDIT_SUBSCRIBERS,
+		TickerType.TIKTOK_LIKE_COUNT,
 	],
 	[TickerCategory.DISCORD]: [
 		TickerType.DISCORD_BOOSTS,

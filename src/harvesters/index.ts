@@ -11,7 +11,6 @@ import {GITHUB_REPO_FORKS} from './impl/github/forks';
 import {GITHUB_REPO_ISSUES} from './impl/github/issues';
 import {GITHUB_REPO_STARS} from './impl/github/stars';
 import {INSTAGRAM_FOLLOWERS} from './impl/instagram/followers';
-import {MINECRAFT_SERVER_PLAYERS_ONLINE} from './impl/minecraft/players';
 import {OPENSEA_COLLECTION_FLOOR} from './impl/opensea/floor';
 import {OPENSEA_COLLECTION_UNIQUE_HOLDERS} from './impl/opensea/holders';
 import {OPENSEA_COLLECTION_SUPPLY} from './impl/opensea/supply';
@@ -21,6 +20,7 @@ import {ROBLOX_FOLLOWERS} from './impl/roblox/followers';
 import {ROBLOX_FRIENDS} from './impl/roblox/friends';
 import {ROBLOX_GROUP_MEMBERS} from './impl/roblox/members';
 import {TIKTOK_FOLLOWERS} from './impl/tiktok/followers';
+import {TIKTOK_LIKE_COUNT} from './impl/tiktok/likes';
 import {TWITCH_FOLLOWERS} from './impl/twitch/followers';
 import {TWITTER_FOLLOWERS} from './impl/twitter/followers';
 import {YOUTUBE_SUBSCRIBERS} from './impl/youtube/subscribers';
@@ -46,9 +46,9 @@ export const harvesters: Record<TickerType, Harvester> = {
 	OPENSEA_COLLECTION_SUPPLY,
 	TWITTER_FOLLOWERS,
 	TIKTOK_FOLLOWERS,
+	TIKTOK_LIKE_COUNT,
 	INSTAGRAM_FOLLOWERS,
 	ROBLOX_FOLLOWERS,
 	ROBLOX_GROUP_MEMBERS,
 	ROBLOX_FRIENDS,
-	MINECRAFT_SERVER_PLAYERS_ONLINE,
 };
