@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "TickerType" ADD VALUE 'TIKTOK_LIKE_COUNT';

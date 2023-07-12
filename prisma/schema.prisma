@@ -1,0 +1,60 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+model Ticker {
+  channel_id    String     @id @unique
+  guild_id      String
+  type          TickerType
+  last_updated  DateTime   @updatedAt
+  refresh_after DateTime   @default(now())
+  format        String
+  platform_id   String?
+  truncate      Boolean    @default(false)
+}
+
+model Preset {
+  name   String @id
+  format String @unique
+}
+
+model Feedback {
+  id         String   @id @default(uuid())
+  user_id    String
+  guild_id   String?
+  feedback   String
+  created_at DateTime @default(now())
+}
+
+enum TickerType {
+  GITHUB_REPO_STARS
+  GITHUB_REPO_FORKS
+  GITHUB_REPO_ISSUES
+  GITHUB_FOLLOWERS
+  TWITCH_FOLLOWERS
+  YOUTUBE_SUBSCRIBERS
+  YOUTUBE_VIEWCOUNT
+  DISCORD_MEMBERS
+  DISCORD_MEMBERS_ROLE
+  DISCORD_HUMANS
+  DISCORD_BOOSTS
+  DISCORD_BOTS
+  REDDIT_SUBSCRIBERS
+  OPENSEA_COLLECTION_FLOOR
+  OPENSEA_COLLECTION_VOLUME
+  OPENSEA_COLLECTION_UNIQUE_HOLDERS
+  OPENSEA_COLLECTION_SUPPLY
+  TWITTER_FOLLOWERS
+  TIKTOK_FOLLOWERS
+  TIKTOK_LIKE_COUNT
+  INSTAGRAM_FOLLOWERS
+  ROBLOX_FOLLOWERS
+  ROBLOX_GROUP_MEMBERS
+  ROBLOX_FRIENDS
+}
